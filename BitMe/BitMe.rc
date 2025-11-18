@@ -1,0 +1,365 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Neutral resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_NEU)
+LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
+#pragma code_page(1252)
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_BITME_DIALOG DIALOGEX 0, 0, 363, 209
+STYLE DS_SETFONT | DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "BitMe"
+MENU IDR_BITME_MENU
+FONT 8, "Tahoma", 0, 0, 0x1
+BEGIN
+    CONTROL         "Text",IDC_CHECK1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,16,18,40,15
+    CONTROL         "Text",IDC_CHECK2,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,16,37,40,15
+    CONTROL         "Text",IDC_CHECK3,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,16,57,40,15
+    CONTROL         "Slider1",IDC_SLIDER1,"msctls_trackbar32",TBS_BOTH | WS_TABSTOP,69,35,145,25
+    CONTROL         "Slider2",IDC_SLIDER2,"msctls_trackbar32",TBS_BOTH | WS_TABSTOP,229,35,123,25
+    CONTROL         "Slider3",IDC_SLIDER3,"msctls_trackbar32",TBS_AUTOTICKS | TBS_BOTH | WS_TABSTOP,10,114,204,25
+    LTEXT           ":",IDC_STATIC,92,142,8,12
+    LTEXT           ":",IDC_STATIC,120,142,8,12
+    EDITTEXT        IDC_EDIT1,69,141,20,12,ES_CENTER | ES_AUTOHSCROLL | ES_NUMBER
+    EDITTEXT        IDC_EDIT2,97,141,20,12,ES_CENTER | ES_AUTOHSCROLL | ES_NUMBER
+    EDITTEXT        IDC_EDIT3,125,141,20,12,ES_CENTER | ES_AUTOHSCROLL | ES_NUMBER
+    GROUPBOX        "Text",IDC_GROUPBOX5,224,84,134,75
+    CONTROL         "Text",IDC_CHECK4,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,309,82,40,15
+    EDITTEXT        IDC_EDIT4,224,178,94,12,ES_RIGHT | ES_AUTOHSCROLL
+    GROUPBOX        "Text",IDC_GROUPBOX1,5,5,54,75
+    RTEXT           "0",IDC_LABEL1,66,20,35,12
+    RTEXT           "0",IDC_LABEL2,142,20,43,12
+    RTEXT           "0",IDC_LABEL3,232,20,23,12
+    RTEXT           "0",IDC_LABEL4,294,20,30,12
+    RTEXT           "0",IDC_LABEL5,14,98,8,12
+    RTEXT           "0",IDC_LABEL6,62,98,29,12
+    RTEXT           "0",IDC_LABEL7,130,98,41,12
+    LTEXT           "0",IDC_LABEL8,235,98,85,15
+    LTEXT           "0",IDC_LABEL9,235,118,85,15
+    LTEXT           "0",IDC_LABEL10,235,138,85,15
+    GROUPBOX        "Text",IDC_GROUPBOX2,64,5,155,75
+    GROUPBOX        "Text",IDC_GROUPBOX3,224,5,134,75
+    GROUPBOX        "Text",IDC_GROUPBOX4,5,84,214,75
+    GROUPBOX        "Text",IDC_GROUPBOX6,5,163,352,38
+    LTEXT           "Text",IDC_LABEL11,325,178,20,12,SS_CENTERIMAGE
+    LTEXT           "Text",IDC_LABEL12,104,20,22,12
+    LTEXT           "Text",IDC_LABEL13,188,20,20,12
+    LTEXT           "Text",IDC_LABEL14,74,64,50,12
+    RTEXT           "Text",IDC_LABEL15,157,64,50,12
+    LTEXT           "Text",IDC_LABEL16,258,20,23,12
+    LTEXT           "Text",IDC_LABEL17,327,20,22,12
+    LTEXT           "Text",IDC_LABEL18,234,64,50,12
+    RTEXT           "Text",IDC_LABEL19,297,64,50,12
+    LTEXT           "Text",IDC_LABEL20,25,98,23,12
+    LTEXT           "Text",IDC_LABEL21,94,98,32,12
+    LTEXT           "Text",IDC_LABEL22,174,98,35,12
+    LTEXT           "Text",IDC_LABEL23,15,143,50,12
+    RTEXT           "Text",IDC_LABEL24,158,143,50,12
+    LTEXT           "Text",IDC_LABEL25,325,98,28,15
+    LTEXT           "Text",IDC_LABEL26,325,118,28,15
+    LTEXT           "Text",IDC_LABEL27,325,138,28,15
+    RTEXT           "Text",IDC_LABEL28,127,178,90,12,SS_CENTERIMAGE
+END
+
+IDD_ABOUT_DIALOG DIALOGEX 0, 0, 260, 150
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About BitMe"
+FONT 8, "Tahoma", 0, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,203,129,50,14
+    LTEXT           "Text",IDC_ABOUT_TEXT,37,7,216,115
+    ICON            IDR_BITME_ICON,IDC_STATIC,7,7,20,20
+    PUSHBUTTON      "Button1",IDC_BUTTON1,149,129,50,14
+END
+
+IDD_SETTINGS_DIALOG DIALOG 0, 0, 225, 150
+STYLE DS_SETFONT | DS_MODALFRAME | DS_CONTEXTHELP | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Settings"
+FONT 8, "Tahoma"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,114,129,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,168,129,50,14
+    LTEXT           "Language:",IDC_LANGUAGE,7,7,100,12
+    COMBOBOX        IDC_COMBO1,7,20,211,104,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_RESCALC_DIALOG DIALOG 0, 0, 180, 140
+STYLE DS_SETFONT | DS_MODALFRAME | DS_CONTEXTHELP | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Resolution Calculator"
+FONT 8, "Tahoma"
+BEGIN
+    GROUPBOX        "Text",IDC_GROUPBOX1,7,5,166,42
+    GROUPBOX        "Text",IDC_GROUPBOX2,7,52,166,42
+    EDITTEXT        IDC_EDIT1,22,22,60,12,ES_RIGHT | ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT2,98,22,60,12,ES_RIGHT | ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT3,22,69,60,12,ES_RIGHT | ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT4,98,69,60,12,ES_RIGHT | ES_AUTOHSCROLL
+    CONTROL         "Text",IDC_CHECK1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,103,119,10
+    COMBOBOX        IDC_COMBO1,128,102,30,75,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    CTEXT           "x",IDC_STATIC,85,22,10,12,SS_CENTERIMAGE
+    CTEXT           ":",IDC_STATIC,85,69,10,12,SS_CENTERIMAGE
+    LTEXT           "Text",IDC_LABEL1,7,121,166,12
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 3,3,0,0
+ PRODUCTVERSION 3,3,0,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "000004b0"
+        BEGIN
+            VALUE "FileDescription", "BitMe"
+            VALUE "FileVersion", "3.3"
+            VALUE "InternalName", "BitMe"
+            VALUE "LegalCopyright", "© Geoffrey Angapa, 2021. All rights reserved."
+            VALUE "OriginalFilename", "BitMe.exe"
+            VALUE "ProductName", "BitMe"
+            VALUE "ProductVersion", "3.3"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x0, 1200
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_BITME_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 5
+        RIGHTMARGIN, 358
+        TOPMARGIN, 5
+        BOTTOMMARGIN, 202
+    END
+
+    IDD_ABOUT_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 253
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 143
+    END
+
+    IDD_SETTINGS_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 218
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 143
+    END
+
+    IDD_RESCALC_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 173
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 133
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_RESCALC_DIALOG DLGINIT
+BEGIN
+    IDC_COMBO1, 0x403, 2, 0
+0x0031, 
+    IDC_COMBO1, 0x403, 2, 0
+0x0032, 
+    IDC_COMBO1, 0x403, 2, 0
+0x0034, 
+    IDC_COMBO1, 0x403, 2, 0
+0x0038, 
+    IDC_COMBO1, 0x403, 3, 0
+0x3631, "\000" 
+    IDC_COMBO1, 0x403, 3, 0
+0x3233, "\000" 
+    IDC_COMBO1, 0x403, 3, 0
+0x3436, "\000" 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_ABOUT_DIALOG AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+#endif    // Neutral resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (South Africa) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENS)
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_SOUTH_AFRICA
+#pragma code_page(1252)
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\BitMe.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""         // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_BITME_ICON          ICON                    "res\\BitMe.ico"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_BITME_MENU MENU
+BEGIN
+    POPUP "&Tools"
+    BEGIN
+        MENUITEM "Resolution Calculator...",    ID_TOOLS_RESCALC
+        MENUITEM "Settings...",                 ID_TOOLS_SETTINGS
+        MENUITEM SEPARATOR
+        MENUITEM "About...",                    ID_HELP_ABOUT
+        MENUITEM SEPARATOR
+        MENUITEM "Quit",                        ID_TOOLS_QUIT
+    END
+    POPUP "&Calculation"
+    BEGIN
+        MENUITEM "Use overhead in calculation", ID_CALCULATION_OVERHEAD
+        MENUITEM SEPARATOR
+        MENUITEM "Container 0",                 ID_CALCULATION_CONTAINER0
+        MENUITEM "Container 1",                 ID_CALCULATION_CONTAINER1
+        MENUITEM "Container 2",                 ID_CALCULATION_CONTAINER2
+        MENUITEM "Container 3",                 ID_CALCULATION_CONTAINER3
+        MENUITEM "Container 4",                 ID_CALCULATION_CONTAINER4
+        MENUITEM "Container 5",                 ID_CALCULATION_CONTAINER5
+        MENUITEM "Container 6",                 ID_CALCULATION_CONTAINER6
+        MENUITEM "Container 7",                 ID_CALCULATION_CONTAINER7
+        MENUITEM "Container 8",                 ID_CALCULATION_CONTAINER8
+        MENUITEM "Container 9",                 ID_CALCULATION_CONTAINER9
+        MENUITEM "Container 10",                ID_CALCULATION_CONTAINER10
+        MENUITEM "Container 11",                ID_CALCULATION_CONTAINER11
+        MENUITEM "Container 12",                ID_CALCULATION_CONTAINER12
+        MENUITEM "Container 13",                ID_CALCULATION_CONTAINER13
+        MENUITEM "Container 14",                ID_CALCULATION_CONTAINER14
+        MENUITEM SEPARATOR
+        MENUITEM "Information...",              ID_CALCULATION_INFORMATION
+    END
+END
+
+#endif    // English (South Africa) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\BitMe.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"         // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

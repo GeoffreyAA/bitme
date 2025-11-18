@@ -1,0 +1,229 @@
+Version 3.3.164 (November 18, 2025)
+
+- Migrated project to Visual Studio 2026 (from VC++ 6.0)
+- Fixed spacing at the bottom of the window, removing hard-coded value
+- Settings are now stored in a text file, instead of the Registry
+- Updated About
+- Removed Report
+- Removed Calculator
+- Trimmed menu
+- Added x64 build
+
+
+Version 3.2.144 (April 20, 2025)
+
+- Removed readme from archive
+- Removed read-only attribute from executable and language file
+
+
+Version 3.2.144 (April 12, 2021)
+
+- First public release of this version. 32-bit x86 build for Windows.
+
+
+Version 3.0 (May 2013)
+
+- Rewrote BitMe from scratch, having lost the source code at the time
+- Fortunate because the program ended up with a better architecture
+- Re-used Weights & Measures systems such as the Language Manager
+
+
+Version 2.3 (Build 4148) [April 5, 2010]
+
+- Windows Calculator should now start under Windows 9x.
+- Removed maximum height clamping from the Resolution Calculator.
+- Removed “Question of the Day.”
+- Removed the “Append to File” report option.
+- Improved the statistics reports.
+- Improved the user-interface.
+- Great amount of architecture and code redesign.
+- Help file has been much improved.
+
+
+Version 2.2 (Build 4047) [December 2007]
+
+- Added a Quit command to the menu.
+- Windows Calculator can now be started from the menu.
+- Fixed approximation in kBps display.
+- Right-aligned text boxes in the Resolution Calculator.
+- Removed negative number clamping from the Resolution Calculator.
+- Considerable code enhancements.
+
+
+Version 2.1.1 (Build 3996) [November 2007]
+
+- First Public Release.
+- Program is now licensed under the GNU General Public License.
+- Added a manifest file for Windows XP themes.
+- Added an option to toggle the AVI overhead.
+- Added petabytes and exabytes to the Size Convertor.
+- Removed negative number clamping from the Size Convertor.
+- Improved precision of the Size Convertor.
+- HtmlHelp() is now called to display the help file.
+- Streamlined the format of saved statistics files.
+- Removed random quotes from the About dialog to avoid any infringement.
+- Cleaned up all functions relying on static variables.
+- Tons of security and bug fixes.
+
+
+Version 2.1 (Build 3880) [July 2007]
+
+- Added a Menu.
+- Added a Settings dialog.
+- Added a Resolution Calculator.
+- Added a Size Convertor.
+- Finally, all of the cosmetic issues have been fixed.
+- Duration can now be set to seconds precision.
+- Improved the format of saved statistics files.
+- Changed old Save dialog to Windows 2000 one.
+- Changed help file to HTML Help (*.chm).
+- Registry settings can now be deleted from within the program.
+- Moved registry settings to the “HKEY_CURRENT_USER\Software\Freeware” key.
+- Tons of fixes, changes, and improvements.
+- Major source code reorganisation.
+
+
+Version 2.1 RC4 (Build 3252) [April 2007]
+
+- Considerable improvements to the main calculation code class in the areas of efficiency, precision, and robustness.
+- Registry handling class is far more robust now.
+- Numerous fixes and improvements.
+- Still not cosmetically equal to BitMe 1.16, though extremely rock-solid, accurate, and reliable.
+
+
+Version 2.0 RC3 (C++ Version) [December 2006]
+
+- Completely rewritten in C++ and MFC.
+- Considerably more rock-solid.
+- Program configuration can now be saved.
+- Added the ability to save bitrate statistics to a file.
+- Too many improvements to state here.
+- Just a bunch of minor cosmetic issues in need of fixing, hence, “RC3.”
+
+
+Version 1.16 [June 2006]
+
+- Totally rewritten from scratch (well, maybe *some* CTRL+C and CTRL+V).
+- Improved AVI overhead accuracy considerably.
+- Improved precision of the data rate calculation.
+- User can now specify custom file sizes, etc.
+- Bunch of enhancements to the user interface.
+- Minor code efficiency improvements.
+
+
+Version 1.15 [Mid-2005]
+
+- Calculation takes into account standard AVI overhead.
+- Increased the Video Bitrate range to 25 Mbps.
+- Data Rate is now also shown in Mbps.
+- The V, A, and R keys can be used to toggle Video, Audio, or Data Rate, respectively.
+- Added digit grouping (toggle with the G key).
+- Few minor bugs fixed.
+- Minor cosmetic changes.
+
+
+Version 1.14 [January 2005]
+
+- Added a splash screen.
+- Re-enabled clock display.
+- Data Rate calculation finally fixed.
+- Rounded off file sizes to 2 decimal places.
+- Minimum Duration is now 1 minute avoiding complications in the code when encountering division-by-zero.
+- Major code fixes, changes, and optimizations.
+- Few cosmetic changes.
+
+
+Version 1.13
+
+- New movie reel icon.
+- Updated to newer comctl32.ocx library.
+- Increased Audio Bitrate range to 640 kbps, since AC-3 supports that.
+- Increased maximum duration to 9 hours.
+- Program can now be closed with the ESC key.
+- Fixed some wrong default values.
+- Every label is now perfectly aligned, down to the pixel.
+- Everything looks much better now.
+
+
+Version 1.12
+
+- Major changes.
+- Version completely rewritten from scratch.
+- Added a Data Rate display—it's unreliable for now.
+- Added—and disabled—an experimental clock display.
+- Optimised code a bit.
+- A lot of cosmetic changes.
+
+
+Version 1.11
+
+- Fixed Sliders to work with the HOME and END keys properly.
+- Cosmetic changes.
+
+
+Version 1.10
+
+- Video and Audio Bitrate toggling completely fixed—works properly for an accurate display of file size.
+- Increased maximum duration to 8 hours.
+- Added a disabled CheckBox to complete the Options Frame.
+
+
+Version 1.9
+
+- Increased Video Bitrate range to 16 Mbps—just like DivX.
+- Increased Audio Bitrate range to 448 kbps so as to support AC-3.
+
+
+Version 1.8
+
+- DivX compatible calculation formula used.
+- Disabling of Video and Audio almost fixed, though still not complete.
+- Colour changes.
+
+
+Version 1.7
+
+- More changes.
+
+
+Version 1.6
+
+- Added possibility to disable Video or Audio (didn't realise it was really broken, as it did not work in each and every different combination).
+- Cosmetic changes.
+
+
+Version 1.5 (BitMe)
+
+- Name changed to BitMe (from *The Bitrate Calculator*).
+- WAV support removed.
+- Interface changed yet again.
+
+
+Version 1.4
+
+- Added some experimental WAV support.
+- Changes to interface.
+
+
+Version 1.3
+
+- Added different colours to different Labels; they look much better than boring black.
+- Changed the font size of different Labels.
+
+
+Version 1.2
+
+- Changed TextBoxes to Labels as they look much better.
+- More cosmetic changes.
+
+
+Version 1.1
+
+- Cosmetic changes, likely.
+
+
+Version 1.0 [September? 2004]
+
+- First version!
+- Used TextBoxes for displaying values.
+- Formula was likely a *little* inaccurate.

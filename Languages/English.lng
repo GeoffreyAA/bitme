@@ -1,0 +1,100 @@
+IDS_MENU_TOOLS=&Tools
+IDS_TOOLS_RESCALC=Resolution Calculator...
+IDS_TOOLS_SETTINGS=Settings...
+IDS_TOOLS_REPORT=Save Report...
+IDS_TOOLS_CALCULATOR=Windows Calculator
+IDS_TOOLS_QUIT=Quit
+IDS_MENU_CALCULATION=&Calculation
+IDS_CALCULATION_OVERHEAD=Use overhead in calculation
+IDS_CALCULATION_INFORMATION=Information...
+IDS_MENU_HELP=&Help
+IDS_HELP_HELP=BitMe Help	F1
+IDS_HELP_HOMEPAGE=Home Page...
+IDS_HELP_LICENCE=Licence...
+IDS_HELP_ABOUT=About...
+
+IDS_LICENCE=This program is free software and, licensed to you under the GNU General Public License, comes with no warranty.
+IDS_LICENCE_TITLE=Licence
+IDS_LICENCE_MSG=This program is free software and, licensed to you under the GNU General Public License, comes with no warranty.\n\nTo see the licence, click OK.
+IDS_LICENCE_ERROR=Cannot open the licence.
+IDS_CALCULATOR_ERROR_TITLE=Calculator
+IDS_CALCULATOR_ERROR=Cannot start Calculator.
+IDS_ERROR=Error
+
+IDS_REPORT=BitMe Report
+IDS_REPORT_DLG_TITLE=Save Report
+IDS_REPORT_ERROR_TITLE=Report
+IDS_REPORT_ERROR=Cannot save report.
+IDS_REPORT_VIDEO=Video
+IDS_REPORT_AUDIO=Audio
+IDS_REPORT_OVERHEAD=Overhead
+IDS_REPORT_ENABLED=enabled
+IDS_REPORT_DISABLED=disabled
+
+IDS_SETTINGS=Settings
+IDS_LANGUAGE=Language:
+IDS_OK=OK
+IDS_CANCEL=Cancel
+
+IDS_ABOUT=About
+IDS_VERSION=Version
+IDS_BUILD=Build
+IDS_ALL_RIGHTS_RESERVED=All rights reserved
+IDS_COMPILED_ON=Compiled on
+IDS_COMPILER=Compiler
+IDS_HOME_PAGE=Home Page
+
+IDS_OPTIONS=Options
+IDS_VIDEO_BITRATE=Video Bitrate
+IDS_AUDIO_BITRATE=Audio Bitrate
+IDS_DURATION=Duration
+IDS_FILE_SIZE=File Size
+IDS_DATA_RATE=Data Rate
+IDS_CUSTOM_FILE_SIZE=Custom File Size
+IDS_CUSTOM_DATA_RATE=Custom Data Rate
+
+IDS_VIDEO=&Video
+IDS_AUDIO=&Audio
+IDS_RATE=&Rate
+IDS_CUSTOM=Custom
+
+IDS_KILOBITS_PER_SECOND=kbps
+IDS_KILOBYTES_PER_SECOND=KB/s
+IDS_HOURS=Hours
+IDS_MINUTES=Minutes
+IDS_SECONDS=Seconds
+IDS_KB=KB
+IDS_MB=MB
+IDS_GB=GB
+IDS_MEGABITS_PER_SECOND=Mbps
+
+IDS_TYPE_FILE_SIZE=Type a file size:
+IDS_TYPE_DATA_RATE=Type a data rate:
+
+IDS_RESOLUTION_CALC=Resolution Calculator
+IDS_DIMENSIONS=Dimensions
+IDS_ASPECT_RATIO=Aspect Ratio
+IDS_ROUND_TO_MULTIPLE=Round dimensions to multiple of:
+IDS_ROUNDING_ERROR=Rounding error =
+IDS_WIDTH=w:
+IDS_HEIGHT=h:
+IDS_ABRV_PIXEL=px
+
+IDS_INFORMATION=Information
+IDS_INFORMATION_KBPS=kbps
+IDS_INFORMATION_SECONDS=seconds
+IDS_INFORMATION_BYTES=bytes
+IDS_INFORMATION_BYTES_SEC=bytes/sec
+IDS_INFORMATION_VIDEO_BITRATE=Video bitrate
+IDS_INFORMATION_AUDIO_BITRATE=Audio bitrate
+IDS_INFORMATION_DURATION=Duration
+IDS_INFORMATION_VIDEO_ENABLED=Video enabled
+IDS_INFORMATION_AUDIO_ENABLED=Audio enabled
+IDS_INFORMATION_OVERHEAD_ENABLED=Overhead enabled
+IDS_INFORMATION_FILE_SIZE=File size
+IDS_INFORMATION_DATA_RATE=Date rate
+IDS_INFORMATION_OVERHEAD=Overhead
+IDS_INFORMATION_CONTAINER=Container
+IDS_INFORMATION_CONTAINER_PTR=Container interface pointer
+IDS_INFORMATION_CONTAINER_OVERHEAD_FULL=Container overhead full
+IDS_INFORMATION_CONTAINER_OVERHEAD_NA=Container overhead no audio
