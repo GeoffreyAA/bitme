@@ -150,9 +150,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <PreLinkEvent>
-      <Command>$(OutDir)Radiance.exe
-
-cl /nologo /c /Zl /Fo$(OutDir) Build.c</Command>
+      <Command>cmd /c ""$(OutDir)Radiance.exe""</Command>
       <Message>Incrementing build number</Message>
     </PreLinkEvent>
     <Midl>
@@ -204,9 +202,7 @@ cl /nologo /c /Zl /Fo$(OutDir) Build.c</Command>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <PreLinkEvent>
-      <Command>$(OutDir)Radiance.exe
-
-cl /nologo /c /Zl /Fo$(OutDir) Build.c</Command>
+      <Command>cmd /c ""$(OutDir)Radiance.exe""</Command>
       <Message>Incrementing build number</Message>
     </PreLinkEvent>
     <Midl>
@@ -255,9 +251,7 @@ cl /nologo /c /Zl /Fo$(OutDir) Build.c</Command>
       <IntrinsicFunctions>true</IntrinsicFunctions>
     </ClCompile>
     <PreLinkEvent>
-      <Command>$(OutDir)Radiance.exe
-
-cl /nologo /c /Zl /Fo$(OutDir) Build.c</Command>
+      <Command>cmd /c ""$(OutDir)Radiance.exe""</Command>
       <Message>Incrementing build number</Message>
     </PreLinkEvent>
     <Midl>
@@ -308,9 +302,7 @@ cl /nologo /c /Zl /Fo$(OutDir) Build.c</Command>
       <EnableEnhancedInstructionSet>NoExtensions</EnableEnhancedInstructionSet>
     </ClCompile>
     <PreLinkEvent>
-      <Command>$(OutDir)Radiance.exe
-
-cl /nologo /c /Zl /Fo$(OutDir) Build.c</Command>
+      <Command>cmd /c ""$(OutDir)Radiance.exe""</Command>
       <Message>Incrementing build number</Message>
     </PreLinkEvent>
     <Midl>
@@ -360,9 +352,7 @@ cl /nologo /c /Zl /Fo$(OutDir) Build.c</Command>
       <IntrinsicFunctions>true</IntrinsicFunctions>
     </ClCompile>
     <PreLinkEvent>
-      <Command>$(OutDir)Radiance.exe
-
-cl /nologo /c /Zl /Fo$(OutDir) Build.c</Command>
+      <Command>cmd /c ""$(OutDir)Radiance.exe""</Command>
       <Message>Incrementing build number</Message>
     </PreLinkEvent>
     <Midl>
@@ -383,7 +373,8 @@ cl /nologo /c /Zl /Fo$(OutDir) Build.c</Command>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <SubSystem>Windows</SubSystem>
       <OutputFile>$(OutDir)BitMe.exe</OutputFile>
-      <AdditionalDependencies>$(OutDir)Build.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
       <EntryPointSymbol>wWinMainCRTStartup</EntryPointSymbol>
       <GenerateDebugInformation>false</GenerateDebugInformation>
     </Link>
@@ -411,9 +402,7 @@ cl /nologo /c /Zl /Fo$(OutDir) Build.c</Command>
       <IntrinsicFunctions>true</IntrinsicFunctions>
     </ClCompile>
     <PreLinkEvent>
-      <Command>$(OutDir)Radiance.exe
-
-cl /nologo /c /Zl /Fo$(OutDir) Build.c</Command>
+      <Command>cmd /c ""$(OutDir)Radiance.exe""</Command>
       <Message>Incrementing build number</Message>
     </PreLinkEvent>
     <Midl>
@@ -447,6 +436,7 @@ cl /nologo /c /Zl /Fo$(OutDir) Build.c</Command>
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="BitMe.cpp" />
     <ClCompile Include="BitMeDlg.cpp" />
+    <ClCompile Include="BuildInfo.cpp" />
     <ClCompile Include="Calculation\AsfInterface.cpp" />
     <ClCompile Include="Calculation\AviInterface.cpp" />
     <ClCompile Include="Calculation\BitrateModel.cpp" />
