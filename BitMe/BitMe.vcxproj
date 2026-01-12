@@ -150,7 +150,9 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <PreLinkEvent>
-      <Command>cmd /c ""$(OutDir)Radiance.exe""</Command>
+      <Command>"$(OutDir)Radiance.exe"
+
+cl /nologo /c /Zl /Fo"$(OutDir)\" Build.c</Command>
       <Message>Incrementing build number</Message>
     </PreLinkEvent>
     <Midl>
@@ -202,7 +204,9 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <PreLinkEvent>
-      <Command>cmd /c ""$(OutDir)Radiance.exe""</Command>
+      <Command>"$(OutDir)Radiance.exe"
+
+cl /nologo /c /Zl /Fo"$(OutDir)\" Build.c</Command>
       <Message>Incrementing build number</Message>
     </PreLinkEvent>
     <Midl>
@@ -251,7 +255,9 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
     </ClCompile>
     <PreLinkEvent>
-      <Command>cmd /c ""$(OutDir)Radiance.exe""</Command>
+      <Command>"$(OutDir)Radiance.exe"
+
+cl /nologo /c /Zl /Fo"$(OutDir)\" Build.c</Command>
       <Message>Incrementing build number</Message>
     </PreLinkEvent>
     <Midl>
@@ -273,8 +279,7 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <SubSystem>Windows</SubSystem>
       <OutputFile>$(OutDir)BitMe.exe</OutputFile>
-      <AdditionalDependencies>
-      </AdditionalDependencies>
+      <AdditionalDependencies>$(OutDir)Build.obj;%(AdditionalDependencies)</AdditionalDependencies>
       <EntryPointSymbol>wWinMainCRTStartup</EntryPointSymbol>
       <GenerateDebugInformation>false</GenerateDebugInformation>
     </Link>
@@ -303,7 +308,9 @@
       <EnableEnhancedInstructionSet>NoExtensions</EnableEnhancedInstructionSet>
     </ClCompile>
     <PreLinkEvent>
-      <Command>cmd /c ""$(OutDir)Radiance.exe""</Command>
+      <Command>"$(OutDir)Radiance.exe"
+
+cl /nologo /c /Zl /Fo"$(OutDir)\" Build.c</Command>
       <Message>Incrementing build number</Message>
     </PreLinkEvent>
     <Midl>
@@ -325,8 +332,7 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <SubSystem>Windows</SubSystem>
       <OutputFile>$(OutDir)BitMe.exe</OutputFile>
-      <AdditionalDependencies>
-      </AdditionalDependencies>
+      <AdditionalDependencies>$(OutDir)Build.obj;%(AdditionalDependencies)</AdditionalDependencies>
       <EntryPointSymbol>wWinMainCRTStartup</EntryPointSymbol>
       <GenerateDebugInformation>false</GenerateDebugInformation>
     </Link>
@@ -354,7 +360,9 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
     </ClCompile>
     <PreLinkEvent>
-      <Command>cmd /c ""$(OutDir)Radiance.exe""</Command>
+      <Command>"$(OutDir)Radiance.exe"
+
+cl /nologo /c /Zl /Fo"$(OutDir)\" Build.c</Command>
       <Message>Incrementing build number</Message>
     </PreLinkEvent>
     <Midl>
@@ -375,8 +383,7 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <SubSystem>Windows</SubSystem>
       <OutputFile>$(OutDir)BitMe.exe</OutputFile>
-      <AdditionalDependencies>
-      </AdditionalDependencies>
+      <AdditionalDependencies>$(OutDir)Build.obj;%(AdditionalDependencies)</AdditionalDependencies>
       <EntryPointSymbol>wWinMainCRTStartup</EntryPointSymbol>
       <GenerateDebugInformation>false</GenerateDebugInformation>
     </Link>
@@ -404,7 +411,9 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
     </ClCompile>
     <PreLinkEvent>
-      <Command>cmd /c ""$(OutDir)Radiance.exe""</Command>
+      <Command>"$(OutDir)Radiance.exe"
+
+cl /nologo /c /Zl /Fo"$(OutDir)\" Build.c</Command>
       <Message>Incrementing build number</Message>
     </PreLinkEvent>
     <Midl>
@@ -425,8 +434,7 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <SubSystem>Windows</SubSystem>
       <OutputFile>$(OutDir)BitMe.exe</OutputFile>
-      <AdditionalDependencies>
-      </AdditionalDependencies>
+      <AdditionalDependencies>$(OutDir)Build.obj;%(AdditionalDependencies)</AdditionalDependencies>
       <EntryPointSymbol>wWinMainCRTStartup</EntryPointSymbol>
       <GenerateDebugInformation>false</GenerateDebugInformation>
     </Link>
@@ -439,7 +447,6 @@
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="BitMe.cpp" />
     <ClCompile Include="BitMeDlg.cpp" />
-    <ClCompile Include="BuildInfo.cpp" />
     <ClCompile Include="Calculation\AsfInterface.cpp" />
     <ClCompile Include="Calculation\AviInterface.cpp" />
     <ClCompile Include="Calculation\BitrateModel.cpp" />

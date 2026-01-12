@@ -5,7 +5,7 @@
 using namespace std;
 
 const char sBuildFile[] = "Build.rad";
-const char sBuildSrcFile[] = "Radiance.stamp";
+const char sBuildSrcFile[] = "Build.c";
 
 int main()
 {

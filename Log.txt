@@ -1,6 +1,6 @@
 Version 3.3.164 (November 18, 2025)
 
-- Migrated project to Visual Studio 2026 (from VC++ 6.0)
+- Migrated project to Visual Studio 2026 (from VS 6.0)
 - Fixed spacing at the bottom of the window, removing hard-coded value
 - Settings are now stored in a text file, instead of the Registry
 - Updated About
