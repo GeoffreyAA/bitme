@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "BitrateModel.h"
-#include "..\Interfaces\Information.h"
+#include "Information.h"
 #include "..\Library\Maths.h"
 #include "..\Library\Library.h"
 #include "..\TmpLibrary.h"

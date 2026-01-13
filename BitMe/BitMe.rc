@@ -46,9 +46,9 @@ BEGIN
     CONTROL         "Text",IDC_CHECK4,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,309,82,40,15
     EDITTEXT        IDC_EDIT4,224,178,94,12,ES_RIGHT | ES_AUTOHSCROLL
     GROUPBOX        "Text",IDC_GROUPBOX1,5,5,54,75
-    RTEXT           "0",IDC_LABEL1,66,20,35,12
-    RTEXT           "0",IDC_LABEL2,142,20,43,12
-    RTEXT           "0",IDC_LABEL3,232,20,23,12
+    RTEXT           "0",IDC_LABEL1,72,20,35,12
+    RTEXT           "0",IDC_LABEL2,140,20,45,12
+    RTEXT           "0",IDC_LABEL3,234,20,27,12
     RTEXT           "0",IDC_LABEL4,294,20,30,12
     RTEXT           "0",IDC_LABEL5,14,98,8,12
     RTEXT           "0",IDC_LABEL6,62,98,29,12
@@ -61,11 +61,11 @@ BEGIN
     GROUPBOX        "Text",IDC_GROUPBOX4,5,84,214,75
     GROUPBOX        "Text",IDC_GROUPBOX6,5,163,352,38
     LTEXT           "Text",IDC_LABEL11,325,178,20,12,SS_CENTERIMAGE
-    LTEXT           "Text",IDC_LABEL12,104,20,22,12
+    LTEXT           "Text",IDC_LABEL12,110,20,22,12
     LTEXT           "Text",IDC_LABEL13,188,20,20,12
     LTEXT           "Text",IDC_LABEL14,74,64,50,12
     RTEXT           "Text",IDC_LABEL15,157,64,50,12
-    LTEXT           "Text",IDC_LABEL16,258,20,23,12
+    LTEXT           "Text",IDC_LABEL16,264,20,23,12
     LTEXT           "Text",IDC_LABEL17,327,20,22,12
     LTEXT           "Text",IDC_LABEL18,234,64,50,12
     RTEXT           "Text",IDC_LABEL19,297,64,50,12
@@ -127,8 +127,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 3,3,0,0
- PRODUCTVERSION 3,3,0,0
+ FILEVERSION 3,4,0,0
+ PRODUCTVERSION 3,4,0,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -144,12 +144,12 @@ BEGIN
         BLOCK "000004b0"
         BEGIN
             VALUE "FileDescription", "BitMe"
-            VALUE "FileVersion", "3.3"
+            VALUE "FileVersion", "3.4"
             VALUE "InternalName", "BitMe"
-            VALUE "LegalCopyright", "© Geoffrey Angapa, 2021. All rights reserved."
+            VALUE "LegalCopyright", "© GeoffreyA, 2021. All rights reserved."
             VALUE "OriginalFilename", "BitMe.exe"
             VALUE "ProductName", "BitMe"
-            VALUE "ProductVersion", "3.3"
+            VALUE "ProductVersion", "3.4"
         END
     END
     BLOCK "VarFileInfo"
@@ -233,6 +233,11 @@ END
 //
 
 IDD_ABOUT_DIALOG AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_BITME_DIALOG AFX_DIALOG_LAYOUT
 BEGIN
     0
 END

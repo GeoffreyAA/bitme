@@ -1,28 +1,3 @@
-///////////////////////////////////////////////////////////////
-//
-//  Win32Library.cpp
-//
-//  (C) Geoffrey Angapa 2016. All rights reserved.
-//
-//  This program is free software; you can redistribute it
-//  and/or modify it under the terms of the GNU General Public
-//  License as published by the Free Software Foundation;
-//  either version 2 of the License, or (at your option) any
-//  later version.
-//
-//  This program is distributed in the hope that it will be
-//  useful, but WITHOUT ANY WARRANTY; without even the implied
-//  warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
-//  PURPOSE.  See the GNU General Public License for more
-//  details.
-//
-//  You should have received a copy of the GNU General Public
-//  License along with this program; if not, write to the Free
-//  Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
-//  Boston, MA 02110-1301 USA.
-//
-///////////////////////////////////////////////////////////////
-
 #include "stdafx.h"
 #include "Win32Library.h"
 #include "Library.h"
@@ -57,11 +32,25 @@ int GetWindowLeft(HWND hWnd)
 	return (GetWindowRect(hWnd, &r) ? r.left : 0);
 }
 
+int GetWindowRight(HWND hWnd)
+{
+	RECT r;
+
+	return (GetWindowRect(hWnd, &r) ? r.right : 0);
+}
+
 int GetWindowTop(HWND hWnd)
 {
 	RECT r;
 
 	return (GetWindowRect(hWnd, &r) ? r.top : 0);
+}
+
+int GetWindowBottom(HWND hWnd)
+{
+	RECT r;
+
+	return (GetWindowRect(hWnd, &r) ? r.bottom : 0);
 }
 
 int GetDesktopWidth()

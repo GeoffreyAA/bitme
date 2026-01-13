@@ -16,11 +16,10 @@
 #include "Library\Templates.h"
 //#include "Library\SettingsManager.h"
 #include "Library\ConfigFile.h"
-#include "Interfaces\Information.h"
+#include "Calculation\Information.h"
 #include "Calculation\ContainerManager.h"
 #include "Calculation\Report.h"
 
-#include "Glue.h"
 #include "TmpLibrary.h"
 
 const wchar_t szFormat[] = L"%.2f";
@@ -524,7 +523,8 @@ void CBitMeDlg::UpdateStrings()
 	LabelT2Title.SetWindowText(ResourceString(L"IDS_MINUTES"));
 	LabelT3Title.SetWindowText(ResourceString(L"IDS_SECONDS"));
 	SetWindowTextRange(LabelTMin.GetSafeHwnd(), Time.GetRangeMin(), ResourceString(L"IDS_SECONDS"));
-	SetWindowTextRange(LabelTMax.GetSafeHwnd(), Time.GetRangeMax(), ResourceString(L"IDS_SECONDS"));
+	//SetWindowTextRange(LabelTMax.GetSafeHwnd(), Time.GetRangeMax(), ResourceString(L"IDS_SECONDS"));
+	SetWindowTextRange(LabelTMax.GetSafeHwnd(), Time.GetRangeMax() / 60 / 60, ResourceString(L"IDS_HOURS"));
 
 	if (CheckDataRate.GetCheck())
 	{

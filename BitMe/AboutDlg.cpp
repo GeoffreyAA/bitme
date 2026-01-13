@@ -61,7 +61,7 @@ void CAboutDlg::Initialise()
 	}
 
 	swprintfs(s, sizeof(s) / sizeof(s[0]), L"%s\n"
-										   L"© Geoffrey Angapa, 2021. %s.\n\n"
+										   L"© GeoffreyA, 2021. %s.\n\n"
 										   L"%s %s\n\n"
 										   L"%s",
 

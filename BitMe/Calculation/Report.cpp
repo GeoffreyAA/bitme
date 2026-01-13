@@ -2,9 +2,9 @@
 #include "Report.h"
 
 #include <stdio.h>
+#include "Information.h"
 #include "..\Application.h"
 #include "..\Library\Win32Library.h"
-#include "..\Interfaces\Information.h"
 #include "..\Library\String.h"
 #include "..\Library\StrW.h"
 #include "..\Library\ResourceString.h"

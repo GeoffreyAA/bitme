@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "ResolutionModel.h"
-#include "Library\Maths.h"
+#include "..\Library\Maths.h"
 
 ResolutionModel::ResolutionModel(double w, double ax, double ay, bool br, double rv) : Width(w), AspectX(ax), AspectY(ay), bRounding(br), r(rv)
 {

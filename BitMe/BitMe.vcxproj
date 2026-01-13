@@ -453,6 +453,7 @@ cl /nologo /c /Zl /Fo"$(OutDir)\" Build.c</Command>
     <ClCompile Include="Calculation\ContainerInterface.cpp" />
     <ClCompile Include="Calculation\ContainerManager.cpp" />
     <ClCompile Include="Calculation\FlvInterface.cpp" />
+    <ClCompile Include="Calculation\Information.cpp" />
     <ClCompile Include="Calculation\M2tsInterface.cpp" />
     <ClCompile Include="Calculation\MatroskaInterface.cpp" />
     <ClCompile Include="Calculation\Mp4Interface.cpp" />
@@ -461,11 +462,10 @@ cl /nologo /c /Zl /Fo"$(OutDir)\" Build.c</Command>
     <ClCompile Include="Calculation\MxfInterface.cpp" />
     <ClCompile Include="Calculation\OggInterface.cpp" />
     <ClCompile Include="Calculation\Report.cpp" />
+    <ClCompile Include="Calculation\ResolutionModel.cpp" />
     <ClCompile Include="Calculation\RmInterface.cpp" />
     <ClCompile Include="Calculation\TestInterface.cpp" />
     <ClCompile Include="Calculation\VobInterface.cpp" />
-    <ClCompile Include="Glue.cpp" />
-    <ClCompile Include="Interfaces\Information.cpp" />
     <ClCompile Include="Library\Alloc.cpp" />
     <ClCompile Include="Library\Base64.cpp" />
     <ClCompile Include="Library\ConfigFile.cpp" />
@@ -484,7 +484,6 @@ cl /nologo /c /Zl /Fo"$(OutDir)\" Build.c</Command>
     <ClCompile Include="Library\VAlloc.cpp" />
     <ClCompile Include="Library\Win32Library.cpp" />
     <ClCompile Include="ResCalcDlg.cpp" />
-    <ClCompile Include="ResolutionModel.cpp" />
     <ClCompile Include="Settings.cpp" />
     <ClCompile Include="SettingsDlg.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -517,6 +516,7 @@ cl /nologo /c /Zl /Fo"$(OutDir)\" Build.c</Command>
     <ClInclude Include="Calculation\ContainerInterface.h" />
     <ClInclude Include="Calculation\ContainerManager.h" />
     <ClInclude Include="Calculation\FlvInterface.h" />
+    <ClInclude Include="Calculation\Information.h" />
     <ClInclude Include="Calculation\M2tsInterface.h" />
     <ClInclude Include="Calculation\MatroskaInterface.h" />
     <ClInclude Include="Calculation\Mp4Interface.h" />
@@ -525,12 +525,11 @@ cl /nologo /c /Zl /Fo"$(OutDir)\" Build.c</Command>
     <ClInclude Include="Calculation\MxfInterface.h" />
     <ClInclude Include="Calculation\OggInterface.h" />
     <ClInclude Include="Calculation\Report.h" />
+    <ClInclude Include="Calculation\ResolutionModel.h" />
     <ClInclude Include="Calculation\RmInterface.h" />
     <ClInclude Include="Calculation\stdafx.h" />
     <ClInclude Include="Calculation\TestInterface.h" />
     <ClInclude Include="Calculation\VobInterface.h" />
-    <ClInclude Include="Glue.h" />
-    <ClInclude Include="Interfaces\Information.h" />
     <ClInclude Include="Library\Alloc.h" />
     <ClInclude Include="Library\array.h" />
     <ClInclude Include="Library\Base64.h" />
@@ -557,7 +556,6 @@ cl /nologo /c /Zl /Fo"$(OutDir)\" Build.c</Command>
     <ClInclude Include="Library\VAlloc.h" />
     <ClInclude Include="Library\Win32Library.h" />
     <ClInclude Include="ResCalcDlg.h" />
-    <ClInclude Include="ResolutionModel.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Settings.h" />
     <ClInclude Include="SettingsDlg.h" />

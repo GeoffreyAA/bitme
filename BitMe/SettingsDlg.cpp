@@ -10,8 +10,6 @@
 //#include "Containers\Container.h"
 #include "Application.h"
 
-#include "Glue.h"
-
 
 ///////////////////////////////////////////////////////////////
 

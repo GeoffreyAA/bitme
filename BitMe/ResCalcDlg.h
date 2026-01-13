@@ -5,7 +5,7 @@
 #pragma once
 #endif
 
-#include "ResolutionModel.h"
+#include "Calculation\ResolutionModel.h"
 
 class CResCalcDlg : public CDialog
 {

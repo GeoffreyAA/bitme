@@ -9,7 +9,6 @@
 #include "Application.h"
 #include <math.h>
 
-#include "Glue.h"
 #include "TmpLibrary.h"
 
 CResCalcDlg::CResCalcDlg(CWnd *pParent) : CDialog(CResCalcDlg::IDD, pParent)

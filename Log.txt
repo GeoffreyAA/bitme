@@ -1,19 +1,31 @@
+Version 3.4.xyz (x y, 2026)
+
+- Increased bitrate limits to suit modern bitrates,
+  such as XAVC Intra Class 480 at 50p with 16 PCM 24-bit 48 kHz audio tracks.
+  Refined slider page sizes to make stepping through easier.
+  Many thanks, FranceBB.
+- Increased size of bitrate labels to fit the bigger numbers, and realigned them.
+- Changed maximum time label from seconds to hours.
+- Fixed building failure with spaces in the project path.
+- Removed legacy project files, and reorganised source code.
+
+
 Version 3.3.164 (November 18, 2025)
 
-- Migrated project to Visual Studio 2026 (from VS 6.0)
-- Fixed spacing at the bottom of the window, removing hard-coded value
-- Settings are now stored in a text file, instead of the Registry
-- Updated About
-- Removed Report
-- Removed Calculator
-- Trimmed menu
-- Added x64 build
+- Migrated project to Visual Studio 2026 (from VS 6.0).
+- Fixed spacing at the bottom of the window, removing hard-coded value.
+- Settings are now stored in a text file, instead of the Registry.
+- Removed Calculator.
+- Removed Report.
+- Updated About.
+- Trimmed menu.
+- Added x64 build.
 
 
 Version 3.2.144 (April 20, 2025)
 
-- Removed readme from archive
-- Removed read-only attribute from executable and language file
+- Removed readme from archive.
+- Removed read-only attribute from executable and language file.
 
 
 Version 3.2.144 (April 12, 2021)
@@ -23,9 +35,9 @@ Version 3.2.144 (April 12, 2021)
 
 Version 3.0 (May 2013)
 
-- Rewrote BitMe from scratch, having lost the source code at the time
-- Fortunate because the program ended up with a better architecture
-- Re-used Weights & Measures systems such as the Language Manager
+- Re-wrote BitMe from scratch, having lost the source code at the time.
+- Fortunate because the program ended up with a better architecture.
+- Re-used Weights & Measures systems such as the Language Manager.
 
 
 Version 2.3 (Build 4148) [April 5, 2010]

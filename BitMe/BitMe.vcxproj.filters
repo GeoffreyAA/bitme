@@ -57,13 +57,7 @@
     <ClCompile Include="Library\Font.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Glue.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Library\HtmlWriter.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Interfaces\Information.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Library\Language.cpp">
@@ -103,9 +97,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ResCalcDlg.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ResolutionModel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Library\ResourceString.cpp">
@@ -151,6 +142,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Library\Base64.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Calculation\Information.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Calculation\ResolutionModel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -208,13 +205,7 @@
     <ClInclude Include="Library\Font.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Glue.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Library\HtmlWriter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Interfaces\Information.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Library\Language.h">
@@ -257,9 +248,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ResCalcDlg.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ResolutionModel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Resource.h">
@@ -326,6 +314,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Library\Base64.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Calculation\Information.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Calculation\ResolutionModel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
