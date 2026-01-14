@@ -1,0 +1,14 @@
+BitMe can be compiled with Visual Studio 2026. Open the solution file, BitMe.sln, set the configuration, and compile. It is set to link statically, so no redistributable files should be needed. As MFC is used, the following must be installed:
+
+	C++ MFC for x64/x86 (Latest MSVC)
+
+
+To target XP, select the "Release-XP" configuration. You will need to have the following installed:
+
+	C++ Windows XP Support for VS 2017 (v141) tools
+	MSVC v141 - VS 2017 C++ x64/x86 build tools (v14.16)
+	C++ MFC for v141 build tools (x86 & x64)
+
+
+Thanks,
+Geoffrey

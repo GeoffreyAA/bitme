@@ -461,7 +461,6 @@ cl /nologo /c /Zl /Fo"$(OutDir)\" Build.c</Command>
     <ClCompile Include="Calculation\MtsInterface.cpp" />
     <ClCompile Include="Calculation\MxfInterface.cpp" />
     <ClCompile Include="Calculation\OggInterface.cpp" />
-    <ClCompile Include="Calculation\Report.cpp" />
     <ClCompile Include="Calculation\ResolutionModel.cpp" />
     <ClCompile Include="Calculation\RmInterface.cpp" />
     <ClCompile Include="Calculation\TestInterface.cpp" />
@@ -483,6 +482,7 @@ cl /nologo /c /Zl /Fo"$(OutDir)\" Build.c</Command>
     <ClCompile Include="Library\Unicode.cpp" />
     <ClCompile Include="Library\VAlloc.cpp" />
     <ClCompile Include="Library\Win32Library.cpp" />
+    <ClCompile Include="Report.cpp" />
     <ClCompile Include="ResCalcDlg.cpp" />
     <ClCompile Include="Settings.cpp" />
     <ClCompile Include="SettingsDlg.cpp" />
@@ -524,7 +524,6 @@ cl /nologo /c /Zl /Fo"$(OutDir)\" Build.c</Command>
     <ClInclude Include="Calculation\MtsInterface.h" />
     <ClInclude Include="Calculation\MxfInterface.h" />
     <ClInclude Include="Calculation\OggInterface.h" />
-    <ClInclude Include="Calculation\Report.h" />
     <ClInclude Include="Calculation\ResolutionModel.h" />
     <ClInclude Include="Calculation\RmInterface.h" />
     <ClInclude Include="Calculation\stdafx.h" />
@@ -555,6 +554,7 @@ cl /nologo /c /Zl /Fo"$(OutDir)\" Build.c</Command>
     <ClInclude Include="Library\Unicode.h" />
     <ClInclude Include="Library\VAlloc.h" />
     <ClInclude Include="Library\Win32Library.h" />
+    <ClInclude Include="Report.h" />
     <ClInclude Include="ResCalcDlg.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Settings.h" />

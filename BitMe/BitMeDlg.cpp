@@ -8,19 +8,18 @@
 #include "SettingsDlg.h"
 
 #include "Application.h"
-#include "Library\Library.h"
-#include "Library\Win32Library.h"
-#include "Library\ResourceString.h"
-#include "Library\Registry.h"
-#include "Library\File.h"
-#include "Library\Templates.h"
-//#include "Library\SettingsManager.h"
-#include "Library\ConfigFile.h"
-#include "Calculation\Information.h"
-#include "Calculation\ContainerManager.h"
-#include "Calculation\Report.h"
-
+#include "Report.h"
 #include "TmpLibrary.h"
+#include "Library\ConfigFile.h"
+#include "Library\File.h"
+#include "Library\Library.h"
+#include "Library\Registry.h"
+#include "Library\ResourceString.h"
+//#include "Library\SettingsManager.h"
+#include "Library\Templates.h"
+#include "Library\Win32Library.h"
+#include "Calculation\ContainerManager.h"
+#include "Calculation\Information.h"
 
 const wchar_t szFormat[] = L"%.2f";
 

@@ -93,9 +93,6 @@
     <ClCompile Include="Library\Registry.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Calculation\Report.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ResCalcDlg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -148,6 +145,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Calculation\ResolutionModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Report.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -244,9 +244,6 @@
     <ClInclude Include="Library\Registry.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Calculation\Report.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ResCalcDlg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -320,6 +317,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Calculation\ResolutionModel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Report.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

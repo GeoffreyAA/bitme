@@ -2,10 +2,12 @@ Version 3.4.xyz (x y, 2026)
 
 - Increased bitrate limits to suit modern bitrates,
   such as XAVC Intra Class 480 at 50p with 16 PCM 24-bit 48 kHz audio tracks.
-  Refined slider page sizes to make stepping through easier.
+  Refined slider page sizes to make scrolling easier.
   Many thanks, FranceBB.
 - Increased size of bitrate labels to fit the bigger numbers, and realigned them.
 - Changed maximum time label from seconds to hours.
+- Added OGV overhead.
+- Improved MXF overhead a bit.
 - Fixed building failure with spaces in the project path.
 - Removed legacy project files, and reorganised source code.
 

@@ -2,14 +2,14 @@
 #include "Report.h"
 
 #include <stdio.h>
-#include "Information.h"
-#include "..\Application.h"
-#include "..\Library\Win32Library.h"
-#include "..\Library\String.h"
-#include "..\Library\StrW.h"
-#include "..\Library\ResourceString.h"
-#include "..\TmpLibrary.h"
-#include "..\Library\HtmlWriter.h"
+#include "Application.h"
+#include "TmpLibrary.h"
+#include "Calculation\Information.h"
+#include "Library\HtmlWriter.h"
+#include "Library\ResourceString.h"
+#include "Library\String.h"
+#include "Library\StrW.h"
+#include "Library\Win32Library.h"
 
 StrUTF8 ResourceStringUTF8(const wchar_t *pszName)
 {

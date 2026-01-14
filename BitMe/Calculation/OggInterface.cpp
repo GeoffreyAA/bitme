@@ -3,14 +3,14 @@
 
 String OggInterface::getName() const
 {
-	return (L"OGG");
+	return (L"OGV");
 }
 double OggInterface::getOverheadFull(double v, double a, double t) const
 {
-	return (11528.0 * t);
+	return (64776.0 * t);
 }
 
 double OggInterface::getOverheadNoAudio(double v, double t) const
 {
-	return (11528.0 * t);
+	return (98357.0 * t);
 }
