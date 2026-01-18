@@ -146,7 +146,7 @@ BEGIN
             VALUE "FileDescription", "BitMe"
             VALUE "FileVersion", "3.4"
             VALUE "InternalName", "BitMe"
-            VALUE "LegalCopyright", "© GeoffreyA, 2021. All rights reserved."
+            VALUE "LegalCopyright", "© Geoffrey A., 2021. All rights reserved."
             VALUE "OriginalFilename", "BitMe.exe"
             VALUE "ProductName", "BitMe"
             VALUE "ProductVersion", "3.4"
