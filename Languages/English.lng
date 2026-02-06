@@ -13,10 +13,7 @@ IDS_HELP_HOMEPAGE=Home Page...
 IDS_HELP_LICENCE=Licence...
 IDS_HELP_ABOUT=About...
 
-IDS_LICENCE=This program is free software and, licensed to you under the GNU General Public License, comes with no warranty.
-IDS_LICENCE_TITLE=Licence
-IDS_LICENCE_MSG=This program is free software and, licensed to you under the GNU General Public License, comes with no warranty.\n\nTo see the licence, click OK.
-IDS_LICENCE_ERROR=Cannot open the licence.
+IDS_LICENCE=This program is free software and, licensed to you under the MIT License, comes with no warranty.
 IDS_CALCULATOR_ERROR_TITLE=Calculator
 IDS_CALCULATOR_ERROR=Cannot start Calculator.
 IDS_ERROR=Error
