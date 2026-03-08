@@ -302,9 +302,9 @@ void CBitMeDlg::OnBeforeClose()
 
 void CBitMeDlg::SetupControls()
 {
-	Video.SetRange(0, 900000, FALSE); // 900000 = 900 Mbps
-	Audio.SetRange(0, 20000, FALSE); // 20000 = 20 Mbps
-	Time.SetRange(0, 32400, FALSE); // 32400 = 9 hours
+	Video.SetRange(0, 900000, FALSE); // 900,000 = 900 Mbps
+	Audio.SetRange(0, 90000, FALSE); // 90,000 = 90 Mbps
+	Time.SetRange(0, 32400, FALSE); // 32,400 = 9 hours
 
 	Video.SetPageSize(500);
 	Audio.SetPageSize(128);

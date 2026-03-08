@@ -71,7 +71,7 @@ String GetApplicationNameFull2()
 
 const wchar_t *GetApplicationVersion()
 {
-	return (L"3.4");
+	return (L"3.5");
 }
 
 int GetBuildNumber()
