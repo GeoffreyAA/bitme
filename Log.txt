@@ -1,6 +1,6 @@
 Version 3.5.183 (March 8, 2026)
 
-- Changed licence from GLPv2 to MIT.
+- Changed licence from GPLv2 to MIT.
 - Increased audio bitrate to 90 Mbps.
 
 
