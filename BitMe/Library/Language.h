@@ -4,19 +4,25 @@
 #include "String.h"
 #include "StringDictionary.h"
 #include "StringList.h"
-#include <windows.h>
+#include <mutex>
 
 class Language
 {
 public:
-	Language(const wchar_t *pszName, const StringDictionary &s);
+	Language();
+	Language(const wchar_t *name, const StringDictionary &dict);
+
+	String getString(const wchar_t *key) const;
 
 	const String& getName() const;
-	String getString(const wchar_t *pszName) const;
+	const StringDictionary& getStrings() const;
+
+	void setName(const wchar_t *name);
+	void setStrings(const StringDictionary &dict);
 
 private:
-	const String Name;
-	const StringDictionary Strings;
+	String Name;
+	StringDictionary Strings;
 };
 
 class LanguageManager
@@ -25,10 +31,10 @@ public:
 	StringList getAvailableLanguages() const;
 
 	Language getCurrentLanguage();
-	bool setCurrentLanguage(const wchar_t *pszName);
+	bool setCurrentLanguage(const wchar_t *name);
 
-	void getCurrentLanguageName(String &s);
-	void getStringFromCurrentLanguage(const wchar_t *pszName, String &s);
+	String getCurrentLanguageName();
+	String getStringFromCurrentLanguage(const wchar_t *key);
 
 	static LanguageManager& getInstance();
 
@@ -36,13 +42,11 @@ public:
 
 private:
 	LanguageManager();
-	Language *LoadLanguage(const wchar_t *pszName) const;
+	bool LoadLanguage(const wchar_t *name, Language &dst) const;
 
 private:
-	const Language *pLanguage;
-	const Language DefaultLanguage;
-
-	CRITICAL_SECTION cs;
+	Language CurrentLanguage;
+	std::mutex cs;
 
 	static LanguageManager Instance;
 };
