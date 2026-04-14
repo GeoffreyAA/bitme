@@ -53,7 +53,7 @@ wchar_t *GetApplicationNameFull2(wchar_t *c, size_t cbSize)
 
 String GetApplicationNameFull()
 {
-	wchar_t w[64];
+	wchar_t w[128];
 
 	GetApplicationNameFull(w, sizeof(w) / sizeof(w[0]));
 
@@ -62,7 +62,7 @@ String GetApplicationNameFull()
 
 String GetApplicationNameFull2()
 {
-	wchar_t w[64];
+	wchar_t w[128];
 
 	GetApplicationNameFull2(w, sizeof(w) / sizeof(w[0]));
 
