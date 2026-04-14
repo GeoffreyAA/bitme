@@ -6,7 +6,7 @@ ResourceString::ResourceString(const wchar_t *pszName)
 {
 	if (pszName)
 	{
-		LanguageManager::getInstance().getStringFromCurrentLanguage(pszName, s);
+		s = LanguageManager::getInstance().getStringFromCurrentLanguage(pszName);
 	}
 }
 
