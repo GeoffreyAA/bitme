@@ -1,30 +1,29 @@
 #include "stdafx.h"
 #include "ConfigFile.h"
+#include <stdio.h>
+#include <wchar.h>
 #include "Library.h"
 #include "Win32Library.h"
 #include "StrW.h"
 #include "Unicode.h"
-#include <stdio.h>
-#include <wchar.h>
 
-ConfigFile::ConfigFile(const wchar_t *file)
+ConfigFile::ConfigFile(const wchar_t *file) : write(false)
 {
 	ApplicationFile path(file);
 
-	FILE *fp = _wfopen(path, L"a");
+	if (path.c_str())
+	{
+		fn = path.c_str();
 
-	if (fp)
-		fclose(fp);
-
-	if (StringDictionaryReader().read(path, d))
-		f = path.c_str();
-	else
-		d.clear();
+		if (!StringDictionaryReader().read(path, d))
+			d.clear();
+	}
 }
 
 ConfigFile::~ConfigFile()
 {
-	StringDictionaryWriter().write(f.c_str(), d);
+	if (write)
+		StringDictionaryWriter().write(fn.c_str(), d);
 }
 
 
@@ -47,12 +46,14 @@ bool ConfigFile::get(const wchar_t *name, String &value) const
 	return false;
 }
 
-bool ConfigFile::put(const wchar_t *name, const String &value)
+bool ConfigFile::put(const wchar_t *name, const wchar_t *value)
 {
-	if (name)
+	if (name && value)
 	{
 		d.erase(name);
 		d.insert(StringDictionary::value_type(name, value));
+
+		write = true;
 
 		return true;
 	}
@@ -106,7 +107,7 @@ char *ConfigFile::getString(const wchar_t *name, char *value, size_t size) const
 {
 	String s;
 
-	if (get(name, s))
+	if (value && get(name, s))
 	{
 		if (ConvertUTF16To8(value, size, s.c_str()))
 			return value;
@@ -139,12 +140,12 @@ void *ConfigFile::getBinary(const wchar_t *name, void *value, size_t bytes) cons
 
 bool ConfigFile::setInteger(const wchar_t *name, int value)
 {
-	return put(name, std::to_wstring(value));
+	return put(name, std::to_wstring(value).c_str());
 }
 
 bool ConfigFile::setFloat(const wchar_t *name, double value)
 {
-	return put(name, std::to_wstring(value));
+	return put(name, std::to_wstring(value).c_str());
 }
 
 bool ConfigFile::setBool(const wchar_t *name, bool value)
@@ -170,7 +171,14 @@ bool ConfigFile::setBinary(const wchar_t *name, const void *value, size_t bytes)
 bool ConfigFile::deleteValue(const wchar_t *name)
 {
 	if (name)
-		return d.erase(name) > 0;
+	{
+		if (d.erase(name) > 0)
+		{
+			write = true;
+
+			return true;
+		}
+	}
 
 	return false;
 }

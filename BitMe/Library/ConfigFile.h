@@ -29,11 +29,12 @@ public:
 
 protected:
 	bool get(const wchar_t *name, String &value) const;
-	bool put(const wchar_t *name, const String &value);
+	bool put(const wchar_t *name, const wchar_t *value);
 
 private:
 	StringDictionary d;
-	String f;
+	String fn;
+	bool write;
 };
 
 #endif
