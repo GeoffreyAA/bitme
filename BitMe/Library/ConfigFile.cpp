@@ -15,7 +15,7 @@ ConfigFile::ConfigFile(const wchar_t *file) : write(false)
 	{
 		fn = path.c_str();
 
-		if (!StringDictionaryReader().read(path, d))
+		if (!StringDictionarySerialiser().read(path, d))
 			d.clear();
 	}
 }
@@ -23,7 +23,7 @@ ConfigFile::ConfigFile(const wchar_t *file) : write(false)
 ConfigFile::~ConfigFile()
 {
 	if (write)
-		StringDictionaryWriter().write(fn.c_str(), d);
+		StringDictionarySerialiser().write(fn.c_str(), d);
 }
 
 

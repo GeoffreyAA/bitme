@@ -5,7 +5,7 @@
 #include "Library.h"
 #include "Unicode.h"
 
-bool StringDictionaryReader::read(const wchar_t *pszFile, StringDictionary &d) const
+bool StringDictionarySerialiser::read(const wchar_t *pszFile, StringDictionary &d) const
 {
 	if (pszFile)
 	{
@@ -40,7 +40,7 @@ bool StringDictionaryReader::read(const wchar_t *pszFile, StringDictionary &d) c
 	return false;
 }
 
-wchar_t *StringDictionaryReader::BreakString(wchar_t *s) const
+wchar_t *StringDictionarySerialiser::BreakString(wchar_t *s) const
 {
 	if (s)
 	{
@@ -67,7 +67,7 @@ wchar_t *StringDictionaryReader::BreakString(wchar_t *s) const
 	return (NULL);
 }
 
-void StringDictionaryReader::ReplaceNewlines(wchar_t *s) const
+void StringDictionarySerialiser::ReplaceNewlines(wchar_t *s) const
 {
 	if (s)
 	{
@@ -83,7 +83,7 @@ void StringDictionaryReader::ReplaceNewlines(wchar_t *s) const
 	}
 }
 
-bool StringDictionaryWriter::write(const wchar_t *pszFile, const StringDictionary &d) const
+bool StringDictionarySerialiser::write(const wchar_t *pszFile, const StringDictionary &d) const
 {
 	if (pszFile)
 	{
@@ -113,7 +113,7 @@ bool StringDictionaryWriter::write(const wchar_t *pszFile, const StringDictionar
 	return false;
 }
 
-String StringDictionaryWriter::TranslateNewlines(const String &s) const
+String StringDictionarySerialiser::TranslateNewlines(const String &s) const
 {
 	String a;
 	a.reserve(s.size());

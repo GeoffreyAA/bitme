@@ -165,7 +165,7 @@ bool LanguageManager::LoadLanguage(const wchar_t *name, Language &dst) const
 		{
 			StringDictionary d;
 
-			if (StringDictionaryReader().read(w, d))
+			if (StringDictionarySerialiser().read(w, d))
 			{
 				dst.setName(name);
 				dst.setStrings(d);
