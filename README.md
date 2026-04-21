@@ -15,8 +15,6 @@ The program comes with a default language of English and can be translated into 
 
 Download BitMe only from its [official page](https://github.com/GeoffreyAA/bitme). This is free software; do not pay for it anywhere.
 
-The main executable, BitMe.exe, is the 64-bit x86 build and should work on Windows 7 and higher. The 32-bit build, BitMe32.exe, should work on XP.
-
 
 Building
 --------
