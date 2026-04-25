@@ -131,6 +131,7 @@ BEGIN_MESSAGE_MAP(CBitMeDlg, CDialog)
 	ON_WM_CTLCOLOR()
 	ON_COMMAND(ID_TOOLS_RESCALC, OnToolsResCalc)
 	ON_COMMAND(ID_TOOLS_SETTINGS, OnToolsSettings)
+	ON_COMMAND(ID_TOOLS_ABOUT, OnToolsAbout)
 	//ON_COMMAND(ID_TOOLS_REPORT, OnToolsReport)
 	//ON_COMMAND(ID_TOOLS_CALCULATOR, OnToolsCalculator)
 	ON_COMMAND(ID_TOOLS_QUIT, OnToolsQuit)
@@ -140,7 +141,6 @@ BEGIN_MESSAGE_MAP(CBitMeDlg, CDialog)
 	ON_WM_HELPINFO()
 	//ON_COMMAND(ID_HELP_HOMEPAGE, OnHelpHomePage)
 	//ON_COMMAND(ID_HELP_LICENCE, OnHelpLicence)
-	ON_COMMAND(ID_HELP_ABOUT, OnHelpAbout)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -880,6 +880,11 @@ void CBitMeDlg::OnToolsSettings()
 	}
 }
 
+void CBitMeDlg::OnToolsAbout()
+{
+	CAboutDlg().DoModal();
+}
+
 /*void CBitMeDlg::OnToolsReport()
 {
 	OPENFILENAME ofn;
@@ -1018,11 +1023,6 @@ BOOL CBitMeDlg::OnHelpInfo(HELPINFO *pHelpInfo)
 		}
 	}
 }*/
-
-void CBitMeDlg::OnHelpAbout()
-{
-	CAboutDlg().DoModal();
-}
 
 
 ///////////////////////////////////////////////////////////////

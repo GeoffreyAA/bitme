@@ -1,10 +1,6 @@
 #ifndef __C_BITME_DLG_H__
 #define __C_BITME_DLG_H__
 
-#if _MSC_VER > 1000
-#pragma once
-#endif
-
 #include "Calculation\BitrateModel.h"
 #include "Library\Font.h"
 #include "Library\Configuration.h"
@@ -116,6 +112,7 @@ protected:
 	afx_msg HBRUSH OnCtlColor(CDC *pDC, CWnd *pWnd, UINT nCtlColor);
 	afx_msg void OnToolsResCalc();
 	afx_msg void OnToolsSettings();
+	afx_msg void OnToolsAbout();
 	//afx_msg void OnToolsReport();
 	//afx_msg void OnToolsCalculator();
 	afx_msg void OnToolsQuit();
@@ -125,7 +122,6 @@ protected:
 	afx_msg BOOL OnHelpInfo(HELPINFO *pHelpInfo);
 	//afx_msg void OnHelpHomePage();
 	//afx_msg void OnHelpLicence();
-	afx_msg void OnHelpAbout();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 

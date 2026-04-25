@@ -242,6 +242,57 @@ BEGIN
     0
 END
 
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_BITME_ICON          ICON                    "res\\BitMe.ico"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_BITME_MENU MENU
+BEGIN
+    POPUP "&Tools"
+    BEGIN
+        MENUITEM "Resolution Calculator...",    ID_TOOLS_RESCALC
+        MENUITEM "Settings...",                 ID_TOOLS_SETTINGS
+        MENUITEM SEPARATOR
+        MENUITEM "About...",                    ID_TOOLS_ABOUT
+        MENUITEM SEPARATOR
+        MENUITEM "Quit",                        ID_TOOLS_QUIT
+    END
+    POPUP "&Calculation"
+    BEGIN
+        MENUITEM "Use overhead in calculation", ID_CALCULATION_OVERHEAD
+        MENUITEM SEPARATOR
+        MENUITEM "Container 0",                 ID_CALCULATION_CONTAINER0
+        MENUITEM "Container 1",                 ID_CALCULATION_CONTAINER1
+        MENUITEM "Container 2",                 ID_CALCULATION_CONTAINER2
+        MENUITEM "Container 3",                 ID_CALCULATION_CONTAINER3
+        MENUITEM "Container 4",                 ID_CALCULATION_CONTAINER4
+        MENUITEM "Container 5",                 ID_CALCULATION_CONTAINER5
+        MENUITEM "Container 6",                 ID_CALCULATION_CONTAINER6
+        MENUITEM "Container 7",                 ID_CALCULATION_CONTAINER7
+        MENUITEM "Container 8",                 ID_CALCULATION_CONTAINER8
+        MENUITEM "Container 9",                 ID_CALCULATION_CONTAINER9
+        MENUITEM "Container 10",                ID_CALCULATION_CONTAINER10
+        MENUITEM "Container 11",                ID_CALCULATION_CONTAINER11
+        MENUITEM "Container 12",                ID_CALCULATION_CONTAINER12
+        MENUITEM "Container 13",                ID_CALCULATION_CONTAINER13
+        MENUITEM "Container 14",                ID_CALCULATION_CONTAINER14
+        MENUITEM SEPARATOR
+        MENUITEM "Information...",              ID_CALCULATION_INFORMATION
+    END
+END
+
 #endif    // Neutral resources
 /////////////////////////////////////////////////////////////////////////////
 
@@ -289,57 +340,6 @@ BEGIN
 END
 
 #endif    // APSTUDIO_INVOKED
-
-
-/////////////////////////////////////////////////////////////////////////////
-//
-// Icon
-//
-
-// Icon with lowest ID value placed first to ensure application icon
-// remains consistent on all systems.
-IDR_BITME_ICON          ICON                    "res\\BitMe.ico"
-
-
-/////////////////////////////////////////////////////////////////////////////
-//
-// Menu
-//
-
-IDR_BITME_MENU MENU
-BEGIN
-    POPUP "&Tools"
-    BEGIN
-        MENUITEM "Resolution Calculator...",    ID_TOOLS_RESCALC
-        MENUITEM "Settings...",                 ID_TOOLS_SETTINGS
-        MENUITEM SEPARATOR
-        MENUITEM "About...",                    ID_HELP_ABOUT
-        MENUITEM SEPARATOR
-        MENUITEM "Quit",                        ID_TOOLS_QUIT
-    END
-    POPUP "&Calculation"
-    BEGIN
-        MENUITEM "Use overhead in calculation", ID_CALCULATION_OVERHEAD
-        MENUITEM SEPARATOR
-        MENUITEM "Container 0",                 ID_CALCULATION_CONTAINER0
-        MENUITEM "Container 1",                 ID_CALCULATION_CONTAINER1
-        MENUITEM "Container 2",                 ID_CALCULATION_CONTAINER2
-        MENUITEM "Container 3",                 ID_CALCULATION_CONTAINER3
-        MENUITEM "Container 4",                 ID_CALCULATION_CONTAINER4
-        MENUITEM "Container 5",                 ID_CALCULATION_CONTAINER5
-        MENUITEM "Container 6",                 ID_CALCULATION_CONTAINER6
-        MENUITEM "Container 7",                 ID_CALCULATION_CONTAINER7
-        MENUITEM "Container 8",                 ID_CALCULATION_CONTAINER8
-        MENUITEM "Container 9",                 ID_CALCULATION_CONTAINER9
-        MENUITEM "Container 10",                ID_CALCULATION_CONTAINER10
-        MENUITEM "Container 11",                ID_CALCULATION_CONTAINER11
-        MENUITEM "Container 12",                ID_CALCULATION_CONTAINER12
-        MENUITEM "Container 13",                ID_CALCULATION_CONTAINER13
-        MENUITEM "Container 14",                ID_CALCULATION_CONTAINER14
-        MENUITEM SEPARATOR
-        MENUITEM "Information...",              ID_CALCULATION_INFORMATION
-    END
-END
 
 #endif    // English (South Africa) resources
 /////////////////////////////////////////////////////////////////////////////
