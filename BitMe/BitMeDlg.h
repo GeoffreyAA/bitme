@@ -90,11 +90,7 @@ protected:
 	void OnReturnKey();
 
 	String GetSelectedContainer() const;
-	//String GetSelectedVideoFormat() const;
-	//String GetSelectedAudioFormat() const;
 	void SelectContainer(const wchar_t *s);
-	//void SelectVideoFormat(const wchar_t *s);
-	//void SelectAudioFormat(const wchar_t *s);
 	void EnableContainersAndFormats(bool b);
 
 	//{{AFX_MSG(CBitMeDlg)
@@ -113,15 +109,11 @@ protected:
 	afx_msg void OnToolsResCalc();
 	afx_msg void OnToolsSettings();
 	afx_msg void OnToolsAbout();
-	//afx_msg void OnToolsReport();
 	//afx_msg void OnToolsCalculator();
 	afx_msg void OnToolsQuit();
 	afx_msg void OnCalculationOverhead();
 	afx_msg void OnCalculationInformation();
-	//afx_msg void OnHelpHelp();
 	afx_msg BOOL OnHelpInfo(HELPINFO *pHelpInfo);
-	//afx_msg void OnHelpHomePage();
-	//afx_msg void OnHelpLicence();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 
@@ -144,8 +136,6 @@ struct CBitMeDlgCfg
 	bool bOverhead;
 
 	String sContainer;
-	//String sVideoFormat;
-	//String sAudioFormat;
 
 	int nVideo;
 	int nAudio;

@@ -8,18 +8,16 @@
 #include "SettingsDlg.h"
 
 #include "Application.h"
-#include "Report.h"
-#include "TmpLibrary.h"
 #include "Library\ConfigFile.h"
 #include "Library\File.h"
 #include "Library\Library.h"
 #include "Library\Registry.h"
 #include "Library\ResourceString.h"
-//#include "Library\SettingsManager.h"
 #include "Library\Templates.h"
 #include "Library\Win32Library.h"
 #include "Calculation\ContainerManager.h"
 #include "Calculation\Information.h"
+#include "TmpLibrary.h"
 
 const wchar_t szFormat[] = L"%.2f";
 
@@ -39,21 +37,8 @@ const UINT Containers[] = {ID_CALCULATION_CONTAINER0,
 						   ID_CALCULATION_CONTAINER13,
 						   ID_CALCULATION_CONTAINER14,};
 
-/*
-const UINT VideoFormats[] = {ID_CALCULATION_VIDEO0,
-							 ID_CALCULATION_VIDEO1,
-							 ID_CALCULATION_VIDEO2,
-							 ID_CALCULATION_VIDEO3,
-							 ID_CALCULATION_VIDEO4};
 
-const UINT AudioFormats[] = {ID_CALCULATION_AUDIO0,
-							 ID_CALCULATION_AUDIO1,
-							 ID_CALCULATION_AUDIO2,
-							 ID_CALCULATION_AUDIO3,
-							 ID_CALCULATION_AUDIO4};*/
-
-
-///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 CBitMeDlg::CBitMeDlg(CWnd *pParent) : CDialog(CBitMeDlg::IDD, pParent)
 {
@@ -132,15 +117,11 @@ BEGIN_MESSAGE_MAP(CBitMeDlg, CDialog)
 	ON_COMMAND(ID_TOOLS_RESCALC, OnToolsResCalc)
 	ON_COMMAND(ID_TOOLS_SETTINGS, OnToolsSettings)
 	ON_COMMAND(ID_TOOLS_ABOUT, OnToolsAbout)
-	//ON_COMMAND(ID_TOOLS_REPORT, OnToolsReport)
 	//ON_COMMAND(ID_TOOLS_CALCULATOR, OnToolsCalculator)
 	ON_COMMAND(ID_TOOLS_QUIT, OnToolsQuit)
 	ON_COMMAND(ID_CALCULATION_OVERHEAD, OnCalculationOverhead)
 	ON_COMMAND(ID_CALCULATION_INFORMATION, OnCalculationInformation)
-	//ON_COMMAND(ID_HELP_HELP, OnHelpHelp)
 	ON_WM_HELPINFO()
-	//ON_COMMAND(ID_HELP_HOMEPAGE, OnHelpHomePage)
-	//ON_COMMAND(ID_HELP_LICENCE, OnHelpLicence)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -211,7 +192,7 @@ BOOL CBitMeDlg::PreTranslateMessage(MSG *pMsg)
 }
 
 
-///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void CBitMeDlg::Initialise()
 {
@@ -239,7 +220,6 @@ void CBitMeDlg::RetrieveConfiguration()
 {
 	CBitMeDlgCfg Cfg;
 
-	//if (!CBitMeDlgCfgSerializer().Retrieve(Cfg, Registry(GetRegistryKey(), KEY_READ, false)))
 	if (!CBitMeDlgCfgSerializer().Retrieve(Cfg, ConfigFile()))
 	{
 		Cfg = CBitMeDlgCfg();
@@ -255,21 +235,8 @@ void CBitMeDlg::RetrieveConfiguration()
 
 	Model.enableOverhead(Cfg.bOverhead);
 	Model.setContainer(ContainerManager::CreateContainer(Cfg.sContainer.c_str()));
-	//Model.setContainer(ContainerManager::CreateInterface(Cfg.sContainer.c_str(), Cfg.sVideoFormat.c_str(), Cfg.sAudioFormat.c_str()));
 
 	::SetWindowPos(GetSafeHwnd(), NULL, Cfg.x, Cfg.y, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
-
-	/*
-	Settings_t s;
-
-	if (!SettingsManager::GetInstance().GetSettings(&s))
-	{
-		s = Settings_t();
-	}
-
-	Model.enableOverhead(s.bUseOverhead);
-	Model.setContainer(ContainerManager::GetContainerInterface(s.sContainerName.c_str()));
-	*/
 }
 
 void CBitMeDlg::SaveConfiguration()
@@ -283,15 +250,12 @@ void CBitMeDlg::SaveConfiguration()
 	Cfg.bCustomSize = ToBool(CheckCustomSize.GetCheck());
 	Cfg.bOverhead = h ? GetMenuItemChecked(h, ID_CALCULATION_OVERHEAD) : false;
 	Cfg.sContainer = GetSelectedContainer();
-	//Cfg.sVideoFormat = GetSelectedVideoFormat();
-	//Cfg.sAudioFormat = GetSelectedAudioFormat();
 	Cfg.nVideo = Video.GetPos();
 	Cfg.nAudio = Audio.GetPos();
 	Cfg.nTime = Time.GetPos();
 	Cfg.x = GetWindowLeft(GetSafeHwnd());
 	Cfg.y = GetWindowTop(GetSafeHwnd());
 
-	//CBitMeDlgCfgSerializer().Save(Cfg, Registry(GetRegistryKey(), KEY_WRITE, true));
 	CBitMeDlgCfgSerializer().Save(Cfg, ConfigFile());
 }
 
@@ -316,24 +280,6 @@ void CBitMeDlg::SetupControls()
 	if (h)
 	{
 		SetMenuStrings(h, Containers, sizeof(Containers) / sizeof(Containers[0]), ContainerManager::GetAvailableContainers());
-		//SetMenuStrings(h, VideoFormats, sizeof(VideoFormats) / sizeof(VideoFormats[0]), ContainerManager::GetAvailableVideoFormats());
-		//SetMenuStrings(h, AudioFormats, sizeof(AudioFormats) / sizeof(AudioFormats[0]), ContainerManager::GetAvailableAudioFormats());
-
-		/*
-		StringList s = ContainerManager::GetAvailableInterfaces();
-
-		for (int i = 0; i < (sizeof(Containers) / sizeof(Containers[0])); i++)
-		{
-			if (i < s.size())
-			{
-				SetMenuString(p->GetSafeHmenu(), Containers[i], s[i].c_str());
-			}
-			else
-			{
-				RemoveMenu(p->GetSafeHmenu(), Containers[i], MF_BYCOMMAND);
-			}
-		}
-		*/
 	}
 
 #if 1
@@ -401,21 +347,15 @@ void CBitMeDlg::UpdateMenu()
 	{
 		ModifyMenu(h, 0, MF_BYPOSITION | MF_STRING, 0, ResourceString(L"IDS_MENU_TOOLS"));
 		ModifyMenu(h, 1, MF_BYPOSITION | MF_STRING, 0, ResourceString(L"IDS_MENU_CALCULATION"));
-		//ModifyMenu(h, 2, MF_BYPOSITION | MF_STRING, 0, ResourceString(L"IDS_MENU_HELP"));
 
 		SetMenuString(h, ID_TOOLS_RESCALC, ResourceString(L"IDS_TOOLS_RESCALC"));
 		SetMenuString(h, ID_TOOLS_SETTINGS, ResourceString(L"IDS_TOOLS_SETTINGS"));
-		//SetMenuString(h, ID_TOOLS_REPORT, ResourceString(L"IDS_TOOLS_REPORT"));
+		SetMenuString(h, ID_TOOLS_ABOUT, ResourceString(L"IDS_TOOLS_ABOUT"));
 		//SetMenuString(h, ID_TOOLS_CALCULATOR, ResourceString(L"IDS_TOOLS_CALCULATOR"));
 		SetMenuString(h, ID_TOOLS_QUIT, ResourceString(L"IDS_TOOLS_QUIT"));
 
 		SetMenuString(h, ID_CALCULATION_OVERHEAD, ResourceString(L"IDS_CALCULATION_OVERHEAD"));
 		SetMenuString(h, ID_CALCULATION_INFORMATION, ResourceString(L"IDS_CALCULATION_INFORMATION"));
-
-		//SetMenuString(h, ID_HELP_HELP, ResourceString(L"IDS_HELP_HELP"));
-		//SetMenuString(h, ID_HELP_HOMEPAGE, ResourceString(L"IDS_HELP_HOMEPAGE"));
-		//SetMenuString(h, ID_HELP_LICENCE, ResourceString(L"IDS_HELP_LICENCE"));
-		SetMenuString(h, ID_HELP_ABOUT, ResourceString(L"IDS_HELP_ABOUT"));
 
 		::DrawMenuBar(GetSafeHwnd());
 	}
@@ -493,8 +433,6 @@ void CBitMeDlg::UpdateControls()
 	// Calculation Menu
 	SetMenuItemCheck(::GetMenu(GetSafeHwnd()), ID_CALCULATION_OVERHEAD, Model.isOverheadEnabled());
 	SelectContainer(Model.getContainer().getName().c_str());
-	//SelectVideoFormat(Model.getContainer().getVideoInterface().getName().c_str());
-	//SelectAudioFormat(Model.getContainer().getAudioInterface().getName().c_str());
 	EnableContainersAndFormats(Model.isOverheadEnabled());
 }
 
@@ -522,7 +460,6 @@ void CBitMeDlg::UpdateStrings()
 	LabelT2Title.SetWindowText(ResourceString(L"IDS_MINUTES"));
 	LabelT3Title.SetWindowText(ResourceString(L"IDS_SECONDS"));
 	SetWindowTextRange(LabelTMin.GetSafeHwnd(), Time.GetRangeMin(), ResourceString(L"IDS_SECONDS"));
-	//SetWindowTextRange(LabelTMax.GetSafeHwnd(), Time.GetRangeMax(), ResourceString(L"IDS_SECONDS"));
 	SetWindowTextRange(LabelTMax.GetSafeHwnd(), Time.GetRangeMax() / 60 / 60, ResourceString(L"IDS_HOURS"));
 
 	if (CheckDataRate.GetCheck())
@@ -746,34 +683,10 @@ String CBitMeDlg::GetSelectedContainer() const
 	return (GetMenuItemSelected(::GetMenu(GetSafeHwnd()), Containers, sizeof(Containers) / sizeof(Containers[0])));
 }
 
-/*
-String CBitMeDlg::GetSelectedVideoFormat() const
-{
-	return (GetMenuItemSelected(::GetMenu(GetSafeHwnd()), VideoFormats, sizeof(VideoFormats) / sizeof(VideoFormats[0])));
-}
-
-String CBitMeDlg::GetSelectedAudioFormat() const
-{
-	return (GetMenuItemSelected(::GetMenu(GetSafeHwnd()), AudioFormats, sizeof(AudioFormats) / sizeof(AudioFormats[0])));
-}
-*/
-
 void CBitMeDlg::SelectContainer(const wchar_t *s)
 {
 	SelectMenuItem(::GetMenu(GetSafeHwnd()), Containers, sizeof(Containers) / sizeof(Containers[0]), s);
 }
-
-/*
-void CBitMeDlg::SelectVideoFormat(const wchar_t *s)
-{
-	SelectMenuItem(::GetMenu(GetSafeHwnd()), VideoFormats, sizeof(VideoFormats) / sizeof(VideoFormats[0]), s);
-}
-
-void CBitMeDlg::SelectAudioFormat(const wchar_t *s)
-{
-	SelectMenuItem(::GetMenu(GetSafeHwnd()), AudioFormats, sizeof(AudioFormats) / sizeof(AudioFormats[0]), s);
-}
-*/
 
 void CBitMeDlg::EnableContainersAndFormats(bool b)
 {
@@ -782,76 +695,11 @@ void CBitMeDlg::EnableContainersAndFormats(bool b)
 	if (h)
 	{
 		EnableMenuItems(h, Containers, sizeof(Containers) / sizeof(Containers[0]), b);
-		//EnableMenuItems(h, VideoFormats, sizeof(VideoFormats) / sizeof(VideoFormats[0]), b);
-		//EnableMenuItems(h, AudioFormats, sizeof(AudioFormats) / sizeof(AudioFormats[0]), b);
 	}
 }
 
-/*
-String CBitMeDlg::GetSelectedContainer() const
-{
-	CMenu *p = GetMenu();
 
-	if (p)
-	{
-		for (int i = 0; i < (sizeof(Containers) / sizeof(Containers[0])); i++)
-		{
-			if (GetMenuItemChecked(p->GetSafeHmenu(), Containers[i]))
-			{
-				wchar_t w[32];
-
-				return (GetMenuString(p->GetSafeHmenu(), Containers[i], w, sizeof(w) / sizeof(w[0]), MF_BYCOMMAND) ? w : L"");
-			}
-		}
-	}
-
-	return (L"");
-}
-
-void CBitMeDlg::SelectContainer(const wchar_t *s)
-{
-	if (s)
-	{
-		CMenu *p = GetMenu();
-
-		if (p)
-		{
-			wchar_t w[32];
-
-			for (int i = 0; i < (sizeof(Containers) / sizeof(Containers[0])); i++)
-			{
-				if (GetMenuString(p->GetSafeHmenu(), Containers[i], w, sizeof(w) / sizeof(w[0]), MF_BYCOMMAND) && !wcscmp(s, w))
-				{
-					CheckMenuRadioItem(p->GetSafeHmenu(), Containers[0], Containers[sizeof(Containers) / sizeof(Containers[0]) - 1], Containers[i], MF_BYCOMMAND);
-
-					return;
-				}
-			}
-
-			for (int j = 0; j < (sizeof(Containers) / sizeof(Containers[0])); j++)
-			{
-				SetMenuItemCheck(p->GetSafeHmenu(), Containers[j], false);
-			}
-		}
-	}
-}
-
-void CBitMeDlg::EnableContainers(bool b)
-{
-	CMenu *p = GetMenu();
-
-	if (p)
-	{
-		for (int i = 0; i < (sizeof(Containers) / sizeof(Containers[0])); i++)
-		{
-			EnableMenuItem(p->GetSafeHmenu(), Containers[i], MF_BYCOMMAND | (b ? MF_ENABLED : MF_GRAYED));
-		}
-	}
-}
-*/
-
-
-///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void CBitMeDlg::OnToolsResCalc()
 {
@@ -865,18 +713,6 @@ void CBitMeDlg::OnToolsSettings()
 		UpdateWindowTitle();
 		UpdateMenu();
 		UpdateStrings();
-
-		/*
-		Settings_t s;
-
-		if (GetGlobalSettings(&s))
-		{
-			Model.enableOverhead(s.bUseOverhead);
-			Model.setContainer(ContainerManager::GetContainerInterface(s.sContainerName.c_str()));
-
-			UpdateControls();
-		}
-		*/
 	}
 }
 
@@ -885,33 +721,8 @@ void CBitMeDlg::OnToolsAbout()
 	CAboutDlg().DoModal();
 }
 
-/*void CBitMeDlg::OnToolsReport()
-{
-	OPENFILENAME ofn;
-	ZeroMemory(&ofn, sizeof(ofn));
-
-	wchar_t w[MAX_PATH] = L"BitMe.htm";
-	ResourceString s(L"IDS_REPORT_DLG_TITLE");
-
-	ofn.lStructSize = sizeof(ofn);
-	ofn.hwndOwner = GetSafeHwnd();
-	ofn.lpstrFilter = L"HTML\0*.htm;*.html\0";
-	ofn.lpstrFile = w;
-	ofn.nMaxFile = sizeof(w) / sizeof(w[0]);
-	ofn.lpstrTitle = s.c_str();
-	ofn.Flags = OFN_HIDEREADONLY | OFN_NOREADONLYRETURN | OFN_OVERWRITEPROMPT | OFN_PATHMUSTEXIST;
-	ofn.lpstrDefExt = L"htm";
-
-	if (GetSaveFileName(&ofn))
-	{
-		if (!SaveReport(w, Model))
-		{
-			MsgBox(ResourceString(L"IDS_REPORT_ERROR"), ResourceString(L"IDS_REPORT_ERROR_TITLE"), GetSafeHwnd(), MSG_ERROR);
-		}
-	}
-}*/
-
-/*void CBitMeDlg::OnToolsCalculator()
+/*
+void CBitMeDlg::OnToolsCalculator()
 {
 	wchar_t c[MAX_PATH];
 
@@ -926,7 +737,8 @@ void CBitMeDlg::OnToolsAbout()
 			MsgBox(ResourceString(L"IDS_CALCULATOR_ERROR"), ResourceString(L"IDS_CALCULATOR_ERROR_TITLE"), GetSafeHwnd(), MSG_ERROR);
 		}
 	}
-}*/
+}
+*/
 
 void CBitMeDlg::OnToolsQuit()
 {
@@ -957,35 +769,11 @@ BOOL CBitMeDlg::OnCommand(WPARAM wParam, LPARAM lParam)
 
 	if (h)
 	{
-		/*
-		if (SelectMenuItemID(h, Containers, sizeof(Containers) / sizeof(Containers[0]), LOWORD(wParam)) ||
-			SelectMenuItemID(h, VideoFormats, sizeof(VideoFormats) / sizeof(VideoFormats[0]), LOWORD(wParam)) ||
-			SelectMenuItemID(h, AudioFormats, sizeof(AudioFormats) / sizeof(AudioFormats[0]), LOWORD(wParam)))
-			*/
-
 		if (SelectMenuItemID(h, Containers, sizeof(Containers) / sizeof(Containers[0]), LOWORD(wParam)))
 		{
 			Model.setContainer(ContainerManager::CreateContainer(GetSelectedContainer().c_str()));
-			//Model.setContainer(ContainerManager::CreateInterface(GetSelectedContainer().c_str(), GetSelectedVideoFormat().c_str(), GetSelectedAudioFormat().c_str()));
-
 			UpdateControls();
 		}
-
-		/*
-		for (int i = 0; i < (sizeof(Containers) / sizeof(Containers[0])); i++)
-		{
-			if (LOWORD(wParam) == Containers[i])
-			{
-				CheckMenuRadioItem(p->GetSafeHmenu(), Containers[0], Containers[sizeof(Containers) / sizeof(Containers[0]) - 1], Containers[i], MF_BYCOMMAND);
-
-				OnChangeContainer();
-
-				UpdateControls();
-
-				break;
-			}
-		}
-		*/
 	}
 
 	return CDialog::OnCommand(wParam, lParam);
@@ -996,38 +784,24 @@ void CBitMeDlg::OnCalculationInformation()
 	MsgBox(Model.getInformation().c_str(), ResourceString(L"IDS_INFORMATION"), GetSafeHwnd());
 }
 
-/*void CBitMeDlg::OnHelpHelp()
-{
-	//HtmlHelp(ApplicationFile(GetHelpFileName()), NULL, GetSafeHwnd());
-}*/
-
 BOOL CBitMeDlg::OnHelpInfo(HELPINFO *pHelpInfo)
 {
-	//OnHelpHelp();
+	ShellOpen(ApplicationFile(GetHelpFileName()), GetSafeHwnd());
 
 	return TRUE;
 }
 
-/*void CBitMeDlg::OnHelpHomePage()
-{
-	ShellOpen(L"https://github.com/GeoffreyAA/bitme", NULL);
-}*/
 
-/*void CBitMeDlg::OnHelpLicence()
-{
-	if (::MessageBox(GetSafeHwnd(), ResourceString(L"IDS_LICENCE_MSG"), ResourceString(L"IDS_LICENCE_TITLE"), MB_OKCANCEL | MB_ICONINFORMATION) == IDOK)
-	{
-		if (!HtmlHelp(ApplicationFile(GetHelpFileName()), L"Licence.txt", GetSafeHwnd()))
-		{
-			MsgBox(ResourceString(L"IDS_LICENCE_ERROR"), ResourceString(L"IDS_LICENCE_TITLE"), GetSafeHwnd(), MSG_ERROR);
-		}
-	}
-}*/
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-///////////////////////////////////////////////////////////////
-
-CBitMeDlgCfg::CBitMeDlgCfg() : bVideo(true), bAudio(true), bDataRate(false), bCustomSize(false), bOverhead(true), sContainer(L"MP4/MOV/3GP"), /*sVideoFormat(L"H.264/MPEG-4 AVC"), sAudioFormat(L"AAC"),*/ nVideo(2000), nAudio(192), nTime(7200), x(32), y(32)
+CBitMeDlgCfg::CBitMeDlgCfg() : bVideo(true),
+							   bAudio(true),
+							   bDataRate(false),
+							   bCustomSize(false),
+							   bOverhead(true),
+							   sContainer(L"MP4/MOV/3GP"),
+							   nVideo(2000), nAudio(192), nTime(7200),
+							   x(32), y(32)
 {
 }
 
@@ -1041,8 +815,6 @@ bool CBitMeDlgCfgSerializer::Save(const CBitMeDlgCfg &Cfg, Configuration &c) con
 	b = c.setBool(L"bCustomSize", Cfg.bCustomSize);
 	b = c.setBool(L"bOverhead", Cfg.bOverhead);
 	b = c.setString(L"sContainer", Cfg.sContainer.c_str());
-	//b = c.setString(L"sVideoFormat", Cfg.sVideoFormat.c_str());
-	//b = c.setString(L"sAudioFormat", Cfg.sAudioFormat.c_str());
 	b = c.setInteger(L"nVideo", Cfg.nVideo);
 	b = c.setInteger(L"nAudio", Cfg.nAudio);
 	b = c.setInteger(L"nTime", Cfg.nTime);
@@ -1055,7 +827,7 @@ bool CBitMeDlgCfgSerializer::Save(const CBitMeDlgCfg &Cfg, Configuration &c) con
 bool CBitMeDlgCfgSerializer::Retrieve(CBitMeDlgCfg &Cfg, const Configuration &c) const
 {
 	CBitMeDlgCfg d;
-	wchar_t w[32];
+	wchar_t w[64];
 
 	Cfg.bVideo = c.getBool(L"bVideo", d.bVideo);
 	Cfg.bAudio = c.getBool(L"bAudio", d.bAudio);
@@ -1063,8 +835,6 @@ bool CBitMeDlgCfgSerializer::Retrieve(CBitMeDlgCfg &Cfg, const Configuration &c)
 	Cfg.bCustomSize = c.getBool(L"bCustomSize", d.bCustomSize);
 	Cfg.bOverhead = c.getBool(L"bOverhead", d.bOverhead);
 	Cfg.sContainer = c.getString(L"sContainer", w, sizeof(w) / sizeof(w[0])) ? w : d.sContainer;
-	//Cfg.sVideoFormat = c.getString(L"sVideoFormat", w, sizeof(w) / sizeof(w[0])) ? w : d.sVideoFormat;
-	//Cfg.sAudioFormat = c.getString(L"sAudioFormat", w, sizeof(w) / sizeof(w[0])) ? w : d.sAudioFormat;
 	Cfg.nVideo = c.getInteger(L"nVideo", d.nVideo);
 	Cfg.nAudio = c.getInteger(L"nAudio", d.nAudio);
 	Cfg.nTime = c.getInteger(L"nTime", d.nTime);
