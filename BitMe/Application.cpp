@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Application.h"
+#include "Library\Compiler.h"
 #include "Library\Library.h"
 #include "Library\ResourceString.h"
 
@@ -15,7 +16,7 @@ wchar_t *GetApplicationNameFull(wchar_t *c, size_t cbSize)
 {
 	if (c)
 	{
-		swprintfs(c, cbSize, L"BitMe %s (%s %d) (%s)"		// Fixes ampersand not showing up in text label, owing to Windows thinking it's an accelerator
+		swprintfs(c, cbSize, L"BitMe %s (%s %d) (%s)"
 
 #ifdef _DEBUG
 							 L" (Debug)"
@@ -91,94 +92,5 @@ const wchar_t *GetRegistryKey()
 
 const wchar_t *GetHelpFileName()
 {
-	//return (L"BitMe.chm");
-
 	return (L"Readme.txt");
-}
-
-const wchar_t *GetCompilerName()
-{
-	return (
-
-#if _MSC_VER >= 1930
-		L"Visual Studio 2022"
-
-#elif _MSC_VER >= 1920
-		L"Visual Studio 2019"
-
-#elif _MSC_VER >= 1910
-		L"Visual Studio 2017"
-
-#elif _MSC_VER >= 1900
-		L"Visual Studio 2015"
-
-#elif _MSC_VER >= 1800
-		L"Visual Studio 2013"
-
-#elif _MSC_VER >= 1700
-		L"Visual Studio 2012"
-
-#elif _MSC_VER >= 1600
-		L"Visual Studio 2010"
-
-#elif _MSC_VER >= 1500
-		L"Visual Studio 2008"
-
-#elif _MSC_VER >= 1400
-		L"Visual Studio 2005"
-
-#elif _MSC_VER >= 1310
-		L"Visual Studio .NET 2003"
-
-#elif _MSC_VER >= 1300
-		L"Visual Studio .NET 2002"
-
-#elif _MSC_VER >= 1200
-		L"Visual C++ 6.0"
-
-#else
-		L"N/A"
-
-#endif
-
-		);
-}
-
-String GetCompilerVersion()
-{
-	wchar_t w[64] = L"N/A";
-
-#ifdef _MSC_VER
-	swprintfs(w, sizeof(w) / sizeof(w[0]), L"MSVC %d", _MSC_VER);
-#endif
-
-	return (w);
-}
-
-String GetCompilerVersionFull()
-{
-	wchar_t w[64] = L"N/A";
-
-#ifdef _MSC_VER
-	swprintfs(w, sizeof(w) / sizeof(w[0]), L"MSVC %d", _MSC_FULL_VER);
-#endif
-
-	return (w);
-}
-
-const wchar_t *GetPlatform()
-{
-#ifdef _M_IX86
-	return (L"x86");
-#endif
-
-#ifdef _M_AMD64
-	return (L"x64");
-#endif
-
-#ifdef _M_ARM
-	return (L"ARM");
-#endif
-
-	return (L"N/A");
 }

@@ -467,6 +467,7 @@ cl /nologo /c /Zl /Fo"$(OutDir)\" Build.c</Command>
     <ClCompile Include="Calculation\VobInterface.cpp" />
     <ClCompile Include="Library\Alloc.cpp" />
     <ClCompile Include="Library\Base64.cpp" />
+    <ClCompile Include="Library\Compiler.cpp" />
     <ClCompile Include="Library\ConfigFile.cpp" />
     <ClCompile Include="Library\File.cpp" />
     <ClCompile Include="Library\FilePointer.cpp" />
@@ -532,6 +533,7 @@ cl /nologo /c /Zl /Fo"$(OutDir)\" Build.c</Command>
     <ClInclude Include="Library\Alloc.h" />
     <ClInclude Include="Library\array.h" />
     <ClInclude Include="Library\Base64.h" />
+    <ClInclude Include="Library\Compiler.h" />
     <ClInclude Include="Library\ConfigFile.h" />
     <ClInclude Include="Library\Configuration.h" />
     <ClInclude Include="Library\File.h" />
