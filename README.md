@@ -13,7 +13,7 @@ Notes
 
 The program comes with a default language of English and can be translated into others. To do so, open the "English.lng" file in a plain-text editor, like Notepad, and translate all the words on the right-hand side of the equal-to sign (=). Then, save it as another file, using UTF-8 encoding without the byte-order mark, or plain ANSI. Lastly, rename the file to that of the language: "French.lng" for example. The extension must be ".lng" for the file to be recognised.
 
-Download BitMe only from its [official page](https://github.com/GeoffreyAA/bitme). This is free software; do not pay for it anywhere.
+Download BitMe only from its [official page](https://github.com/GeoffreyAA/bitme). It is free; do not pay for it anywhere.
 
 
 Building
