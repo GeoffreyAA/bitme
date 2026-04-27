@@ -204,8 +204,6 @@ String BitrateModel::getInformation() const
 										   L"\n%s: %s %s"
 										   L"\n%s: %s"
 										   L"\n\n%s: %s"
-										   //L"\n%s: %s"
-										   //L"\n%s: %s"
 										   L"\n%s: %s"
 										   L"\n%s: %s"
 										   L"\n%s: %s"
@@ -220,8 +218,6 @@ String BitrateModel::getInformation() const
 										   , ResourceString(L"IDS_INFORMATION_DATA_RATE").c_str(), FloatToStr2(Information(getDataRate()).getBytes()).c_str(), ResourceString(L"IDS_INFORMATION_BYTES_SEC").c_str()
 										   , ResourceString(L"IDS_INFORMATION_OVERHEAD").c_str(), FloatToStr2(getOverhead()).c_str()
 										   , ResourceString(L"IDS_INFORMATION_CONTAINER").c_str(), getContainer().getName().c_str()
-										   //, ResourceString(L"IDS_INFORMATION_VIDEO_FORMAT").c_str(), getContainer().getVideoInterface().getName().c_str()
-										   //, ResourceString(L"IDS_INFORMATION_AUDIO_FORMAT").c_str(), getContainer().getAudioInterface().getName().c_str()
 										   , ResourceString(L"IDS_INFORMATION_CONTAINER_PTR").c_str(), pInterface ? L"Not null" : L"Null"
 										   , ResourceString(L"IDS_INFORMATION_CONTAINER_OVERHEAD_FULL").c_str(), FloatToStr2(getContainer().getOverheadFull(getVideoBitrate(), getAudioBitrate(), getDuration())).c_str()
 										   , ResourceString(L"IDS_INFORMATION_CONTAINER_OVERHEAD_NA").c_str(), FloatToStr2(getContainer().getOverheadNoAudio(getVideoBitrate(), getDuration())).c_str());
