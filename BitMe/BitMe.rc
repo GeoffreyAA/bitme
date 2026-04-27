@@ -86,7 +86,7 @@ CAPTION "About BitMe"
 FONT 8, "Tahoma", 0, 0, 0x0
 BEGIN
     DEFPUSHBUTTON   "OK",IDOK,203,129,50,14
-    LTEXT           "Text",IDC_ABOUT_TEXT,37,7,216,115
+    LTEXT           "Text",IDC_ABOUT_TEXT,37,7,216,115,SS_NOPREFIX
     ICON            IDR_BITME_ICON,IDC_STATIC,7,7,20,20
     PUSHBUTTON      "Button1",IDC_BUTTON1,149,129,50,14
 END
@@ -127,8 +127,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 3,5,0,0
- PRODUCTVERSION 3,5,0,0
+ FILEVERSION 3,6,0,0
+ PRODUCTVERSION 3,6,0,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -144,12 +144,12 @@ BEGIN
         BLOCK "000004b0"
         BEGIN
             VALUE "FileDescription", "BitMe"
-            VALUE "FileVersion", "3.5"
+            VALUE "FileVersion", "3.6"
             VALUE "InternalName", "BitMe"
             VALUE "LegalCopyright", "© Geoffrey A., 2021. All rights reserved."
             VALUE "OriginalFilename", "BitMe.exe"
             VALUE "ProductName", "BitMe"
-            VALUE "ProductVersion", "3.5"
+            VALUE "ProductVersion", "3.6"
         END
     END
     BLOCK "VarFileInfo"

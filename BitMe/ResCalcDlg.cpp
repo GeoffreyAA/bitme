@@ -3,13 +3,10 @@
 #include "ResCalcDlg.h"
 
 #include "Library\Library.h"
-#include "Library\Win32Library.h"
 #include "Library\ResourceString.h"
 #include "Library\Templates.h"
-#include "Application.h"
+#include "Library\Win32Library.h"
 #include <math.h>
-
-#include "TmpLibrary.h"
 
 CResCalcDlg::CResCalcDlg(CWnd *pParent) : CDialog(CResCalcDlg::IDD, pParent)
 {
@@ -215,7 +212,5 @@ void CResCalcDlg::OnReturnKey()
 
 BOOL CResCalcDlg::OnHelpInfo(HELPINFO *pHelpInfo)
 {
-	//HtmlHelp(ApplicationFile(GetHelpFileName()), L"ResCalc.htm", GetSafeHwnd());
-
 	return TRUE;
 }

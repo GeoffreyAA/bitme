@@ -1,10 +1,6 @@
 #ifndef __C_RES_CALC_DLG_H__
 #define __C_RES_CALC_DLG_H__
 
-#if _MSC_VER > 1000
-#pragma once
-#endif
-
 #include "Calculation\ResolutionModel.h"
 
 class CResCalcDlg : public CDialog
