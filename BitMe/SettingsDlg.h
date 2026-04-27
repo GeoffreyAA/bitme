@@ -1,10 +1,6 @@
 #ifndef __C_SETTINGS_DLG_H__
 #define __C_SETTINGS_DLG_H__
 
-#if _MSC_VER > 1000
-#pragma once
-#endif
-
 class CSettingsDlg : public CDialog
 {
 public:
@@ -22,8 +18,6 @@ public:
 
 protected:
 	void Initialise();
-	void SetupControls();
-	void UpdateControls();
 
 	//{{AFX_MSG(CSettingsDlg)
 	virtual BOOL OnInitDialog();
