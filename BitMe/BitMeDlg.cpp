@@ -8,10 +8,10 @@
 #include "SettingsDlg.h"
 
 #include "Application.h"
+#include "Name.h"
 #include "Library\ConfigFile.h"
 #include "Library\File.h"
 #include "Library\Library.h"
-#include "Library\Registry.h"
 #include "Library\ResourceString.h"
 #include "Library\Templates.h"
 #include "Library\Win32Library.h"

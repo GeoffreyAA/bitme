@@ -483,8 +483,8 @@ cl /nologo /c /Zl /Fo"$(OutDir)\" Build.c</Command>
     <ClCompile Include="Library\Unicode.cpp" />
     <ClCompile Include="Library\VAlloc.cpp" />
     <ClCompile Include="Library\Win32Library.cpp" />
+    <ClCompile Include="Name.cpp" />
     <ClCompile Include="ResCalcDlg.cpp" />
-    <ClCompile Include="Settings.cpp" />
     <ClCompile Include="SettingsDlg.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -555,9 +555,9 @@ cl /nologo /c /Zl /Fo"$(OutDir)\" Build.c</Command>
     <ClInclude Include="Library\Unicode.h" />
     <ClInclude Include="Library\VAlloc.h" />
     <ClInclude Include="Library\Win32Library.h" />
+    <ClInclude Include="Name.h" />
     <ClInclude Include="ResCalcDlg.h" />
     <ClInclude Include="Resource.h" />
-    <ClInclude Include="Settings.h" />
     <ClInclude Include="SettingsDlg.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="TmpLibrary.h" />

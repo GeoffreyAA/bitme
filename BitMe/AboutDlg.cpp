@@ -4,12 +4,13 @@
 #include "AboutDlg.h"
 
 #include "Application.h"
+#include "Name.h"
 #include "Library\Library.h"
-#include "Library\Win32Library.h"
 #include "Library\ResourceString.h"
+#include "Library\Win32Library.h"
 
 
-///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 CAboutDlg::CAboutDlg(CWnd *pParent) : CDialog(CAboutDlg::IDD, pParent)
 {
@@ -41,38 +42,18 @@ BOOL CAboutDlg::OnInitDialog()
 }
 
 
-///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void CAboutDlg::Initialise()
 {
-	wchar_t s[1024];
-
+	wchar_t s[128];
 	swprintfs(s, sizeof(s) / sizeof(s[0]), L"%s %s", ResourceString(L"IDS_ABOUT").c_str(),
 													 GetApplicationName());
 
 	SetWindowText(s);
-
-	wchar_t d[128];
-	SYSTEMTIME st;
-
-	if (!TimeToSystemTimeLocal(GetBuildTime(), &st) || !GetDateTimeFormatted(d, sizeof(d) / sizeof(d[0]), &st))
-	{
-		wcscpys(d, ResourceString(L"IDS_DATE_ERROR"), sizeof(d) / sizeof(d[0]));
-	}
-
-	swprintfs(s, sizeof(s) / sizeof(s[0]), L"%s\n"
-										   L"© Geoffrey A., 2021. %s.\n\n"
-										   L"%s %s\n\n"
-										   L"%s",
-
-										   GetApplicationNameFull2().c_str(),
-										   ResourceString(L"IDS_ALL_RIGHTS_RESERVED").c_str(),
-										   ResourceString(L"IDS_COMPILED_ON").c_str(), d,
-										   ResourceString(L"IDS_LICENCE").c_str());
-
-	SetDlgItemText(IDC_ABOUT_TEXT, s);
-	SetDlgItemText(IDOK, ResourceString(L"IDS_OK"));
+	SetDlgItemText(IDC_ABOUT_TEXT, GetApplicationNameEx().c_str());
 	SetDlgItemText(IDC_BUTTON1, ResourceString(L"IDS_HOME_PAGE"));
+	SetDlgItemText(IDOK, ResourceString(L"IDS_OK"));
 }
 
 void CAboutDlg::OnHomePage()
