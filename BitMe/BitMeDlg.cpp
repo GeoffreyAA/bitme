@@ -288,21 +288,23 @@ void CBitMeDlg::SetupControls()
 	Font2.Create(L"Arial", 10);
 	Font3.Create(L"MS Sans Serif", 12, true);
 
-	//Font1.Create(L"Arial", 9);
-	//Font4.Create(L"Arial", 8.5);
+	/*
+	Font1.Create(L"Arial", 9);
+	Font4.Create(L"Arial", 8.5);
 
-	//SetWindowFont(GroupOptions.GetSafeHwnd(), Font1.GetFont());
-	//SetWindowFont(GroupVideo.GetSafeHwnd(), Font1.GetFont());
-	//SetWindowFont(GroupAudio.GetSafeHwnd(), Font1.GetFont());
-	//SetWindowFont(GroupTime.GetSafeHwnd(), Font1.GetFont());
-	//SetWindowFont(GroupFileSize.GetSafeHwnd(), Font1.GetFont());
-	//SetWindowFont(GroupCustomSize.GetSafeHwnd(), Font1.GetFont());
+	SetWindowFont(GroupOptions.GetSafeHwnd(), Font1.GetFont());
+	SetWindowFont(GroupVideo.GetSafeHwnd(), Font1.GetFont());
+	SetWindowFont(GroupAudio.GetSafeHwnd(), Font1.GetFont());
+	SetWindowFont(GroupTime.GetSafeHwnd(), Font1.GetFont());
+	SetWindowFont(GroupFileSize.GetSafeHwnd(), Font1.GetFont());
+	SetWindowFont(GroupCustomSize.GetSafeHwnd(), Font1.GetFont());
 
-	//SetWindowFont(CheckVideo.GetSafeHwnd(), Font4.GetFont());
-	//SetWindowFont(CheckAudio.GetSafeHwnd(), Font4.GetFont());
-	//SetWindowFont(CheckDataRate.GetSafeHwnd(), Font4.GetFont());
-	//SetWindowFont(CheckCustomSize.GetSafeHwnd(), Font4.GetFont());
-	//SetWindowFont(CheckOverhead.GetSafeHwnd(), Font4.GetFont());
+	SetWindowFont(CheckVideo.GetSafeHwnd(), Font4.GetFont());
+	SetWindowFont(CheckAudio.GetSafeHwnd(), Font4.GetFont());
+	SetWindowFont(CheckDataRate.GetSafeHwnd(), Font4.GetFont());
+	SetWindowFont(CheckCustomSize.GetSafeHwnd(), Font4.GetFont());
+	SetWindowFont(CheckOverhead.GetSafeHwnd(), Font4.GetFont());
+	*/
 
 	SetWindowFont(LabelV1.GetSafeHwnd(), Font1.GetFont());
 	SetWindowFont(LabelV2.GetSafeHwnd(), Font1.GetFont());
@@ -332,9 +334,9 @@ void CBitMeDlg::SetupControls()
 
 void CBitMeDlg::UpdateWindowTitle()
 {
-#ifndef _DEBUG
 	SetWindowText(GetApplicationName());
-#else
+
+#ifdef _DEBUG
 	SetWindowText(GetApplicationNameFull().c_str());
 #endif
 }
