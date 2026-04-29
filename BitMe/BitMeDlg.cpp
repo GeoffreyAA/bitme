@@ -19,7 +19,11 @@
 #include "Calculation\Information.h"
 #include "TmpLibrary.h"
 
-const wchar_t szFormat[] = L"%.2f";
+const int VIDEO_MAX = 900000;	// 900,000 = 900 Mbps
+const int AUDIO_MAX = 90000;	// 90,000 = 90 Mbps
+const int TIME_MAX  = 32400;	// 32,400 = 9 hours
+
+const wchar_t szFormat[] = L"%.2f";	// 0.00
 
 const UINT Containers[] = {ID_CALCULATION_CONTAINER0,
 						   ID_CALCULATION_CONTAINER1,
@@ -35,7 +39,7 @@ const UINT Containers[] = {ID_CALCULATION_CONTAINER0,
 						   ID_CALCULATION_CONTAINER11,
 						   ID_CALCULATION_CONTAINER12,
 						   ID_CALCULATION_CONTAINER13,
-						   ID_CALCULATION_CONTAINER14,};
+						   ID_CALCULATION_CONTAINER14};
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -220,10 +224,8 @@ void CBitMeDlg::RetrieveConfiguration()
 {
 	CBitMeDlgCfg Cfg;
 
-	if (!CBitMeDlgCfgSerializer().Retrieve(Cfg, ConfigFile()))
-	{
+	if (!CBitMeDlgCfgSerialiser().Retrieve(Cfg, ConfigFile()))
 		Cfg = CBitMeDlgCfg();
-	}
 
 	CheckVideo.SetCheck(Cfg.bVideo);
 	CheckAudio.SetCheck(Cfg.bAudio);
@@ -256,7 +258,7 @@ void CBitMeDlg::SaveConfiguration()
 	Cfg.x = GetWindowLeft(GetSafeHwnd());
 	Cfg.y = GetWindowTop(GetSafeHwnd());
 
-	CBitMeDlgCfgSerializer().Save(Cfg, ConfigFile());
+	CBitMeDlgCfgSerialiser().Save(Cfg, ConfigFile());
 }
 
 void CBitMeDlg::OnBeforeClose()
@@ -266,9 +268,9 @@ void CBitMeDlg::OnBeforeClose()
 
 void CBitMeDlg::SetupControls()
 {
-	Video.SetRange(0, 900000, FALSE); // 900,000 = 900 Mbps
-	Audio.SetRange(0, 90000, FALSE); // 90,000 = 90 Mbps
-	Time.SetRange(0, 32400, FALSE); // 32,400 = 9 hours
+	Video.SetRange(0, VIDEO_MAX, FALSE);
+	Audio.SetRange(0, AUDIO_MAX, FALSE);
+	Time.SetRange(0, TIME_MAX, FALSE);
 
 	Video.SetPageSize(500);
 	Audio.SetPageSize(128);
@@ -807,7 +809,7 @@ CBitMeDlgCfg::CBitMeDlgCfg() : bVideo(true),
 {
 }
 
-bool CBitMeDlgCfgSerializer::Save(const CBitMeDlgCfg &Cfg, Configuration &c) const
+bool CBitMeDlgCfgSerialiser::Save(const CBitMeDlgCfg &Cfg, Configuration &c) const
 {
 	bool b;
 
@@ -826,7 +828,7 @@ bool CBitMeDlgCfgSerializer::Save(const CBitMeDlgCfg &Cfg, Configuration &c) con
 	return (b);
 }
 
-bool CBitMeDlgCfgSerializer::Retrieve(CBitMeDlgCfg &Cfg, const Configuration &c) const
+bool CBitMeDlgCfgSerialiser::Retrieve(CBitMeDlgCfg &Cfg, const Configuration &c) const
 {
 	CBitMeDlgCfg d;
 	wchar_t w[64];
