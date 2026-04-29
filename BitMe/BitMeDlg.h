@@ -145,7 +145,7 @@ struct CBitMeDlgCfg
 	int y;
 };
 
-class CBitMeDlgCfgSerializer
+class CBitMeDlgCfgSerialiser
 {
 public:
 	bool Save(const CBitMeDlgCfg &Cfg, Configuration &c) const;

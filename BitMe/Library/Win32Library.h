@@ -45,9 +45,7 @@ int MsgBox(const wchar_t *pszMessage = NULL, const wchar_t *pszTitle = NULL, HWN
 HFONT CreatePointFont(const wchar_t *pszName = NULL, int nPointSize = 10, bool bBold = false, bool bItalic = false, bool bUnderline = false, bool bStrikeOut = false);
 
 // HTML Help
-#ifndef _AFXDLL
-bool HtmlHelp(const wchar_t *pszFile = NULL, const wchar_t *pszPage = NULL, HWND hOwner = NULL);
-#endif
+//bool HtmlHelp(const wchar_t *pszFile, const wchar_t *pszPage = NULL, HWND hOwner = NULL);
 
 // Other
 bool GetDateTimeFormatted(wchar_t *pszBuffer, size_t cbSize, const SYSTEMTIME *st = NULL);
