@@ -144,10 +144,10 @@
     <ClCompile Include="Calculation\ResolutionModel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Library\Compiler.cpp">
+    <ClCompile Include="Name.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Name.cpp">
+    <ClCompile Include="Library\Platform.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -316,10 +316,10 @@
     <ClInclude Include="Calculation\ResolutionModel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Library\Compiler.h">
+    <ClInclude Include="Name.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Name.h">
+    <ClInclude Include="Library\Platform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

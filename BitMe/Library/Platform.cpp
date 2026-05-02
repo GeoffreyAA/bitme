@@ -1,6 +1,7 @@
 #include "stdafx.h"
-#include "Compiler.h"
+#include "Platform.h"
 #include "Library.h"
+#include <windows.h>
 
 const wchar_t *GetPlatform()
 {
@@ -90,4 +91,25 @@ String GetCompilerVersionFull()
 #endif
 
 	return (w);
+}
+
+// This does not work as expected because Microsoft changed GetVersionEx()
+// to return 6.2 no matter the Windows version, forcing deprecation.
+String GetWindowsVersion()
+{
+	OSVERSIONINFO osvi;
+
+	ZeroMemory(&osvi, sizeof(OSVERSIONINFO));
+	osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFO);
+
+	wchar_t w[64] = L"N/A";
+
+	if (GetVersionEx(&osvi))
+	{
+		swprintfs(w, sizeof(w) / sizeof(w[0]), L"Windows %d.%d.%d", osvi.dwMajorVersion,
+																	osvi.dwMinorVersion,
+																	osvi.dwBuildNumber);
+	}
+
+	return w;
 }

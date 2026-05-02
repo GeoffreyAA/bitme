@@ -505,11 +505,6 @@ bool ShellOpen(const wchar_t *pszFile, HWND hOwner)
 	return (ShellExecuteW(hOwner, NULL, pszFile, NULL, NULL, SW_SHOWNORMAL) > (HINSTANCE)32);
 }
 
-bool IsWindowsNT()
-{
-	return (GetVersion() < 0x80000000);
-}
-
 bool GetOpenFileNameDlg(wchar_t *pszBuffer, size_t cbSize, HWND hOwner, const wchar_t *pszTitle, const wchar_t *pszFilter)
 {
 	if (pszBuffer && cbSize)

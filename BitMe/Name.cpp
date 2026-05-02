@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "Name.h"
 #include "Application.h"
-#include "Library\Compiler.h"
 #include "Library\Library.h"
+#include "Library\Platform.h"
 #include "Library\ResourceString.h"
 #include "Library\Win32Library.h"
 

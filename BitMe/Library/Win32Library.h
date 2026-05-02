@@ -53,7 +53,6 @@ bool TimeToFileTime(time_t t, FILETIME *ft);
 bool TimeToSystemTime(time_t t, SYSTEMTIME *st);
 bool TimeToSystemTimeLocal(time_t t, SYSTEMTIME *st);
 bool ShellOpen(const wchar_t *pszFile, HWND hOwner);
-bool IsWindowsNT();
 bool GetOpenFileNameDlg(wchar_t *pszBuffer, size_t cbSize, HWND hOwner = NULL, const wchar_t *pszTitle = NULL, const wchar_t *pszFilter = NULL);
 bool GetSaveFileNameDlg(wchar_t *pszBuffer, size_t cbSize, HWND hOwner = NULL, const wchar_t *pszTitle = NULL, const wchar_t *pszFilter = NULL, const wchar_t *pszDefExt = NULL);
 

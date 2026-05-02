@@ -1,5 +1,5 @@
-#ifndef __COMPILER_H__
-#define __COMPILER_H__
+#ifndef __PLATFORM_H__
+#define __PLATFORM_H__
 
 #include <stddef.h>
 #include "String.h"
