@@ -140,6 +140,9 @@ StringList LanguageManager::getAvailableLanguages() const
 		{
 			do {
 
+				if (wfd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)	// Thanks to Raymond Chen's blog. I hadn't realised that directories would be processed.
+					continue;
+
 				RemoveFileExt(wfd.cFileName);
 				s.push_back(wfd.cFileName);
 
