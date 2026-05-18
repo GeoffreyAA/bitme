@@ -15,6 +15,8 @@ int GetWindowBottom(HWND hWnd);
 int GetDesktopWidth();
 int GetDesktopHeight();
 void SetWindowSize(HWND hWnd, int w, int h);
+void SetWindowWidth(HWND hWnd, int w);
+void SetWindowHeight(HWND hWnd, int h);
 void SetWindowPosition(HWND hWnd, int x, int y);
 void CenterWindow(HWND hWnd, HWND hRel = NULL);
 double GetWindowFloat(HWND hWnd);

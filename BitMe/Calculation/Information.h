@@ -16,6 +16,8 @@ public:
 	double getEB() const;
 	double getZB() const;
 	double getYB() const;
+	double getRB() const;
+	double getQB() const;
 
 	void setBits(double x);
 	void setBytes(double x);
@@ -27,6 +29,8 @@ public:
 	void setEB(double x);
 	void setZB(double x);
 	void setYB(double x);
+	void setRB(double x);
+	void setQB(double x);
 
 private:
 	double bits;

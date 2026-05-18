@@ -68,6 +68,16 @@ void SetWindowSize(HWND hWnd, int w, int h)
 	SetWindowPos(hWnd, NULL, 0, 0, w, h, SWP_NOMOVE | SWP_NOZORDER);
 }
 
+void SetWindowWidth(HWND hWnd, int w)
+{
+	SetWindowSize(hWnd, w, GetWindowHeight(hWnd));
+}
+
+void SetWindowHeight(HWND hWnd, int h)
+{
+	SetWindowSize(hWnd, GetWindowWidth(hWnd), h);
+}
+
 void SetWindowPosition(HWND hWnd, int x, int y)
 {
 	SetWindowPos(hWnd, NULL, x, y, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
