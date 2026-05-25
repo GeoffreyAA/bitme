@@ -2,7 +2,6 @@
 #include "File.h"
 #include <string.h>
 #include <ctype.h>
-#include <windows.h>
 
 bool IsPathDelimiter(wchar_t c)
 {
@@ -28,7 +27,7 @@ bool AppendString(wchar_t *pszDestination, const wchar_t *pszSource, size_t cbSi
 }
 
 
-///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const wchar_t *GetFileName(const wchar_t *pszPath)
 {
@@ -153,21 +152,4 @@ bool AddFileExt(wchar_t *pszPath, const wchar_t *pszFileExt, size_t cbSize)
 {
 	return (AppendString(pszPath, L".", cbSize) &&
 			AppendString(pszPath, pszFileExt, cbSize));
-}
-
-
-///////////////////////////////////////////////////////////////
-
-bool GetProgramPath(wchar_t *pszBuffer, size_t cbSize)
-{
-	if (pszBuffer && (cbSize > 0) && GetModuleFileNameW(NULL, pszBuffer, cbSize - 1))
-	{
-		pszBuffer[cbSize - 1] = L'\0';
-
-		RemoveFileName(pszBuffer);
-
-		return true;
-	}
-
-	return false;
 }

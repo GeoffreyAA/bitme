@@ -57,6 +57,7 @@ bool TimeToSystemTimeLocal(time_t t, SYSTEMTIME *st);
 bool ShellOpen(const wchar_t *pszFile, HWND hOwner);
 bool GetOpenFileNameDlg(wchar_t *pszBuffer, size_t cbSize, HWND hOwner = NULL, const wchar_t *pszTitle = NULL, const wchar_t *pszFilter = NULL);
 bool GetSaveFileNameDlg(wchar_t *pszBuffer, size_t cbSize, HWND hOwner = NULL, const wchar_t *pszTitle = NULL, const wchar_t *pszFilter = NULL, const wchar_t *pszDefExt = NULL);
+bool GetProgramPath(wchar_t *pszBuffer, size_t cbSize);
 
 class ApplicationFile
 {

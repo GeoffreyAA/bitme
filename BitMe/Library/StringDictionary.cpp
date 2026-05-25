@@ -44,7 +44,7 @@ wchar_t *StringDictionarySerialiser::BreakString(wchar_t *s) const
 {
 	if (s)
 	{
-		wchar_t *Separator = (wchar_t *)wcschr(s, L'=');
+		wchar_t *Separator = wcschr(s, L'=');
 
 		if (Separator)
 		{

@@ -90,8 +90,3 @@ String FloatToStr2(double x)
 		return (c);
 	}
 }
-
-uint32 Clamp64To32(uint64 x)
-{
-	return ((x > UINT_MAX) ? UINT_MAX : x);
-}

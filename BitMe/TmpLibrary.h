@@ -13,6 +13,5 @@ void SetWindowTextRange(HWND hWnd, int x, const wchar_t *pszString);
 double BitsToKilobits(double x);
 double BitsToMegabits(double x);
 String FloatToStr2(double x);
-uint32 Clamp64To32(uint64 x);
 
 #endif

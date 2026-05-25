@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "Registry.h"
 #include "StrW.h"
+#include "Unicode.h"
+#include <intsafe.h>
 
 Registry::Registry() : h(NULL)
 {
@@ -27,7 +29,7 @@ Registry::~Registry()
 
 bool Registry::open(const wchar_t *pszSubKey, REGSAM samDesired, bool bCreate)
 {
-	return (open(HKEY_CURRENT_USER, pszSubKey, samDesired, bCreate));
+	return open(HKEY_CURRENT_USER, pszSubKey, samDesired, bCreate);
 }
 
 bool Registry::open(HKEY hKey, const wchar_t *pszSubKey, REGSAM samDesired, bool bCreate)
@@ -59,7 +61,7 @@ bool Registry::close()
 		}
 	}
 
-	return (h == NULL);
+	return h == NULL;
 }
 
 bool Registry::attach(HKEY hKey)
@@ -83,36 +85,35 @@ HKEY Registry::detach()
 
 	h = NULL;
 
-	return (tmp);
+	return tmp;
 }
 
 int Registry::getInteger(const wchar_t *pszName, int nDefault) const
 {
 	if (isReady())
 	{
-		DWORD n;
-		DWORD type;
-		size_t size = sizeof(n);
+		DWORD n, type;
+		DWORD size = sizeof(n);
 
-		if ((RegQueryValueExW(getHandle(), pszName, NULL, &type, (LPBYTE)&n, (LPDWORD)&size) == ERROR_SUCCESS) && (type == REG_DWORD))
+		if ((RegQueryValueExW(getHandle(), pszName, NULL, &type, (LPBYTE)&n, &size) == ERROR_SUCCESS) && (type == REG_DWORD))
 		{
-			return (n);
+			return n;
 		}
 	}
 
-	return (nDefault);
+	return nDefault;
 }
 
 double Registry::getFloat(const wchar_t *pszName, double fDefault) const
 {
 	double x;
 
-	return (getBinary(pszName, &x, sizeof(x)) ? x : fDefault);
+	return getBinary(pszName, &x, sizeof(x)) ? x : fDefault;
 }
 
 bool Registry::getBool(const wchar_t *pszName, bool bDefault) const
 {
-	return (getInteger(pszName, bDefault) != 0);
+	return getInteger(pszName, bDefault) != 0;
 }
 
 char *Registry::getString(const wchar_t *pszName, char *pszBuffer, size_t cbSize) const
@@ -121,51 +122,56 @@ char *Registry::getString(const wchar_t *pszName, char *pszBuffer, size_t cbSize
 
 	if (getString(pszName, w, sizeof(w) / sizeof(w[0])))
 	{
-		if (WideCharToMultiByte(CP_ACP, 0, w, -1, pszBuffer, cbSize * sizeof(char), NULL, NULL))
+		if (ConvertUTF16To8(pszBuffer, cbSize, w))
 		{
-			return (pszBuffer);
+			return pszBuffer;
 		}
 	}
 
-	return (NULL);
+	return NULL;
 }
 
 wchar_t *Registry::getString(const wchar_t *pszName, wchar_t *pszBuffer, size_t cbSize) const
 {
 	if (isReady())
 	{
-		DWORD type;
-		size_t size = cbSize * sizeof(wchar_t);
+		DWORD size, type;
 
-		if ((RegQueryValueExW(getHandle(), pszName, NULL, &type, (LPBYTE)pszBuffer, (LPDWORD)&size) == ERROR_SUCCESS) && (type == REG_SZ))
+		if (SIZETToDWord(cbSize * sizeof(wchar_t), &size) == S_OK)
 		{
-			return (pszBuffer);
+			if ((RegQueryValueExW(getHandle(), pszName, NULL, &type, (LPBYTE)pszBuffer, &size) == ERROR_SUCCESS) && (type == REG_SZ))
+			{
+				return pszBuffer;
+			}
 		}
 	}
 
-	return (NULL);
+	return NULL;
 }
 
 void *Registry::getBinary(const wchar_t *pszName, void *pBuffer, size_t nBytes) const
 {
 	if (isReady())
 	{
-		DWORD type;
+		DWORD bytes, type;
 
-		if ((RegQueryValueExW(getHandle(), pszName, NULL, &type, (LPBYTE)pBuffer, (LPDWORD)&nBytes) == ERROR_SUCCESS) && (type == REG_BINARY))
+		if (SIZETToDWord(nBytes, &bytes) == S_OK)
 		{
-			return (pBuffer);
+			if ((RegQueryValueExW(getHandle(), pszName, NULL, &type, (LPBYTE)pBuffer, &bytes) == ERROR_SUCCESS) && (type == REG_BINARY))
+			{
+				return pBuffer;
+			}
 		}
 	}
 
-	return (NULL);
+	return NULL;
 }
 
 bool Registry::setInteger(const wchar_t *pszName, int nValue)
 {
 	if (isReady())
 	{
-		return (RegSetValueExW(getHandle(), pszName, 0, REG_DWORD, (const BYTE *)(&nValue), sizeof(nValue)) == ERROR_SUCCESS);
+		return RegSetValueExW(getHandle(), pszName, 0, REG_DWORD, (const BYTE *)(&nValue), sizeof(nValue)) == ERROR_SUCCESS;
 	}
 
 	return false;
@@ -173,24 +179,29 @@ bool Registry::setInteger(const wchar_t *pszName, int nValue)
 
 bool Registry::setFloat(const wchar_t *pszName, double fValue)
 {
-	return (setBinary(pszName, &fValue, sizeof(fValue)));
+	return setBinary(pszName, &fValue, sizeof(fValue));
 }
 
 bool Registry::setBool(const wchar_t *pszName, bool bValue)
 {
-	return (setInteger(pszName, bValue));
+	return setInteger(pszName, bValue);
 }
 
 bool Registry::setString(const wchar_t *pszName, const char *pszString)
 {
-	return (setString(pszName, StrW(pszString)));
+	return setString(pszName, StrW(pszString));
 }
 
 bool Registry::setString(const wchar_t *pszName, const wchar_t *pszString)
 {
 	if (isReady())
 	{
-		return (RegSetValueExW(getHandle(), pszName, 0, REG_SZ, (const BYTE *)pszString, pszString ? ((wcslen(pszString) + 1) * sizeof(wchar_t)) : 0) == ERROR_SUCCESS);
+		DWORD bytes;
+
+		if (SIZETToDWord(pszString ? ((wcslen(pszString) + 1) * sizeof(wchar_t)) : 0, &bytes) == S_OK)
+		{
+			return RegSetValueExW(getHandle(), pszName, 0, REG_SZ, (const BYTE *)pszString, bytes) == ERROR_SUCCESS;
+		}
 	}
 
 	return false;
@@ -200,7 +211,12 @@ bool Registry::setBinary(const wchar_t *pszName, const void *pData, size_t nByte
 {
 	if (isReady())
 	{
-		return (RegSetValueExW(getHandle(), pszName, 0, REG_BINARY, (const BYTE *)pData, nBytes) == ERROR_SUCCESS);
+		DWORD bytes;
+
+		if (SIZETToDWord(nBytes, &bytes) == S_OK)
+		{
+			return RegSetValueExW(getHandle(), pszName, 0, REG_BINARY, (const BYTE *)pData, bytes) == ERROR_SUCCESS;
+		}
 	}
 
 	return false;
@@ -210,7 +226,7 @@ bool Registry::deleteValue(const wchar_t *pszName)
 {
 	if (isReady())
 	{
-		return (RegDeleteValueW(getHandle(), pszName) == ERROR_SUCCESS);
+		return RegDeleteValueW(getHandle(), pszName) == ERROR_SUCCESS;
 	}
 
 	return false;
@@ -218,10 +234,10 @@ bool Registry::deleteValue(const wchar_t *pszName)
 
 bool Registry::isReady() const
 {
-	return (getHandle() != NULL);
+	return getHandle() != NULL;
 }
 
 HKEY Registry::getHandle() const
 {
-	return (h);
+	return h;
 }

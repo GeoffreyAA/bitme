@@ -3,6 +3,7 @@
 #include "ConfigFile.h"
 #include "File.h"
 #include "Library.h"
+#include "Win32Library.h"
 #include <windows.h>
 
 Language::Language()

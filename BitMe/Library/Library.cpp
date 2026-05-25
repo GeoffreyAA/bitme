@@ -113,33 +113,32 @@ wchar_t *RemoveNonNbrs(wchar_t *s)
 {
 	if (s)
 	{
-		const int length = wcslen(s);
+		wchar_t *p = s;
+		wchar_t *sgn = NULL;
 
-		int SgnPos = -1;
-		int i = 0;
-
-		while ((i < length) && !iswdigit(s[i]))
+		while (*p && !iswdigit(*p))
 		{
-			if ((s[i] == L'-') || (s[i] == L'+'))
+			if ((*p == L'-') || (*p == L'+'))
 			{
-				SgnPos = i;
+				sgn = p;
 			}
 
-			i++;
+			p++;
 		}
 
-		int DecPos = -1;
+		wchar_t *dec = wcschr(s, L'.');
 
-		wchar_t *p = wcschr(s, L'.');
-
-		if (p && ((p - s) > SgnPos))
+		if (dec && (dec < sgn))
 		{
-			DecPos = p - s;
+			dec = NULL;
 		}
 
-		for (i = length - 1; i >= 0; i--)
+		size_t i = wcslen(s);
+
+		while (i--)
 		{
-			if (!iswdigit(s[i]) && (i != SgnPos) && (i != DecPos))
+			if (!iswdigit(s[i]) && ((s + i) != sgn) &&
+								   ((s + i) != dec))
 			{
 				StringDelete(s, i);
 			}

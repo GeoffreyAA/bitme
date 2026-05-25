@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include "Win32Library.h"
-#include "Library.h"
 #include "File.h"
+#include "Library.h"
+#include <intsafe.h>
 #include <stdlib.h>
 
 
@@ -244,13 +245,15 @@ String GetMenuItemSelected(HMENU hMenu, const UINT IDs[], size_t n)
 
 bool GetMenuItemSelected(HMENU hMenu, const UINT IDs[], size_t n, wchar_t *s, size_t cbSize)
 {
-	if (hMenu && s)
+	int size;
+
+	if (hMenu && s && (UIntPtrToInt(cbSize, &size) == S_OK) && (size > 0))
 	{
 		for (size_t i = 0; i < n; i++)
 		{
 			if (GetMenuItemChecked(hMenu, IDs[i]))
 			{
-				return (GetMenuStringW(hMenu, IDs[i], s, cbSize, MF_BYCOMMAND) != 0);
+				return (GetMenuStringW(hMenu, IDs[i], s, size, MF_BYCOMMAND) != 0);
 			}
 		}
 	}
@@ -517,7 +520,9 @@ bool ShellOpen(const wchar_t *pszFile, HWND hOwner)
 
 bool GetOpenFileNameDlg(wchar_t *pszBuffer, size_t cbSize, HWND hOwner, const wchar_t *pszTitle, const wchar_t *pszFilter)
 {
-	if (pszBuffer && cbSize)
+	DWORD dwSize;
+
+	if (pszBuffer && (SIZETToDWord(cbSize, &dwSize) == S_OK) && dwSize)
 	{
 		OPENFILENAMEW ofn;
 		ZeroMemory(&ofn, sizeof(ofn));
@@ -528,7 +533,7 @@ bool GetOpenFileNameDlg(wchar_t *pszBuffer, size_t cbSize, HWND hOwner, const wc
 		ofn.hwndOwner = hOwner;
 		ofn.lpstrFilter = pszFilter;
 		ofn.lpstrFile = pszBuffer;
-		ofn.nMaxFile = cbSize;
+		ofn.nMaxFile = dwSize;
 		ofn.lpstrTitle = pszTitle;
 		ofn.Flags = OFN_FILEMUSTEXIST | OFN_HIDEREADONLY | OFN_PATHMUSTEXIST;
 
@@ -540,7 +545,9 @@ bool GetOpenFileNameDlg(wchar_t *pszBuffer, size_t cbSize, HWND hOwner, const wc
 
 bool GetSaveFileNameDlg(wchar_t *pszBuffer, size_t cbSize, HWND hOwner, const wchar_t *pszTitle, const wchar_t *pszFilter, const wchar_t *pszDefExt)
 {
-	if (pszBuffer && cbSize)
+	DWORD dwSize;
+
+	if (pszBuffer && (SIZETToDWord(cbSize, &dwSize) == S_OK) && dwSize)
 	{
 		OPENFILENAMEW ofn;
 		ZeroMemory(&ofn, sizeof(ofn));
@@ -551,12 +558,28 @@ bool GetSaveFileNameDlg(wchar_t *pszBuffer, size_t cbSize, HWND hOwner, const wc
 		ofn.hwndOwner = hOwner;
 		ofn.lpstrFilter = pszFilter;
 		ofn.lpstrFile = pszBuffer;
-		ofn.nMaxFile = cbSize;
+		ofn.nMaxFile = dwSize;
 		ofn.lpstrTitle = pszTitle;
 		ofn.Flags = OFN_HIDEREADONLY | OFN_NOREADONLYRETURN | OFN_OVERWRITEPROMPT | OFN_PATHMUSTEXIST;
 		ofn.lpstrDefExt = pszDefExt;
 
 		return (GetSaveFileNameW(&ofn) != 0);
+	}
+
+	return false;
+}
+
+bool GetProgramPath(wchar_t *pszBuffer, size_t cbSize)
+{
+	DWORD dwSize;
+
+	if (pszBuffer && (SIZETToDWord(cbSize, &dwSize) == S_OK) && (dwSize > 0) && GetModuleFileNameW(NULL, pszBuffer, dwSize - 1))
+	{
+		pszBuffer[dwSize - 1] = L'\0';
+
+		RemoveFileName(pszBuffer);
+
+		return true;
 	}
 
 	return false;
