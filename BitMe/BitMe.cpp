@@ -23,12 +23,6 @@ END_MESSAGE_MAP()
 
 BOOL CBitMeApp::InitInstance()
 {
-#ifdef _AFXDLL
-	Enable3dControls();
-#else
-	Enable3dControlsStatic();
-#endif
-
 	CBitMeDlg Dlg;
 	m_pMainWnd = &Dlg;
 
