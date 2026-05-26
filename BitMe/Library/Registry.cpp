@@ -139,7 +139,7 @@ wchar_t *Registry::getString(const wchar_t *pszName, wchar_t *pszBuffer, size_t 
 		DWORD bytes, type;
 
 		if ((SizeTMult(cbSize, sizeof(wchar_t), &st_bytes) == S_OK) &&
-			(SIZETToDWord(st_bytes, &bytes) == S_OK)
+			(SIZETToDWord(st_bytes, &bytes) == S_OK))
 		{
 			if ((RegQueryValueExW(getHandle(), pszName, NULL, &type, (LPBYTE)pszBuffer, &bytes) == ERROR_SUCCESS) && (type == REG_SZ))
 			{
