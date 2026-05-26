@@ -1,11 +1,11 @@
 #include "stdafx.h"
 #include "ConfigFile.h"
-#include <stdio.h>
-#include <wchar.h>
 #include "Library.h"
-#include "Win32Library.h"
 #include "StrW.h"
 #include "Unicode.h"
+#include "Win32Library.h"
+#include <stdio.h>
+#include <wchar.h>
 
 ConfigFile::ConfigFile(const wchar_t *file) : write(false)
 {

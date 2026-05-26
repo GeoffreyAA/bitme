@@ -135,11 +135,13 @@ wchar_t *Registry::getString(const wchar_t *pszName, wchar_t *pszBuffer, size_t 
 {
 	if (isReady())
 	{
-		DWORD size, type;
+		size_t st_bytes;
+		DWORD bytes, type;
 
-		if (SIZETToDWord(cbSize * sizeof(wchar_t), &size) == S_OK)
+		if ((SizeTMult(cbSize, sizeof(wchar_t), &st_bytes) == S_OK) &&
+			(SIZETToDWord(st_bytes, &bytes) == S_OK)
 		{
-			if ((RegQueryValueExW(getHandle(), pszName, NULL, &type, (LPBYTE)pszBuffer, &size) == ERROR_SUCCESS) && (type == REG_SZ))
+			if ((RegQueryValueExW(getHandle(), pszName, NULL, &type, (LPBYTE)pszBuffer, &bytes) == ERROR_SUCCESS) && (type == REG_SZ))
 			{
 				return pszBuffer;
 			}
@@ -171,7 +173,7 @@ bool Registry::setInteger(const wchar_t *pszName, int nValue)
 {
 	if (isReady())
 	{
-		return RegSetValueExW(getHandle(), pszName, 0, REG_DWORD, (const BYTE *)(&nValue), sizeof(nValue)) == ERROR_SUCCESS;
+		return RegSetValueExW(getHandle(), pszName, 0, REG_DWORD, (const BYTE *)&nValue, sizeof(nValue)) == ERROR_SUCCESS;
 	}
 
 	return false;
@@ -196,9 +198,11 @@ bool Registry::setString(const wchar_t *pszName, const wchar_t *pszString)
 {
 	if (isReady())
 	{
+		size_t st_bytes;
 		DWORD bytes;
 
-		if (SIZETToDWord(pszString ? ((wcslen(pszString) + 1) * sizeof(wchar_t)) : 0, &bytes) == S_OK)
+		if ((SizeTMult(pszString ? (wcslen(pszString) + 1) : 0, sizeof(wchar_t), &st_bytes) == S_OK) &&
+			(SIZETToDWord(st_bytes, &bytes) == S_OK))
 		{
 			return RegSetValueExW(getHandle(), pszName, 0, REG_SZ, (const BYTE *)pszString, bytes) == ERROR_SUCCESS;
 		}

@@ -33,16 +33,16 @@ StrW::~StrW()
 
 const wchar_t *StrW::c_str() const
 {
-	return (w);
+	return w;
 }
 
 StrW::operator const wchar_t *() const
 {
-	return (c_str());
+	return c_str();
 }
 
 
-///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 StrA::StrA(const wchar_t *w) : a(NULL)
 {
@@ -52,7 +52,7 @@ StrA::StrA(const wchar_t *w) : a(NULL)
 
 		if (bytes)
 		{
-			a = (char *)malloc(bytes);
+			a = static_cast<char *>(malloc(bytes));
 
 			if (a && !WideCharToMultiByte(CP_ACP, 0, w, -1, a, bytes, NULL, NULL))
 			{
@@ -74,16 +74,16 @@ StrA::~StrA()
 
 const char *StrA::c_str() const
 {
-	return (a);
+	return a;
 }
 
 StrA::operator const char *() const
 {
-	return (c_str());
+	return c_str();
 }
 
 
-///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 StrUTF8::StrUTF8(const wchar_t *w) : a(NULL)
 {
@@ -93,7 +93,7 @@ StrUTF8::StrUTF8(const wchar_t *w) : a(NULL)
 
 		if (bytes)
 		{
-			a = (char *)malloc(bytes);
+			a = static_cast<char *>(malloc(bytes));
 
 			if (a && !WideCharToMultiByte(CP_UTF8, 0, w, -1, a, bytes, NULL, NULL))
 			{
@@ -113,10 +113,10 @@ StrUTF8::~StrUTF8()
 
 const char *StrUTF8::c_str() const
 {
-	return (a ? a : "");
+	return a ? a : "";
 }
 
 StrUTF8::operator const char *() const
 {
-	return (c_str());
+	return c_str();
 }
