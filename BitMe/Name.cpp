@@ -13,16 +13,16 @@ wchar_t *GetApplicationNameFull(wchar_t *c, size_t cbSize)
 {
 	if (c)
 	{
-		swprintfs(c, cbSize, L"%s %s (%s %d) (%s)"
+		swprintf(c, cbSize, L"%s %s (%s %d) (%s)"
 
 #ifdef _DEBUG
-							 L" (Debug)"
+							L" (Debug)"
 #endif
-							 , GetApplicationName()
-							 , GetApplicationVersion()
-							 , ResourceString(L"IDS_BUILD").c_str()
-							 , GetBuildNumber()
-							 , GetPlatform());
+							, GetApplicationName()
+							, GetApplicationVersion()
+							, ResourceString(L"IDS_BUILD").c_str()
+							, GetBuildNumber()
+							, GetPlatform());
 	}
 
 	return c;
@@ -56,26 +56,26 @@ wchar_t *GetApplicationNameEx(wchar_t *c, size_t cbSize)
 
 		// Put together name string painstakingly:
 
-		swprintfs(c, cbSize, L"%s\n"
-							 L"%s %s (%s %d) (%s) (%s)"
+		swprintf(c, cbSize, L"%s\n"
+							L"%s %s (%s %d) (%s) (%s)"
 #ifdef _DEBUG
-							 L" (Debug)"
+							L" (Debug)"
 #endif
-							 L"\n%s. %s.\n\n"
-							 L"%s %s\n\n"
-							 L"%s",
+							L"\n%s. %s.\n\n"
+							L"%s %s\n\n"
+							L"%s",
 
-							 GetApplicationName(),
-							 ResourceString(L"IDS_VERSION").c_str(),
-							 GetApplicationVersion(),
-							 ResourceString(L"IDS_BUILD").c_str(),
-							 GetBuildNumber(),
-							 GetPlatform(),
-							 GetCompilerVersion().c_str(),
-							 GetCopyright(),
-							 ResourceString(L"IDS_ALL_RIGHTS_RESERVED").c_str(),
-							 ResourceString(L"IDS_COMPILED_ON").c_str(), d,
-							 ResourceString(L"IDS_LICENCE").c_str());
+							GetApplicationName(),
+							ResourceString(L"IDS_VERSION").c_str(),
+							GetApplicationVersion(),
+							ResourceString(L"IDS_BUILD").c_str(),
+							GetBuildNumber(),
+							GetPlatform(),
+							GetCompilerVersion().c_str(),
+							GetCopyright(),
+							ResourceString(L"IDS_ALL_RIGHTS_RESERVED").c_str(),
+							ResourceString(L"IDS_COMPILED_ON").c_str(), d,
+							ResourceString(L"IDS_LICENCE").c_str());
 	}
 
 	return c;

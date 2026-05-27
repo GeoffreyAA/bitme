@@ -7,7 +7,7 @@ void SetWindowInt2(HWND hWnd, int x)
 {
 	wchar_t c[64];
 
-	swprintfs(c, sizeof(c) / sizeof(c[0]), L"%02d", x);
+	swprintf(c, sizeof(c) / sizeof(c[0]), L"%02d", x);
 
 	SetWindowTextW(hWnd, c);
 }
@@ -43,7 +43,7 @@ void SetWindowFloat2(HWND hWnd, double x, const wchar_t *pszFormat)
 	wchar_t c[256];
 	wchar_t Formatted[256];
 
-	swprintfs(c, sizeof(c) / sizeof(c[0]), pszFormat, x);
+	swprintf(c, sizeof(c) / sizeof(c[0]), pszFormat, x);
 
 	if (GetNumberFormat(LOCALE_USER_DEFAULT, 0, c, NULL, Formatted, sizeof(Formatted) / sizeof(Formatted[0])))
 	{
@@ -59,7 +59,7 @@ void SetWindowTextRange(HWND hWnd, int x, const wchar_t *pszString)
 {
 	wchar_t c[256];
 
-	swprintfs(c, sizeof(c) / sizeof(c[0]), L"%d %s", x, pszString ? pszString : L"");
+	swprintf(c, sizeof(c) / sizeof(c[0]), L"%d %s", x, pszString ? pszString : L"");
 
 	SetWindowTextW(hWnd, c);
 }
@@ -79,7 +79,7 @@ String FloatToStr2(double x)
 	wchar_t c[256];
 	wchar_t Formatted[256];
 
-	swprintfs(c, sizeof(c) / sizeof(c[0]), L"%.2f", x);
+	swprintf(c, sizeof(c) / sizeof(c[0]), L"%.2f", x);
 
 	if (GetNumberFormat(LOCALE_USER_DEFAULT, 0, c, NULL, Formatted, sizeof(Formatted) / sizeof(Formatted[0])))
 	{

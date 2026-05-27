@@ -194,33 +194,33 @@ String BitrateModel::getInformation() const
 {
 	wchar_t w[1024];
 
-	swprintfs(w, sizeof(w) / sizeof(w[0]), L"%s: %d %s"
-										   L"\n%s: %d %s"
-										   L"\n%s: %d %s"
-										   L"\n\n%s: %d"
-										   L"\n%s: %d"
-										   L"\n%s: %d"
-										   L"\n\n%s: %s %s"
-										   L"\n%s: %s %s"
-										   L"\n%s: %s"
-										   L"\n\n%s: %s"
-										   L"\n%s: %s"
-										   L"\n%s: %s"
-										   L"\n%s: %s"
+	swprintf(w, sizeof(w) / sizeof(w[0]), L"%s: %d %s"
+										  L"\n%s: %d %s"
+										  L"\n%s: %d %s"
+										  L"\n\n%s: %d"
+										  L"\n%s: %d"
+										  L"\n%s: %d"
+										  L"\n\n%s: %s %s"
+										  L"\n%s: %s %s"
+										  L"\n%s: %s"
+										  L"\n\n%s: %s"
+										  L"\n%s: %s"
+										  L"\n%s: %s"
+										  L"\n%s: %s"
 
-										   , ResourceString(L"IDS_INFORMATION_VIDEO_BITRATE").c_str(), getVideoBitrate(), ResourceString(L"IDS_INFORMATION_KBPS").c_str()
-										   , ResourceString(L"IDS_INFORMATION_AUDIO_BITRATE").c_str(), getAudioBitrate(), ResourceString(L"IDS_INFORMATION_KBPS").c_str()
-										   , ResourceString(L"IDS_INFORMATION_DURATION").c_str(), getDuration(), ResourceString(L"IDS_INFORMATION_SECONDS").c_str()
-										   , ResourceString(L"IDS_INFORMATION_VIDEO_ENABLED").c_str(), isVideoEnabled()
-										   , ResourceString(L"IDS_INFORMATION_AUDIO_ENABLED").c_str(), isAudioEnabled()
-										   , ResourceString(L"IDS_INFORMATION_OVERHEAD_ENABLED").c_str(), isOverheadEnabled()
-										   , ResourceString(L"IDS_INFORMATION_FILE_SIZE").c_str(), FloatToStr2(Information(getFileSize()).getBytes()).c_str(), ResourceString(L"IDS_INFORMATION_BYTES").c_str()
-										   , ResourceString(L"IDS_INFORMATION_DATA_RATE").c_str(), FloatToStr2(Information(getDataRate()).getBytes()).c_str(), ResourceString(L"IDS_INFORMATION_BYTES_SEC").c_str()
-										   , ResourceString(L"IDS_INFORMATION_OVERHEAD").c_str(), FloatToStr2(getOverhead()).c_str()
-										   , ResourceString(L"IDS_INFORMATION_CONTAINER").c_str(), getContainer().getName().c_str()
-										   , ResourceString(L"IDS_INFORMATION_CONTAINER_PTR").c_str(), pInterface ? L"Not null" : L"Null"
-										   , ResourceString(L"IDS_INFORMATION_CONTAINER_OVERHEAD_FULL").c_str(), FloatToStr2(getContainer().getOverheadFull(getVideoBitrate(), getAudioBitrate(), getDuration())).c_str()
-										   , ResourceString(L"IDS_INFORMATION_CONTAINER_OVERHEAD_NA").c_str(), FloatToStr2(getContainer().getOverheadNoAudio(getVideoBitrate(), getDuration())).c_str());
+										  , ResourceString(L"IDS_INFORMATION_VIDEO_BITRATE").c_str(), getVideoBitrate(), ResourceString(L"IDS_INFORMATION_KBPS").c_str()
+										  , ResourceString(L"IDS_INFORMATION_AUDIO_BITRATE").c_str(), getAudioBitrate(), ResourceString(L"IDS_INFORMATION_KBPS").c_str()
+										  , ResourceString(L"IDS_INFORMATION_DURATION").c_str(), getDuration(), ResourceString(L"IDS_INFORMATION_SECONDS").c_str()
+										  , ResourceString(L"IDS_INFORMATION_VIDEO_ENABLED").c_str(), isVideoEnabled()
+										  , ResourceString(L"IDS_INFORMATION_AUDIO_ENABLED").c_str(), isAudioEnabled()
+										  , ResourceString(L"IDS_INFORMATION_OVERHEAD_ENABLED").c_str(), isOverheadEnabled()
+										  , ResourceString(L"IDS_INFORMATION_FILE_SIZE").c_str(), FloatToStr2(Information(getFileSize()).getBytes()).c_str(), ResourceString(L"IDS_INFORMATION_BYTES").c_str()
+										  , ResourceString(L"IDS_INFORMATION_DATA_RATE").c_str(), FloatToStr2(Information(getDataRate()).getBytes()).c_str(), ResourceString(L"IDS_INFORMATION_BYTES_SEC").c_str()
+										  , ResourceString(L"IDS_INFORMATION_OVERHEAD").c_str(), FloatToStr2(getOverhead()).c_str()
+										  , ResourceString(L"IDS_INFORMATION_CONTAINER").c_str(), getContainer().getName().c_str()
+										  , ResourceString(L"IDS_INFORMATION_CONTAINER_PTR").c_str(), pInterface ? L"Not null" : L"Null"
+										  , ResourceString(L"IDS_INFORMATION_CONTAINER_OVERHEAD_FULL").c_str(), FloatToStr2(getContainer().getOverheadFull(getVideoBitrate(), getAudioBitrate(), getDuration())).c_str()
+										  , ResourceString(L"IDS_INFORMATION_CONTAINER_OVERHEAD_NA").c_str(), FloatToStr2(getContainer().getOverheadNoAudio(getVideoBitrate(), getDuration())).c_str());
 
 	return (w);
 }

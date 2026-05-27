@@ -17,6 +17,8 @@ wchar_t *wcscpys(wchar_t *strDestination, const wchar_t *strSource, size_t cbSiz
 	return (strDestination);
 }
 
+#if 0
+
 int swprintfs(wchar_t *c, size_t cbSize, const wchar_t *Format, ...)
 {
 	if (c && (cbSize > 0))
@@ -37,16 +39,18 @@ int swprintfs(wchar_t *c, size_t cbSize, const wchar_t *Format, ...)
 	return (-1);
 }
 
+#endif
+
 wchar_t *IntToStr(int x, wchar_t *c, size_t cbSize)
 {
-	swprintfs(c, cbSize, L"%d", x);
+	swprintf(c, cbSize, L"%d", x);
 
 	return (c);
 }
 
 wchar_t *FloatToStr(double x, wchar_t *c, size_t cbSize, const wchar_t *Format)
 {
-	swprintfs(c, cbSize, Format, x);
+	swprintf(c, cbSize, Format, x);
 
 	return (c);
 }

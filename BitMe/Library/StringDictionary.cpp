@@ -96,7 +96,7 @@ bool StringDictionarySerialiser::write(const wchar_t *pszFile, const StringDicti
 
 			for (StringDictionary::const_iterator i = d.begin(); i != d.end(); i++)
 			{
-				swprintfs(w, sizeof(w) / sizeof(w[0]), L"%s=%s", (*i).first.c_str(), TranslateNewlines((*i).second).c_str());
+				swprintf(w, sizeof(w) / sizeof(w[0]), L"%s=%s", (*i).first.c_str(), TranslateNewlines((*i).second).c_str());
 
 				if (ConvertUTF16To8(c, sizeof(c) / sizeof(c[0]), w))
 				{

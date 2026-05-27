@@ -76,7 +76,7 @@ String GetCompilerVersion()
 	wchar_t w[64] = L"N/A";
 
 #ifdef _MSC_VER
-	swprintfs(w, sizeof(w) / sizeof(w[0]), L"MSVC %d", _MSC_VER);
+	swprintf(w, sizeof(w) / sizeof(w[0]), L"MSVC %d", _MSC_VER);
 #endif
 
 	return (w);
@@ -87,7 +87,7 @@ String GetCompilerVersionFull()
 	wchar_t w[64] = L"N/A";
 
 #ifdef _MSC_FULL_VER
-	swprintfs(w, sizeof(w) / sizeof(w[0]), L"MSVC %d", _MSC_FULL_VER);
+	swprintf(w, sizeof(w) / sizeof(w[0]), L"MSVC %d", _MSC_FULL_VER);
 #endif
 
 	return (w);

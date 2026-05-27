@@ -47,8 +47,8 @@ BOOL CAboutDlg::OnInitDialog()
 void CAboutDlg::Initialise()
 {
 	wchar_t s[128];
-	swprintfs(s, sizeof(s) / sizeof(s[0]), L"%s %s", ResourceString(L"IDS_ABOUT").c_str(),
-													 GetApplicationName());
+	swprintf(s, sizeof(s) / sizeof(s[0]), L"%s %s", ResourceString(L"IDS_ABOUT").c_str(),
+													GetApplicationName());
 
 	SetWindowText(s);
 	SetDlgItemText(IDC_ABOUT_TEXT, GetApplicationNameEx().c_str());

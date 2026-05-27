@@ -104,14 +104,14 @@ void CResCalcDlg::UpdateControls()
 	ResolutionModel m(Model);
 	m.enableRounding(false);
 
-	swprintfs(w, sizeof(w) / sizeof(w[0]), L"%s %s %g %s; %s %g %s",
-										   ResourceString(L"IDS_ROUNDING_ERROR").c_str(),
-										   ResourceString(L"IDS_WIDTH").c_str(),
-										   fabs(Model.getWidth() - m.getWidth()),
-										   ResourceString(L"IDS_ABRV_PIXEL").c_str(),
-										   ResourceString(L"IDS_HEIGHT").c_str(),
-										   fabs(Model.getHeight() - m.getHeight()),
-										   ResourceString(L"IDS_ABRV_PIXEL").c_str());
+	swprintf(w, sizeof(w) / sizeof(w[0]), L"%s %s %g %s; %s %g %s",
+										  ResourceString(L"IDS_ROUNDING_ERROR").c_str(),
+										  ResourceString(L"IDS_WIDTH").c_str(),
+										  fabs(Model.getWidth() - m.getWidth()),
+										  ResourceString(L"IDS_ABRV_PIXEL").c_str(),
+										  ResourceString(L"IDS_HEIGHT").c_str(),
+										  fabs(Model.getHeight() - m.getHeight()),
+										  ResourceString(L"IDS_ABRV_PIXEL").c_str());
 
 	LabelRoundingError.SetWindowText(w);
 }
