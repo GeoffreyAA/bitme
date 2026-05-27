@@ -358,7 +358,7 @@ HFONT CreatePointFont(const wchar_t *pszName, int nPointSize, bool bBold, bool b
 
 	if (pszName)
 	{
-		wcscpys(s, pszName, sizeof(s) / sizeof(s[0]));
+		wcscpys(s, sizeof(s) / sizeof(s[0]), pszName);
 	}
 
 	HDC hDC = GetDC(NULL);

@@ -122,7 +122,7 @@ wchar_t *ConfigFile::getString(const wchar_t *name, wchar_t *value, size_t size)
 
 	if (value && get(name, s))
 	{
-		wcscpys(value, s.c_str(), size);
+		wcscpys(value, size, s.c_str());
 
 		return value;
 	}

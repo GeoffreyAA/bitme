@@ -51,7 +51,7 @@ wchar_t *GetApplicationNameEx(wchar_t *c, size_t cbSize)
 
 		if (!TimeToSystemTimeLocal(GetBuildTime(), &st) || !GetDateTimeFormatted(d, sizeof(d) / sizeof(d[0]), &st))
 		{
-			wcscpys(d, ResourceString(L"IDS_ERROR"), sizeof(d) / sizeof(d[0]));
+			wcscpys(d, sizeof(d) / sizeof(d[0]), ResourceString(L"IDS_ERROR"));
 		}
 
 		// Put together name string painstakingly:

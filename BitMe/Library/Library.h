@@ -3,7 +3,7 @@
 
 #include <stddef.h>
 
-wchar_t *wcscpys(wchar_t *strDestination, const wchar_t *strSource, size_t cbSize);
+wchar_t *wcscpys(wchar_t *dst, size_t size, const wchar_t *src);
 
 wchar_t *IntToStr(int x, wchar_t *c, size_t cbSize);
 wchar_t *FloatToStr(double x, wchar_t *c, size_t cbSize, const wchar_t *Format = L"%.16g");

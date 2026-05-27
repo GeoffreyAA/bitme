@@ -6,6 +6,29 @@
 #include <stdarg.h>
 #include <ctype.h>
 
+wchar_t *wcscpys(wchar_t *dst, size_t size, const wchar_t *src)
+{
+	if (dst && src && (size > 0))
+	{
+		const size_t length = wcslen(src);
+
+		memcpy(dst, src, ((length < size) ? (length + 1) : (size - 1)) * sizeof(wchar_t));
+
+		dst[size - 1] = L'\0';
+	}
+
+	return dst;
+}
+
+#if 0
+
+/*
+May 27, 2026:
+
+Decided to retire this function, which I wrote in 2011.
+It works well, but using str/wcsncpy is considered bad practice.
+*/
+
 wchar_t *wcscpys(wchar_t *strDestination, const wchar_t *strSource, size_t cbSize)
 {
 	if (strDestination && strSource && (cbSize > 0))
@@ -17,7 +40,16 @@ wchar_t *wcscpys(wchar_t *strDestination, const wchar_t *strSource, size_t cbSiz
 	return (strDestination);
 }
 
-#if 0
+/*
+May 27, 2026:
+
+Retired custom swprintfs in favour of C99's swprintf. Back when I programmed these things, using VC++ 6.0,
+the available swprintf (_swprintf today) did not take the buffer size. So, I wrapped _vsnwprintf,
+properly terminating with a NULL, and named it swprintfs, the "s" standing for "safe." As luck would have it,
+the signature I used matches the C99 version, meaning that only the "s" needed to be removed from calls to this function.
+
+Farewell! You've served WM and BitMe well for over a decade.
+*/
 
 int swprintfs(wchar_t *c, size_t cbSize, const wchar_t *Format, ...)
 {
