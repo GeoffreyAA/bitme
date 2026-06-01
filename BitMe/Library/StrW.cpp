@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "StrW.h"
 #include <windows.h>
-#include <malloc.h>
+#include <stdlib.h>
 
 StrW::StrW(const char *a) : w(NULL)
 {

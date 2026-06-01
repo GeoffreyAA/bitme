@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include "File.h"
+#include <wchar.h>
+#include <wctype.h>
 #include <string.h>
-#include <ctype.h>
 
 bool IsPathDelimiter(wchar_t c)
 {

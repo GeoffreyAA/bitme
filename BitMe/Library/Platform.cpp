@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "Platform.h"
-#include "Library.h"
 #include <windows.h>
 
 const wchar_t *GetPlatform()

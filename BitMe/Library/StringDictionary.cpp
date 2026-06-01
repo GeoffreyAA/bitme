@@ -1,9 +1,9 @@
 #include "stdafx.h"
 #include "StringDictionary.h"
-#include <stdio.h>
-#include <string.h>
 #include "Library.h"
 #include "Unicode.h"
+#include <stdio.h>
+#include <wchar.h>
 
 bool StringDictionarySerialiser::read(const wchar_t *pszFile, StringDictionary &d) const
 {

@@ -1,7 +1,7 @@
 #ifndef __PLATFORM_H__
 #define __PLATFORM_H__
 
-#include <stddef.h>
+#include <wchar.h>
 #include "String.h"
 
 const wchar_t *GetPlatform();

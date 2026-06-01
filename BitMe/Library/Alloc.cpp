@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Alloc.h"
-#include <malloc.h>
+#include <stdlib.h>
 
 Alloc::Alloc(size_t bytes) : p(NULL)
 {

@@ -1,10 +1,9 @@
 #include "stdafx.h"
 #include "Library.h"
 
+#include <wchar.h>
+#include <wctype.h>
 #include <string.h>
-#include <stdio.h>
-#include <stdarg.h>
-#include <ctype.h>
 
 wchar_t *wcscpys(wchar_t *dst, size_t size, const wchar_t *src)
 {
