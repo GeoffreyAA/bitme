@@ -5,7 +5,50 @@
 #include <stdio.h>
 #include <wchar.h>
 
-bool StringDictionarySerialiser::read(const wchar_t *pszFile, StringDictionary &d) const
+void ReplaceNewlines(wchar_t *s)
+{
+	if (s)
+	{
+		for (size_t i = wcslen(s); i > 0; i--)
+		{
+			if ((s[i] == L'n') && (s[i - 1] == L'\\'))
+			{
+				s[i] = L'\n';
+
+				StringDelete(s, i - 1);
+			}
+		}
+	}
+}
+
+wchar_t *BreakString(wchar_t *s)
+{
+	if (s)
+	{
+		wchar_t *Separator = wcschr(s, L'=');
+
+		if (Separator)
+		{
+			*Separator = L'\0';
+
+			wchar_t *b = Separator + 1;
+
+			Trim(s);
+			Trim(b);
+
+			ReplaceNewlines(b);
+
+			if (wcslen(s) && wcslen(b))
+			{
+				return (b);
+			}
+		}
+	}
+
+	return (NULL);
+}
+
+bool StringDictionaryRead(const wchar_t *pszFile, StringDictionary &d)
 {
 	if (pszFile)
 	{
@@ -40,50 +83,30 @@ bool StringDictionarySerialiser::read(const wchar_t *pszFile, StringDictionary &
 	return false;
 }
 
-wchar_t *StringDictionarySerialiser::BreakString(wchar_t *s) const
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+String TranslateNewlines(const String &s)
 {
-	if (s)
+	String a;
+	a.reserve(s.size());
+
+	for (String::const_iterator i = s.begin(); i != s.end(); i++)
 	{
-		wchar_t *Separator = wcschr(s, L'=');
-
-		if (Separator)
+		if ((*i) == L'\n')
 		{
-			*Separator = L'\0';
-
-			wchar_t *b = Separator + 1;
-
-			Trim(s);
-			Trim(b);
-
-			ReplaceNewlines(b);
-
-			if (wcslen(s) && wcslen(b))
-			{
-				return (b);
-			}
+			a.append(L"\\n");
+		}
+		else
+		{
+			a.append(1, *i);
 		}
 	}
 
-	return (NULL);
+	return (a);
 }
 
-void StringDictionarySerialiser::ReplaceNewlines(wchar_t *s) const
-{
-	if (s)
-	{
-		for (size_t i = wcslen(s); i > 0; i--)
-		{
-			if ((s[i] == L'n') && (s[i - 1] == L'\\'))
-			{
-				s[i] = L'\n';
-
-				StringDelete(s, i - 1);
-			}
-		}
-	}
-}
-
-bool StringDictionarySerialiser::write(const wchar_t *pszFile, const StringDictionary &d) const
+bool StringDictionaryWrite(const wchar_t *pszFile, const StringDictionary &d)
 {
 	if (pszFile)
 	{
@@ -111,24 +134,4 @@ bool StringDictionarySerialiser::write(const wchar_t *pszFile, const StringDicti
 	}
 
 	return false;
-}
-
-String StringDictionarySerialiser::TranslateNewlines(const String &s) const
-{
-	String a;
-	a.reserve(s.size());
-
-	for (String::const_iterator i = s.begin(); i != s.end(); i++)
-	{
-		if ((*i) == L'\n')
-		{
-			a.append(L"\\n");
-		}
-		else
-		{
-			a.append(1, *i);
-		}
-	}
-
-	return (a);
 }
