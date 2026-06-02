@@ -38,3 +38,8 @@ const wchar_t *GetHelpFileName()
 {
 	return (L"Readme.txt");
 }
+
+const wchar_t *GetURL()
+{
+	return (L"https://github.com/GeoffreyAA/bitme");
+}

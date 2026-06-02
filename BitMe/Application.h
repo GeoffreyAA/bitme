@@ -11,5 +11,6 @@ time_t GetBuildTime();
 const wchar_t *GetCopyright();
 const wchar_t *GetRegistryKey();
 const wchar_t *GetHelpFileName();
+const wchar_t *GetURL();
 
 #endif

@@ -58,7 +58,7 @@ void CAboutDlg::Initialise()
 
 void CAboutDlg::OnHomePage()
 {
-	ShellOpen(L"https://github.com/GeoffreyAA/bitme", NULL);
+	ShellOpen(GetURL(), NULL);
 }
 
 BOOL CAboutDlg::OnHelpInfo(HELPINFO *pHelpInfo)
