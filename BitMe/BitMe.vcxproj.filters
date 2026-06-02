@@ -289,9 +289,6 @@
     <ClInclude Include="TmpLibrary.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Library\Types.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Library\Unicode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
