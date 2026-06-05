@@ -462,7 +462,7 @@ bool GetDateTimeFormatted(wchar_t *pszBuffer, size_t cbSize, const SYSTEMTIME *s
 	if (GetDateFormatW(LOCALE_USER_DEFAULT, DATE_LONGDATE, st, NULL, d, sizeof(d) / sizeof(d[0])) &&
 		GetTimeFormatW(LOCALE_USER_DEFAULT, 0, st, NULL, t, sizeof(t) / sizeof(t[0])))
 	{
-		swprintf(pszBuffer, cbSize, L"%s, %s", d, t);
+		swprintf(pszBuffer, cbSize, L"%ls, %ls", d, t);
 
 		return true;
 	}

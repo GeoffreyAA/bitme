@@ -29,7 +29,7 @@ String Language::getString(const wchar_t *key) const
 		{
 			wchar_t s[256];
 
-			swprintf(s, sizeof(s) / sizeof(s[0]), L"<%s>", key);
+			swprintf(s, sizeof(s) / sizeof(s[0]), L"<%ls>", key);
 
 			return s;
 		}

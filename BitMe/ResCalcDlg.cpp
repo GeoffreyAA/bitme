@@ -104,7 +104,7 @@ void CResCalcDlg::UpdateControls()
 	ResolutionModel m(Model);
 	m.enableRounding(false);
 
-	swprintf(w, sizeof(w) / sizeof(w[0]), L"%s %s %g %s; %s %g %s",
+	swprintf(w, sizeof(w) / sizeof(w[0]), L"%ls %ls %g %ls; %ls %g %ls",
 										  ResourceString(L"IDS_ROUNDING_ERROR").c_str(),
 										  ResourceString(L"IDS_WIDTH").c_str(),
 										  fabs(Model.getWidth() - m.getWidth()),

@@ -71,14 +71,14 @@ HtmlWriter::HtmlWriter(const wchar_t *pszFile, Mode mode, const wchar_t *pszTitl
 			}
 			else if (m == MODE_UTF16)
 			{
-				fwprintf(f, L"%c", 0xFEFF);
+				fwprintf(f, L"%lc", 0xFEFF);
 
 				fwprintf(f, L"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\"\n\t\"http://www.w3.org/TR/html4/strict.dtd\">\n\n");
 
 				fwprintf(f, L"<html>\n\n");
 
 				fwprintf(f, L"<head>\n");
-				fwprintf(f, L"<title>%s</title>\n", Transform(pszTitle).c_str());
+				fwprintf(f, L"<title>%ls</title>\n", Transform(pszTitle).c_str());
 				fwprintf(f, L"<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-16le\">\n");
 				fwprintf(f, L"</head>\n\n");
 
@@ -142,7 +142,7 @@ void HtmlWriter::WriteString(const char *s)
 				break;
 
 			case MODE_UTF16:
-				fwprintf(f, L"%s", Transform(StrW(s)).c_str());
+				fwprintf(f, L"%ls", Transform(StrW(s)).c_str());
 				break;
 		}
 	}
@@ -163,7 +163,7 @@ void HtmlWriter::WriteString(const wchar_t *s)
 				break;
 
 			case MODE_UTF16:
-				fwprintf(f, L"%s", Transform(s).c_str());
+				fwprintf(f, L"%ls", Transform(s).c_str());
 				break;
 		}
 	}

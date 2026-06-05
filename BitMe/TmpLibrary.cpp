@@ -59,7 +59,7 @@ void SetWindowTextRange(HWND hWnd, int x, const wchar_t *pszString)
 {
 	wchar_t c[256];
 
-	swprintf(c, sizeof(c) / sizeof(c[0]), L"%d %s", x, pszString ? pszString : L"");
+	swprintf(c, sizeof(c) / sizeof(c[0]), L"%d %ls", x, pszString ? pszString : L"");
 
 	SetWindowTextW(hWnd, c);
 }

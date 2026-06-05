@@ -13,7 +13,7 @@ wchar_t *GetApplicationNameFull(wchar_t *c, size_t cbSize)
 {
 	if (c)
 	{
-		swprintf(c, cbSize, L"%s %s (%s %d) (%s)"
+		swprintf(c, cbSize, L"%ls %ls (%ls %d) (%ls)"
 
 #ifdef _DEBUG
 							L" (Debug)"
@@ -56,14 +56,14 @@ wchar_t *GetApplicationNameEx(wchar_t *c, size_t cbSize)
 
 		// Put together name string painstakingly:
 
-		swprintf(c, cbSize, L"%s\n"
-							L"%s %s (%s %d) (%s) (%s)"
+		swprintf(c, cbSize, L"%ls\n"
+							L"%ls %ls (%ls %d) (%ls) (%ls)"
 #ifdef _DEBUG
 							L" (Debug)"
 #endif
-							L"\n%s. %s.\n\n"
-							L"%s %s\n\n"
-							L"%s",
+							L"\n%ls. %ls.\n\n"
+							L"%ls %ls\n\n"
+							L"%ls",
 
 							GetApplicationName(),
 							ResourceString(L"IDS_VERSION").c_str(),
