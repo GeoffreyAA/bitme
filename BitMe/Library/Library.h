@@ -12,6 +12,8 @@ wchar_t *StringDelete(wchar_t *s, size_t i);
 wchar_t *Trim(wchar_t *s);
 wchar_t *TrimLeft(wchar_t *s);
 wchar_t *TrimRight(wchar_t *s);
+wchar_t *Strip(wchar_t *s);
+wchar_t *ReplaceChars(wchar_t *s, wchar_t from, wchar_t to);
 wchar_t *RemoveNonNbrs(wchar_t *s);
 
 bool ContainsText(const wchar_t *s);

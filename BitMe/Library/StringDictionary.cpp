@@ -5,47 +5,35 @@
 #include <stdio.h>
 #include <wchar.h>
 
-void ReplaceNewlines(wchar_t *s)
-{
-	if (s)
-	{
-		for (size_t i = wcslen(s); i > 0; i--)
-		{
-			if ((s[i] == L'n') && (s[i - 1] == L'\\'))
-			{
-				s[i] = L'\n';
+const wchar_t Newline = L'\n';
+const wchar_t NewlineEncoded = L'|';
 
-				StringDelete(s, i - 1);
-			}
-		}
-	}
-}
-
-wchar_t *BreakString(wchar_t *s)
+wchar_t *BreakString(wchar_t *dst, size_t size, const char *line)
 {
-	if (s)
+	if (ConvertUTF8To16(dst, size, line))
 	{
-		wchar_t *Separator = wcschr(s, L'=');
+		Strip(dst);
+
+		wchar_t *Separator = wcschr(dst, L'=');
 
 		if (Separator)
 		{
 			*Separator = L'\0';
 
-			wchar_t *b = Separator + 1;
+			wchar_t *val = Separator + 1;
 
-			Trim(s);
-			Trim(b);
+			Trim(dst);
+			Trim(val);
+			ReplaceChars(val, NewlineEncoded, Newline);
 
-			ReplaceNewlines(b);
-
-			if (wcslen(s) && wcslen(b))
+			if (wcslen(dst) && wcslen(val))
 			{
-				return (b);
+				return val;
 			}
 		}
 	}
 
-	return (NULL);
+	return NULL;
 }
 
 bool StringDictionaryRead(const wchar_t *pszFile, StringDictionary &d)
@@ -63,14 +51,11 @@ bool StringDictionaryRead(const wchar_t *pszFile, StringDictionary &d)
 
 			while (fgets(c, sizeof(c) / sizeof(c[0]), f) != NULL)
 			{
-				if (ConvertUTF8To16(w, sizeof(w) / sizeof(w[0]), c))
-				{
-					wchar_t *b = BreakString(w);
+				wchar_t *val = BreakString(w, sizeof(w) / sizeof(w[0]), c);
 
-					if (b)
-					{
-						d.insert(StringDictionary::value_type(w, b));
-					}
+				if (val)
+				{
+					d.insert(StringDictionary::value_type(w, val));
 				}
 			}
 
@@ -86,24 +71,28 @@ bool StringDictionaryRead(const wchar_t *pszFile, StringDictionary &d)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-String TranslateNewlines(const String &s)
+bool MakeString(char *dst, size_t size, const wchar_t *key, const wchar_t *val)
 {
-	String a;
-	a.reserve(s.size());
-
-	for (String::const_iterator i = s.begin(); i != s.end(); i++)
+	if (dst && size && key && val)
 	{
-		if ((*i) == L'\n')
-		{
-			a.append(L"\\n");
-		}
-		else
-		{
-			a.append(1, *i);
-		}
+		wchar_t k[1024];
+		wchar_t v[3072];
+		wchar_t w[4096];
+
+		wcscpys(k, sizeof(k) / sizeof(k[0]), key);
+		wcscpys(v, sizeof(v) / sizeof(v[0]), val);
+
+		ReplaceChars(v, Newline, NewlineEncoded);
+		Trim(k);
+		Trim(v);
+
+		swprintf(w, sizeof(w) / sizeof(w[0]), L"%ls=%ls", k, v);
+		Strip(w);
+
+		return ConvertUTF16To8(dst, size, w);
 	}
 
-	return (a);
+	return false;
 }
 
 bool StringDictionaryWrite(const wchar_t *pszFile, const StringDictionary &d)
@@ -115,13 +104,10 @@ bool StringDictionaryWrite(const wchar_t *pszFile, const StringDictionary &d)
 		if (f)
 		{
 			char c[4096];
-			wchar_t w[4096];
 
 			for (StringDictionary::const_iterator i = d.begin(); i != d.end(); i++)
 			{
-				swprintf(w, sizeof(w) / sizeof(w[0]), L"%s=%s", (*i).first.c_str(), TranslateNewlines((*i).second).c_str());
-
-				if (ConvertUTF16To8(c, sizeof(c) / sizeof(c[0]), w))
+				if (MakeString(c, sizeof(c) / sizeof(c[0]), (*i).first.c_str(), (*i).second.c_str()))
 				{
 					fprintf(f, "%s\r\n", c);
 				}
@@ -135,3 +121,21 @@ bool StringDictionaryWrite(const wchar_t *pszFile, const StringDictionary &d)
 
 	return false;
 }
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#if 0
+
+std::wostream& operator<<(std::wostream &wos, const StringDictionary &d)
+{
+	for (StringDictionary::const_iterator i = d.begin(); i != d.end(); i++)
+	{
+		wos << (*i).first << L" = "
+			<< (*i).second << std::endl;
+	}
+
+	return wos;
+}
+
+#endif

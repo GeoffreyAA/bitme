@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "Library.h"
-
 #include <wchar.h>
 #include <wctype.h>
 #include <string.h>
@@ -138,6 +137,40 @@ wchar_t *TrimRight(wchar_t *s)
 		while ((i--) && iswspace(s[i]))
 		{
 			s[i] = L'\0';
+		}
+	}
+
+	return (s);
+}
+
+wchar_t *Strip(wchar_t *s)
+{
+	if (s)
+	{
+		size_t i = wcslen(s);
+
+		while (i--)
+		{
+			if (iswspace(s[i]) && (s[i] != L' '))
+			{
+				StringDelete(s, i);
+			}
+		}
+	}
+
+	return (s);
+}
+
+wchar_t *ReplaceChars(wchar_t *s, wchar_t from, wchar_t to)
+{
+	if (s)
+	{
+		while (*s)
+		{
+			if (*s == from)
+				*s = to;
+
+			s++;
 		}
 	}
 
