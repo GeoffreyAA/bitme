@@ -69,7 +69,7 @@ LanguageManager::LanguageManager()
 {
 	wchar_t w[256];
 
-	if (ConfigFile().getString(LanguageCfg, w, sizeof(w) / sizeof(w[0])))
+	if (ConfigFile().GetString(LanguageCfg, w, sizeof(w) / sizeof(w[0])))
 	{
 		setCurrentLanguage(w);
 	}
@@ -83,7 +83,7 @@ LanguageManager::~LanguageManager()
 {
 	std::lock_guard<std::mutex> lock(cs);
 
-	ConfigFile().setString(LanguageCfg, CurrentLanguage.getName().c_str());
+	ConfigFile().SetString(LanguageCfg, CurrentLanguage.getName().c_str());
 }
 
 Language LanguageManager::getCurrentLanguage()

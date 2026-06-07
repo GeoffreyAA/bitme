@@ -6,21 +6,21 @@
 class Configuration
 {
 public:
-	virtual int getInteger(const wchar_t *pszName, int nDefault = -1) const = 0;
-	virtual double getFloat(const wchar_t *pszName, double fDefault = -1.0) const = 0;
-	virtual bool getBool(const wchar_t *pszName, bool bDefault = false) const = 0;
-	virtual char *getString(const wchar_t *pszName, char *pszBuffer, size_t cbSize) const = 0;
-	virtual wchar_t *getString(const wchar_t *pszName, wchar_t *pszBuffer, size_t cbSize) const = 0;
-	virtual void *getBinary(const wchar_t *pszName, void *pBuffer, size_t nBytes) const = 0;
+	virtual bool GetInt(const wchar_t *name, int &value) const = 0;
+	virtual bool GetFloat(const wchar_t *name, double &value) const = 0;
+	virtual bool GetBool(const wchar_t *name, bool &value) const = 0;
+	virtual bool GetString(const wchar_t *name, char *value, size_t size) const = 0;
+	virtual bool GetString(const wchar_t *name, wchar_t *value, size_t size) const = 0;
+	virtual bool GetBinary(const wchar_t *name, void *value, size_t bytes) const = 0;
 
-	virtual bool setInteger(const wchar_t *pszName, int nValue) = 0;
-	virtual bool setFloat(const wchar_t *pszName, double fValue) = 0;
-	virtual bool setBool(const wchar_t *pszName, bool bValue) = 0;
-	virtual bool setString(const wchar_t *pszName, const char *pszString) = 0;
-	virtual bool setString(const wchar_t *pszName, const wchar_t *pszString) = 0;
-	virtual bool setBinary(const wchar_t *pszName, const void *pData, size_t nBytes) = 0;
+	virtual bool SetInt(const wchar_t *name, int value) = 0;
+	virtual bool SetFloat(const wchar_t *name, double value) = 0;
+	virtual bool SetBool(const wchar_t *name, bool value) = 0;
+	virtual bool SetString(const wchar_t *name, const char *value) = 0;
+	virtual bool SetString(const wchar_t *name, const wchar_t *value) = 0;
+	virtual bool SetBinary(const wchar_t *name, const void *value, size_t bytes) = 0;
 
-	virtual bool deleteValue(const wchar_t *pszName) = 0;
+	virtual bool Delete(const wchar_t *name) = 0;
 
 	virtual ~Configuration() {}
 };

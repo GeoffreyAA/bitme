@@ -811,39 +811,37 @@ CBitMeDlgCfg::CBitMeDlgCfg() : bVideo(true),
 
 bool CBitMeDlgCfgSerialiser::Save(const CBitMeDlgCfg &Cfg, Configuration &c) const
 {
-	bool b;
+	c.SetBool(L"bVideo", Cfg.bVideo);
+	c.SetBool(L"bAudio", Cfg.bAudio);
+	c.SetBool(L"bDataRate", Cfg.bDataRate);
+	c.SetBool(L"bCustomSize", Cfg.bCustomSize);
+	c.SetBool(L"bOverhead", Cfg.bOverhead);
+	c.SetString(L"sContainer", Cfg.sContainer.c_str());
+	c.SetInt(L"nVideo", Cfg.nVideo);
+	c.SetInt(L"nAudio", Cfg.nAudio);
+	c.SetInt(L"nTime", Cfg.nTime);
+	c.SetInt(L"x", Cfg.x);
+	c.SetInt(L"y", Cfg.y);
 
-	b = c.setBool(L"bVideo", Cfg.bVideo);
-	b = c.setBool(L"bAudio", Cfg.bAudio);
-	b = c.setBool(L"bDataRate", Cfg.bDataRate);
-	b = c.setBool(L"bCustomSize", Cfg.bCustomSize);
-	b = c.setBool(L"bOverhead", Cfg.bOverhead);
-	b = c.setString(L"sContainer", Cfg.sContainer.c_str());
-	b = c.setInteger(L"nVideo", Cfg.nVideo);
-	b = c.setInteger(L"nAudio", Cfg.nAudio);
-	b = c.setInteger(L"nTime", Cfg.nTime);
-	b = c.setInteger(L"x", Cfg.x);
-	b = c.setInteger(L"y", Cfg.y);
-
-	return (b);
+	return true;
 }
 
 bool CBitMeDlgCfgSerialiser::Retrieve(CBitMeDlgCfg &Cfg, const Configuration &c) const
 {
-	CBitMeDlgCfg d;
+	const CBitMeDlgCfg def;
 	wchar_t w[64];
 
-	Cfg.bVideo = c.getBool(L"bVideo", d.bVideo);
-	Cfg.bAudio = c.getBool(L"bAudio", d.bAudio);
-	Cfg.bDataRate = c.getBool(L"bDataRate", d.bDataRate);
-	Cfg.bCustomSize = c.getBool(L"bCustomSize", d.bCustomSize);
-	Cfg.bOverhead = c.getBool(L"bOverhead", d.bOverhead);
-	Cfg.sContainer = c.getString(L"sContainer", w, sizeof(w) / sizeof(w[0])) ? w : d.sContainer;
-	Cfg.nVideo = c.getInteger(L"nVideo", d.nVideo);
-	Cfg.nAudio = c.getInteger(L"nAudio", d.nAudio);
-	Cfg.nTime = c.getInteger(L"nTime", d.nTime);
-	Cfg.x = c.getInteger(L"x", d.x);
-	Cfg.y = c.getInteger(L"y", d.y);
+	if (!c.GetBool(L"bVideo", Cfg.bVideo))				Cfg.bVideo = def.bVideo;
+	if (!c.GetBool(L"bAudio", Cfg.bAudio))				Cfg.bAudio = def.bAudio;
+	if (!c.GetBool(L"bDataRate", Cfg.bDataRate))		Cfg.bDataRate = def.bDataRate;
+	if (!c.GetBool(L"bCustomSize", Cfg.bCustomSize))	Cfg.bCustomSize = def.bCustomSize;
+	if (!c.GetBool(L"bOverhead", Cfg.bOverhead))		Cfg.bOverhead = def.bOverhead;
+	Cfg.sContainer = c.GetString(L"sContainer", w, sizeof(w) / sizeof(w[0])) ? w : def.sContainer;
+	if (!c.GetInt(L"nVideo", Cfg.nVideo))				Cfg.nVideo = def.nVideo;
+	if (!c.GetInt(L"nAudio", Cfg.nAudio))				Cfg.nAudio = def.nAudio;
+	if (!c.GetInt(L"nTime", Cfg.nTime))					Cfg.nTime = def.nTime;
+	if (!c.GetInt(L"x", Cfg.x))							Cfg.x = def.x;
+	if (!c.GetInt(L"y", Cfg.y))							Cfg.y = def.y;
 
 	return true;
 }

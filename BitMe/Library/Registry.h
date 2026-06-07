@@ -13,29 +13,29 @@ public:
 	Registry(HKEY hKey, const wchar_t *pszSubKey, REGSAM samDesired, bool bCreate);
 	~Registry();
 
-	int getInteger(const wchar_t *pszName, int nDefault = -1) const;
-	double getFloat(const wchar_t *pszName, double fDefault = -1.0) const;
-	bool getBool(const wchar_t *pszName, bool bDefault = false) const;
-	char *getString(const wchar_t *pszName, char *pszBuffer, size_t cbSize) const;
-	wchar_t *getString(const wchar_t *pszName, wchar_t *pszBuffer, size_t cbSize) const;
-	void *getBinary(const wchar_t *pszName, void *pBuffer, size_t nBytes) const;
+	bool Open(const wchar_t *pszSubKey, REGSAM samDesired, bool bCreate);
+	bool Open(HKEY hKey, const wchar_t *pszSubKey, REGSAM samDesired, bool bCreate);
+	bool Close();
+	bool Attach(HKEY hKey);
+	HKEY Detach();
+	bool IsReady() const;
+	HKEY GetHandle() const;
 
-	bool setInteger(const wchar_t *pszName, int nValue);
-	bool setFloat(const wchar_t *pszName, double fValue);
-	bool setBool(const wchar_t *pszName, bool bValue);
-	bool setString(const wchar_t *pszName, const char *pszString);
-	bool setString(const wchar_t *pszName, const wchar_t *pszString);
-	bool setBinary(const wchar_t *pszName, const void *pData, size_t nBytes);
+	bool GetInt(const wchar_t *name, int &value) const;
+	bool GetFloat(const wchar_t *name, double &value) const;
+	bool GetBool(const wchar_t *name, bool &value) const;
+	bool GetString(const wchar_t *name, char *value, size_t size) const;
+	bool GetString(const wchar_t *name, wchar_t *value, size_t size) const;
+	bool GetBinary(const wchar_t *name, void *value, size_t bytes) const;
 
-	bool deleteValue(const wchar_t *pszName);
+	bool SetInt(const wchar_t *name, int value);
+	bool SetFloat(const wchar_t *name, double value);
+	bool SetBool(const wchar_t *name, bool value);
+	bool SetString(const wchar_t *name, const char *value);
+	bool SetString(const wchar_t *name, const wchar_t *value);
+	bool SetBinary(const wchar_t *name, const void *value, size_t bytes);
 
-	bool open(const wchar_t *pszSubKey, REGSAM samDesired, bool bCreate);
-	bool open(HKEY hKey, const wchar_t *pszSubKey, REGSAM samDesired, bool bCreate);
-	bool close();
-	bool attach(HKEY hKey);
-	HKEY detach();
-	bool isReady() const;
-	HKEY getHandle() const;
+	bool Delete(const wchar_t *name);
 
 private:
 	Registry(const Registry &);

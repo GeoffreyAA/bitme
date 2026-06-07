@@ -63,111 +63,122 @@ bool ConfigFile::put(const wchar_t *name, const wchar_t *value)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-int ConfigFile::getInteger(const wchar_t *name, int def) const
+bool ConfigFile::GetInt(const wchar_t *name, int &value) const
 {
 	String s;
 
 	if (get(name, s))
 	{
 		if (IsNumber(s.c_str()))
-			return wcstol(s.c_str(), NULL, 10);
+		{
+			value = wcstol(s.c_str(), NULL, 10);
+			return true;
+		}
 	}
 
-	return def;
+	return false;
 }
 
-double ConfigFile::getFloat(const wchar_t *name, double def) const
+bool ConfigFile::GetFloat(const wchar_t *name, double &value) const
 {
 	String s;
 
 	if (get(name, s))
 	{
 		if (IsNumber(s.c_str()))
-			return wcstod(s.c_str(), NULL);
+		{
+			value = wcstod(s.c_str(), NULL);
+			return true;
+		}
 	}
 
-	return def;
+	return false;
 }
 
-bool ConfigFile::getBool(const wchar_t *name, bool def) const
+bool ConfigFile::GetBool(const wchar_t *name, bool &value) const
 {
 	String s;
 
 	if (get(name, s))
 	{
-		if (!wcscmp(s.c_str(), L"true")) return true;
-		if (!wcscmp(s.c_str(), L"false")) return false;
+		if (!wcscmp(s.c_str(), L"true"))
+		{
+			value = true;
+			return true;
+		}
+
+		if (!wcscmp(s.c_str(), L"false"))
+		{
+			value = false;
+			return true;
+		}
 	}
 
-	return def;
+	return false;
 }
 
-char *ConfigFile::getString(const wchar_t *name, char *value, size_t size) const
+bool ConfigFile::GetString(const wchar_t *name, char *value, size_t size) const
 {
 	String s;
 
-	if (value && get(name, s))
-	{
-		if (ConvertUTF16To8(value, size, s.c_str()))
-			return value;
-	}
+	if (get(name, s))
+		return ConvertUTF16To8(value, size, s.c_str());
 
-	return NULL;
+	return false;
 }
 
-wchar_t *ConfigFile::getString(const wchar_t *name, wchar_t *value, size_t size) const
+bool ConfigFile::GetString(const wchar_t *name, wchar_t *value, size_t size) const
 {
 	String s;
 
 	if (value && get(name, s))
 	{
 		wcscpys(value, size, s.c_str());
-
-		return value;
+		return true;
 	}
 
-	return NULL;
+	return false;
 }
 
-void *ConfigFile::getBinary(const wchar_t *name, void *value, size_t bytes) const
+bool ConfigFile::GetBinary(const wchar_t *name, void *value, size_t bytes) const
 {
-	return NULL;
+	return false;
 }
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool ConfigFile::setInteger(const wchar_t *name, int value)
+bool ConfigFile::SetInt(const wchar_t *name, int value)
 {
 	return put(name, std::to_wstring(value).c_str());
 }
 
-bool ConfigFile::setFloat(const wchar_t *name, double value)
+bool ConfigFile::SetFloat(const wchar_t *name, double value)
 {
 	return put(name, std::to_wstring(value).c_str());
 }
 
-bool ConfigFile::setBool(const wchar_t *name, bool value)
+bool ConfigFile::SetBool(const wchar_t *name, bool value)
 {
 	return put(name, value ? L"true" : L"false");
 }
 
-bool ConfigFile::setString(const wchar_t *name, const char *value)
+bool ConfigFile::SetString(const wchar_t *name, const char *value)
 {
 	return put(name, StrW(value).c_str());
 }
 
-bool ConfigFile::setString(const wchar_t *name, const wchar_t *value)
+bool ConfigFile::SetString(const wchar_t *name, const wchar_t *value)
 {
 	return put(name, value);
 }
 
-bool ConfigFile::setBinary(const wchar_t *name, const void *value, size_t bytes)
+bool ConfigFile::SetBinary(const wchar_t *name, const void *value, size_t bytes)
 {
 	return false;
 }
 
-bool ConfigFile::deleteValue(const wchar_t *name)
+bool ConfigFile::Delete(const wchar_t *name)
 {
 	if (name)
 	{

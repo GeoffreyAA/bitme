@@ -14,27 +14,30 @@ Registry::Registry(HKEY hKey) : h(hKey)
 
 Registry::Registry(const wchar_t *pszSubKey, REGSAM samDesired, bool bCreate) : h(NULL)
 {
-	open(pszSubKey, samDesired, bCreate);
+	Open(pszSubKey, samDesired, bCreate);
 }
 
 Registry::Registry(HKEY hKey, const wchar_t *pszSubKey, REGSAM samDesired, bool bCreate) : h(NULL)
 {
-	open(hKey, pszSubKey, samDesired, bCreate);
+	Open(hKey, pszSubKey, samDesired, bCreate);
 }
 
 Registry::~Registry()
 {
-	close();
+	Close();
 }
 
-bool Registry::open(const wchar_t *pszSubKey, REGSAM samDesired, bool bCreate)
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+bool Registry::Open(const wchar_t *pszSubKey, REGSAM samDesired, bool bCreate)
 {
-	return open(HKEY_CURRENT_USER, pszSubKey, samDesired, bCreate);
+	return Open(HKEY_CURRENT_USER, pszSubKey, samDesired, bCreate);
 }
 
-bool Registry::open(HKEY hKey, const wchar_t *pszSubKey, REGSAM samDesired, bool bCreate)
+bool Registry::Open(HKEY hKey, const wchar_t *pszSubKey, REGSAM samDesired, bool bCreate)
 {
-	if (close())
+	if (Close())
 	{
 		HKEY tmp;
 		LONG lResult = bCreate ? RegCreateKeyExW(hKey, pszSubKey, 0, REG_NONE, REG_OPTION_NON_VOLATILE, samDesired, NULL, &tmp, NULL) :
@@ -51,7 +54,7 @@ bool Registry::open(HKEY hKey, const wchar_t *pszSubKey, REGSAM samDesired, bool
 	return false;
 }
 
-bool Registry::close()
+bool Registry::Close()
 {
 	if (h)
 	{
@@ -64,7 +67,7 @@ bool Registry::close()
 	return h == NULL;
 }
 
-bool Registry::attach(HKEY hKey)
+bool Registry::Attach(HKEY hKey)
 {
 	if (!h)
 	{
@@ -79,7 +82,7 @@ bool Registry::attach(HKEY hKey)
 	return false;
 }
 
-HKEY Registry::detach()
+HKEY Registry::Detach()
 {
 	HKEY tmp = h;
 
@@ -88,160 +91,174 @@ HKEY Registry::detach()
 	return tmp;
 }
 
-int Registry::getInteger(const wchar_t *pszName, int nDefault) const
+bool Registry::IsReady() const
 {
-	if (isReady())
+	return GetHandle() != NULL;
+}
+
+HKEY Registry::GetHandle() const
+{
+	return h;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+bool Registry::GetInt(const wchar_t *name, int &value) const
+{
+	if (IsReady())
 	{
 		DWORD n, type;
 		DWORD size = sizeof(n);
 
-		if ((RegQueryValueExW(getHandle(), pszName, NULL, &type, (LPBYTE)&n, &size) == ERROR_SUCCESS) && (type == REG_DWORD))
+		if ((RegQueryValueExW(GetHandle(), name, NULL, &type, (LPBYTE)&n, &size) == ERROR_SUCCESS) && (type == REG_DWORD))
 		{
-			return n;
+			value = n;
+			return true;
 		}
 	}
 
-	return nDefault;
+	return false;
 }
 
-double Registry::getFloat(const wchar_t *pszName, double fDefault) const
+bool Registry::GetFloat(const wchar_t *name, double &value) const
 {
 	double x;
 
-	return getBinary(pszName, &x, sizeof(x)) ? x : fDefault;
+	if (GetBinary(name, &x, sizeof(x)))
+	{
+		value = x;
+		return true;
+	}
+
+	return false;
 }
 
-bool Registry::getBool(const wchar_t *pszName, bool bDefault) const
+bool Registry::GetBool(const wchar_t *name, bool &value) const
 {
-	return getInteger(pszName, bDefault) != 0;
+	int n;
+
+	if (GetInt(name, n))
+	{
+		value = (n != 0);
+		return true;
+	}
+
+	return false;
 }
 
-char *Registry::getString(const wchar_t *pszName, char *pszBuffer, size_t cbSize) const
+bool Registry::GetString(const wchar_t *name, char *value, size_t size) const
 {
 	wchar_t w[256];
 
-	if (getString(pszName, w, sizeof(w) / sizeof(w[0])))
-	{
-		if (ConvertUTF16To8(pszBuffer, cbSize, w))
-		{
-			return pszBuffer;
-		}
-	}
+	if (GetString(name, w, sizeof(w) / sizeof(w[0])))
+		return ConvertUTF16To8(value, size, w);
 
-	return NULL;
+	return false;
 }
 
-wchar_t *Registry::getString(const wchar_t *pszName, wchar_t *pszBuffer, size_t cbSize) const
+bool Registry::GetString(const wchar_t *name, wchar_t *value, size_t size) const
 {
-	if (isReady())
+	if (IsReady())
 	{
 		size_t st_bytes;
 		DWORD bytes, type;
 
-		if ((SizeTMult(cbSize, sizeof(wchar_t), &st_bytes) == S_OK) &&
+		if ((SizeTMult(size, sizeof(wchar_t), &st_bytes) == S_OK) &&
 			(SIZETToDWord(st_bytes, &bytes) == S_OK))
 		{
-			if ((RegQueryValueExW(getHandle(), pszName, NULL, &type, (LPBYTE)pszBuffer, &bytes) == ERROR_SUCCESS) && (type == REG_SZ))
+			if ((RegQueryValueExW(GetHandle(), name, NULL, &type, (LPBYTE)value, &bytes) == ERROR_SUCCESS) && (type == REG_SZ))
 			{
-				return pszBuffer;
+				return true;
 			}
 		}
-	}
-
-	return NULL;
-}
-
-void *Registry::getBinary(const wchar_t *pszName, void *pBuffer, size_t nBytes) const
-{
-	if (isReady())
-	{
-		DWORD bytes, type;
-
-		if (SIZETToDWord(nBytes, &bytes) == S_OK)
-		{
-			if ((RegQueryValueExW(getHandle(), pszName, NULL, &type, (LPBYTE)pBuffer, &bytes) == ERROR_SUCCESS) && (type == REG_BINARY))
-			{
-				return pBuffer;
-			}
-		}
-	}
-
-	return NULL;
-}
-
-bool Registry::setInteger(const wchar_t *pszName, int nValue)
-{
-	if (isReady())
-	{
-		return RegSetValueExW(getHandle(), pszName, 0, REG_DWORD, (const BYTE *)&nValue, sizeof(nValue)) == ERROR_SUCCESS;
 	}
 
 	return false;
 }
 
-bool Registry::setFloat(const wchar_t *pszName, double fValue)
+bool Registry::GetBinary(const wchar_t *name, void *value, size_t bytes) const
 {
-	return setBinary(pszName, &fValue, sizeof(fValue));
+	if (IsReady())
+	{
+		DWORD dw_bytes, type;
+
+		if (SIZETToDWord(bytes, &dw_bytes) == S_OK)
+		{
+			if ((RegQueryValueExW(GetHandle(), name, NULL, &type, (LPBYTE)value, &dw_bytes) == ERROR_SUCCESS) && (type == REG_BINARY))
+			{
+				return true;
+			}
+		}
+	}
+
+	return false;
 }
 
-bool Registry::setBool(const wchar_t *pszName, bool bValue)
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+bool Registry::SetInt(const wchar_t *name, int value)
 {
-	return setInteger(pszName, bValue);
+	if (IsReady())
+		return RegSetValueExW(GetHandle(), name, 0, REG_DWORD, (const BYTE *)&value, sizeof(value)) == ERROR_SUCCESS;
+
+	return false;
 }
 
-bool Registry::setString(const wchar_t *pszName, const char *pszString)
+bool Registry::SetFloat(const wchar_t *name, double value)
 {
-	return setString(pszName, StrW(pszString));
+	return SetBinary(name, &value, sizeof(value));
 }
 
-bool Registry::setString(const wchar_t *pszName, const wchar_t *pszString)
+bool Registry::SetBool(const wchar_t *name, bool value)
 {
-	if (isReady())
+	return SetInt(name, value);
+}
+
+bool Registry::SetString(const wchar_t *name, const char *value)
+{
+	return SetString(name, StrW(value));
+}
+
+bool Registry::SetString(const wchar_t *name, const wchar_t *value)
+{
+	if (IsReady())
 	{
 		size_t st_bytes;
-		DWORD bytes;
+		DWORD dw_bytes;
 
-		if ((SizeTMult(pszString ? (wcslen(pszString) + 1) : 0, sizeof(wchar_t), &st_bytes) == S_OK) &&
-			(SIZETToDWord(st_bytes, &bytes) == S_OK))
+		if ((SizeTMult(value ? (wcslen(value) + 1) : 0, sizeof(wchar_t), &st_bytes) == S_OK) &&
+			(SIZETToDWord(st_bytes, &dw_bytes) == S_OK))
 		{
-			return RegSetValueExW(getHandle(), pszName, 0, REG_SZ, (const BYTE *)pszString, bytes) == ERROR_SUCCESS;
+			return RegSetValueExW(GetHandle(), name, 0, REG_SZ, (const BYTE *)value, dw_bytes) == ERROR_SUCCESS;
 		}
 	}
 
 	return false;
 }
 
-bool Registry::setBinary(const wchar_t *pszName, const void *pData, size_t nBytes)
+bool Registry::SetBinary(const wchar_t *name, const void *value, size_t bytes)
 {
-	if (isReady())
+	if (IsReady())
 	{
-		DWORD bytes;
+		DWORD dw_bytes;
 
-		if (SIZETToDWord(nBytes, &bytes) == S_OK)
+		if (SIZETToDWord(bytes, &dw_bytes) == S_OK)
 		{
-			return RegSetValueExW(getHandle(), pszName, 0, REG_BINARY, (const BYTE *)pData, bytes) == ERROR_SUCCESS;
+			return RegSetValueExW(GetHandle(), name, 0, REG_BINARY, (const BYTE *)value, dw_bytes) == ERROR_SUCCESS;
 		}
 	}
 
 	return false;
 }
 
-bool Registry::deleteValue(const wchar_t *pszName)
+bool Registry::Delete(const wchar_t *name)
 {
-	if (isReady())
+	if (IsReady())
 	{
-		return RegDeleteValueW(getHandle(), pszName) == ERROR_SUCCESS;
+		return RegDeleteValueW(GetHandle(), name) == ERROR_SUCCESS;
 	}
 
 	return false;
-}
-
-bool Registry::isReady() const
-{
-	return getHandle() != NULL;
-}
-
-HKEY Registry::getHandle() const
-{
-	return h;
 }
