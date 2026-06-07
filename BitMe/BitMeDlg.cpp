@@ -836,7 +836,7 @@ bool CBitMeDlgCfgSerialiser::Retrieve(CBitMeDlgCfg &Cfg, const Configuration &c)
 	if (!c.GetBool(L"bDataRate", Cfg.bDataRate))		Cfg.bDataRate = def.bDataRate;
 	if (!c.GetBool(L"bCustomSize", Cfg.bCustomSize))	Cfg.bCustomSize = def.bCustomSize;
 	if (!c.GetBool(L"bOverhead", Cfg.bOverhead))		Cfg.bOverhead = def.bOverhead;
-	Cfg.sContainer = c.GetString(L"sContainer", w, sizeof(w) / sizeof(w[0])) ? w : def.sContainer;
+	if (!c.GetString(L"sContainer", Cfg.sContainer))	Cfg.sContainer = def.sContainer;
 	if (!c.GetInt(L"nVideo", Cfg.nVideo))				Cfg.nVideo = def.nVideo;
 	if (!c.GetInt(L"nAudio", Cfg.nAudio))				Cfg.nAudio = def.nAudio;
 	if (!c.GetInt(L"nTime", Cfg.nTime))					Cfg.nTime = def.nTime;

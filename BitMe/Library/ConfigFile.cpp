@@ -140,6 +140,11 @@ bool ConfigFile::GetString(const wchar_t *name, wchar_t *value, size_t size) con
 	return false;
 }
 
+bool ConfigFile::GetString(const wchar_t *name, String &value) const
+{
+	return get(name, value);
+}
+
 bool ConfigFile::GetBinary(const wchar_t *name, void *value, size_t bytes) const
 {
 	return false;
@@ -171,6 +176,11 @@ bool ConfigFile::SetString(const wchar_t *name, const char *value)
 bool ConfigFile::SetString(const wchar_t *name, const wchar_t *value)
 {
 	return put(name, value);
+}
+
+bool ConfigFile::SetString(const wchar_t *name, const String &value)
+{
+	return put(name, value.c_str());
 }
 
 bool ConfigFile::SetBinary(const wchar_t *name, const void *value, size_t bytes)

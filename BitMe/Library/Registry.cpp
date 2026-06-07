@@ -177,6 +177,11 @@ bool Registry::GetString(const wchar_t *name, wchar_t *value, size_t size) const
 	return false;
 }
 
+bool Registry::GetString(const wchar_t *name, String &value) const
+{
+	return false;
+}
+
 bool Registry::GetBinary(const wchar_t *name, void *value, size_t bytes) const
 {
 	if (IsReady())
@@ -235,6 +240,11 @@ bool Registry::SetString(const wchar_t *name, const wchar_t *value)
 		}
 	}
 
+	return false;
+}
+
+bool Registry::SetString(const wchar_t *name, const String &value)
+{
 	return false;
 }
 
