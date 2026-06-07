@@ -3,7 +3,6 @@
 
 #include <windows.h>
 #include "Library\String.h"
-#include "Library\Types.h"
 
 void SetWindowInt2(HWND hWnd, int x);
 void SetWindowInt4(HWND hWnd, int x);
