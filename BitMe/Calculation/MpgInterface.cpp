@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "MpgInterface.h"
 
-String MpgInterface::getName() const
+const wchar_t *MpgInterface::getName() const
 {
 	return (L"MPG");
 }

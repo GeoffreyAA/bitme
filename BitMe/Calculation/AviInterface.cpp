@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "AviInterface.h"
 
-String AviInterface::getName() const
+const wchar_t *AviInterface::getName() const
 {
 	return (L"AVI");
 }

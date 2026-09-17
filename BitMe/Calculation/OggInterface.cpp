@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "OggInterface.h"
 
-String OggInterface::getName() const
+const wchar_t *OggInterface::getName() const
 {
 	return (L"OGV");
 }

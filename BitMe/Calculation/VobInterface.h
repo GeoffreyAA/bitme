@@ -6,7 +6,7 @@
 class VobInterface : public ContainerInterface
 {
 public:
-	String getName() const;
+	const wchar_t *getName() const;
 	double getOverheadFull(double v, double a, double t) const;
 	double getOverheadNoAudio(double v, double t) const;
 };

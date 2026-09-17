@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Mp4Interface.h"
 
-String Mp4Interface::getName() const
+const wchar_t *Mp4Interface::getName() const
 {
 	return (L"MP4/MOV/3GP");
 }

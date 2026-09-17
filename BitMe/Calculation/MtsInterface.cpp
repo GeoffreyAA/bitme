@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "MtsInterface.h"
 
-String MtsInterface::getName() const
+const wchar_t *MtsInterface::getName() const
 {
 	return (L"MPEG-TS");
 }

@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "FlvInterface.h"
 
-String FlvInterface::getName() const
+const wchar_t *FlvInterface::getName() const
 {
 	return (L"FLV");
 }

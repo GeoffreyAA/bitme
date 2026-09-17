@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "MatroskaInterface.h"
 
-String MatroskaInterface::getName() const
+const wchar_t *MatroskaInterface::getName() const
 {
 	return (L"Matroska/WebM");
 }

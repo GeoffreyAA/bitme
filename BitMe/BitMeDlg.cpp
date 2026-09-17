@@ -286,9 +286,9 @@ void CBitMeDlg::SetupControls()
 
 #if 1
 
-	Font1.Create(L"MS Sans Serif", 10, true);
+	Font1.Create(L"MS Sans Serif", 10, FW_BOLD);
 	Font2.Create(L"Arial", 10);
-	Font3.Create(L"MS Sans Serif", 12, true);
+	Font3.Create(L"MS Sans Serif", 12, FW_BOLD);
 
 	/*
 	Font1.Create(L"Arial", 9);
@@ -436,7 +436,7 @@ void CBitMeDlg::UpdateControls()
 
 	// Calculation Menu
 	SetMenuItemCheck(::GetMenu(GetSafeHwnd()), ID_CALCULATION_OVERHEAD, Model.isOverheadEnabled());
-	SelectContainer(Model.getContainer().getName().c_str());
+	SelectContainer(Model.getContainer().getName());
 	EnableContainersAndFormats(Model.isOverheadEnabled());
 }
 
@@ -829,7 +829,6 @@ bool CBitMeDlgCfgSerialiser::Save(const CBitMeDlgCfg &Cfg, Configuration &c) con
 bool CBitMeDlgCfgSerialiser::Retrieve(CBitMeDlgCfg &Cfg, const Configuration &c) const
 {
 	const CBitMeDlgCfg def;
-	wchar_t w[64];
 
 	if (!c.GetBool(L"bVideo", Cfg.bVideo))				Cfg.bVideo = def.bVideo;
 	if (!c.GetBool(L"bAudio", Cfg.bAudio))				Cfg.bAudio = def.bAudio;

@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "RmInterface.h"
 
-String RmInterface::getName() const
+const wchar_t *RmInterface::getName() const
 {
 	return (L"RM");
 }

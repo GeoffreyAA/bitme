@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "MxfInterface.h"
 
-String MxfInterface::getName() const
+const wchar_t *MxfInterface::getName() const
 {
 	return (L"MXF");
 }

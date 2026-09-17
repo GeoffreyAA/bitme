@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "M2tsInterface.h"
 
-String M2tsInterface::getName() const
+const wchar_t *M2tsInterface::getName() const
 {
 	return (L"M2TS");
 }

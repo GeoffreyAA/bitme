@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "TestInterface.h"
 
-String TestInterface::getName() const
+const wchar_t *TestInterface::getName() const
 {
 	return (L"== Test ==");
 }

@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "AsfInterface.h"
 
-String AsfInterface::getName() const
+const wchar_t *AsfInterface::getName() const
 {
 	return (L"ASF/WMV");
 }

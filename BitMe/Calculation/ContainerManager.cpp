@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "ContainerManager.h"
-
 #include "AsfInterface.h"
 #include "AviInterface.h"
 #include "FlvInterface.h"
@@ -14,7 +13,9 @@
 #include "RmInterface.h"
 #include "VobInterface.h"
 
+#ifdef _DEBUG
 #include "TestInterface.h"
+#endif
 
 StringList ContainerManager::GetAvailableContainers()
 {
@@ -33,30 +34,34 @@ StringList ContainerManager::GetAvailableContainers()
 	s.push_back(RmInterface().getName());
 	s.push_back(VobInterface().getName());
 
-	//s.push_back(TestInterface().getName());
+#ifdef _DEBUG
+	s.push_back(TestInterface().getName());
+#endif
 
-	return (s);
+	return s;
 }
 
 ContainerInterface *ContainerManager::CreateContainer(const wchar_t *pszName)
 {
 	if (pszName)
 	{
-		if (!wcscmp(pszName, AsfInterface().getName().c_str()))			return (new AsfInterface);
-		if (!wcscmp(pszName, AviInterface().getName().c_str()))			return (new AviInterface);
-		if (!wcscmp(pszName, FlvInterface().getName().c_str()))			return (new FlvInterface);
-		if (!wcscmp(pszName, MatroskaInterface().getName().c_str()))	return (new MatroskaInterface);
-		if (!wcscmp(pszName, Mp4Interface().getName().c_str()))			return (new Mp4Interface);
-		if (!wcscmp(pszName, MpgInterface().getName().c_str()))			return (new MpgInterface);
-		if (!wcscmp(pszName, MtsInterface().getName().c_str()))			return (new MtsInterface);
-		if (!wcscmp(pszName, M2tsInterface().getName().c_str()))		return (new M2tsInterface);
-		if (!wcscmp(pszName, MxfInterface().getName().c_str()))			return (new MxfInterface);
-		if (!wcscmp(pszName, OggInterface().getName().c_str()))			return (new OggInterface);
-		if (!wcscmp(pszName, RmInterface().getName().c_str()))			return (new RmInterface);
-		if (!wcscmp(pszName, VobInterface().getName().c_str()))			return (new VobInterface);
+		if (!wcscmp(pszName, AsfInterface().getName()))			return new AsfInterface;
+		if (!wcscmp(pszName, AviInterface().getName()))			return new AviInterface;
+		if (!wcscmp(pszName, FlvInterface().getName()))			return new FlvInterface;
+		if (!wcscmp(pszName, MatroskaInterface().getName()))	return new MatroskaInterface;
+		if (!wcscmp(pszName, Mp4Interface().getName()))			return new Mp4Interface;
+		if (!wcscmp(pszName, MpgInterface().getName()))			return new MpgInterface;
+		if (!wcscmp(pszName, MtsInterface().getName()))			return new MtsInterface;
+		if (!wcscmp(pszName, M2tsInterface().getName()))		return new M2tsInterface;
+		if (!wcscmp(pszName, MxfInterface().getName()))			return new MxfInterface;
+		if (!wcscmp(pszName, OggInterface().getName()))			return new OggInterface;
+		if (!wcscmp(pszName, RmInterface().getName()))			return new RmInterface;
+		if (!wcscmp(pszName, VobInterface().getName()))			return new VobInterface;
 
-		//if (!wcscmp(pszName, TestInterface().getName().c_str()))		return (new TestInterface);
+#ifdef _DEBUG
+		if (!wcscmp(pszName, TestInterface().getName()))		return new TestInterface;
+#endif
 	}
 
-	return (NULL);
+	return NULL;
 }

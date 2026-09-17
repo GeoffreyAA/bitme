@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "VobInterface.h"
 
-String VobInterface::getName() const
+const wchar_t *VobInterface::getName() const
 {
 	return (L"VOB");
 }

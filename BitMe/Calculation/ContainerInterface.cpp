@@ -5,7 +5,7 @@ ContainerInterface::~ContainerInterface()
 {
 }
 
-String ContainerInterface::getName() const
+const wchar_t *ContainerInterface::getName() const
 {
 	return (L"");
 }
