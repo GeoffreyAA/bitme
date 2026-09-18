@@ -21,6 +21,7 @@ void SetWindowPosition(HWND hWnd, int x, int y);
 void CenterWindow(HWND hWnd, HWND hRel = NULL);
 double GetWindowFloat(HWND hWnd);
 void SetWindowFloat(HWND hWnd, double x, const wchar_t *pszFormat = L"%.16g");
+void SetWindowFloatDG(HWND hWnd, double x, bool bGroup);
 int GetWindowInt(HWND hWnd);
 void SetWindowInt(HWND hWnd, int x);
 bool GetDlgItemChecked(HWND hDlg, int nID);
@@ -44,7 +45,9 @@ enum MsgType { MSG_INFORMATION, MSG_EXCLAMATION, MSG_ERROR };
 int MsgBox(const wchar_t *pszMessage = NULL, const wchar_t *pszTitle = NULL, HWND hOwner = NULL, MsgType t = MSG_INFORMATION);
 
 // Font
-HFONT CreatePointFont(const wchar_t *pszName = NULL, int nPointSize = 10, bool bBold = false, bool bItalic = false, bool bUnderline = false, bool bStrikeOut = false);
+HFONT CreatePointFont(const wchar_t *pszName = NULL, int nPointSize = 10, int nWeight = FW_NORMAL, bool bItalic = false, bool bUnderline = false, bool bStrikeOut = false);
+int FontPointToLogicalSize(int PS);
+int FontLogicalToPointSize(int LU);
 
 // HTML Help
 //bool HtmlHelp(const wchar_t *pszFile, const wchar_t *pszPage = NULL, HWND hOwner = NULL);

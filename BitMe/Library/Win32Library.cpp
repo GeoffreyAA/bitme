@@ -126,6 +126,18 @@ void SetWindowFloat(HWND hWnd, double x, const wchar_t *pszFormat)
 	SetWindowTextW(hWnd, c);
 }
 
+void SetWindowFloatDG(HWND hWnd, double x, bool bGroup)
+{
+	wchar_t c[256];
+
+	swprintf(c, sizeof(c) / sizeof(c[0]), L"%.16g", x);
+
+	if (bGroup)
+		FormatNumber(c, sizeof(c) / sizeof(c[0]), L".", L",", 3);
+
+	SetWindowTextW(hWnd, c);
+}
+
 int GetWindowInt(HWND hWnd)
 {
 	wchar_t c[512];
@@ -352,14 +364,12 @@ int MsgBox(const wchar_t *pszMessage, const wchar_t *pszTitle, HWND hOwner, MsgT
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-HFONT CreatePointFont(const wchar_t *pszName, int nPointSize, bool bBold, bool bItalic, bool bUnderline, bool bStrikeOut)
+HFONT CreatePointFont(const wchar_t *pszName, int nPointSize, int nWeight, bool bItalic, bool bUnderline, bool bStrikeOut)
 {
 	wchar_t s[32] = L"";
 
 	if (pszName)
-	{
 		wcscpys(s, sizeof(s) / sizeof(s[0]), pszName);
-	}
 
 	HDC hDC = GetDC(NULL);
 
@@ -369,7 +379,7 @@ HFONT CreatePointFont(const wchar_t *pszName, int nPointSize, bool bBold, bool b
 						  0,
 						  0,
 						  0,
-						  bBold ? FW_BOLD : FW_NORMAL,
+						  nWeight, /*bBold ? FW_BOLD : FW_NORMAL*/
 						  bItalic,
 						  bUnderline,
 						  bStrikeOut,
@@ -383,6 +393,32 @@ HFONT CreatePointFont(const wchar_t *pszName, int nPointSize, bool bBold, bool b
 	ReleaseDC(NULL, hDC);
 
 	return (h);
+}
+
+int FontPointToLogicalSize(int PS)
+{
+	HDC hDC = GetDC(NULL);
+
+	if (!hDC) return 0;
+
+	int LU = -MulDiv(PS, GetDeviceCaps(hDC, LOGPIXELSY), 72);
+
+	ReleaseDC(NULL, hDC);
+
+	return LU;
+}
+
+int FontLogicalToPointSize(int LU)
+{
+	HDC hDC = GetDC(NULL);
+
+	if (!hDC) return 0;
+
+	int PS = -MulDiv(LU, 72, GetDeviceCaps(hDC, LOGPIXELSY));
+
+	ReleaseDC(NULL, hDC);
+
+	return PS;
 }
 
 

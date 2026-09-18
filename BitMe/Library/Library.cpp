@@ -85,6 +85,43 @@ wchar_t *FloatToStr(double x, wchar_t *c, size_t cbSize, const wchar_t *Format)
 	return (c);
 }
 
+wchar_t *FormatNumber(wchar_t *number, size_t size, const wchar_t *decimal, const wchar_t *seperator, size_t seperator_length)
+{
+	if (number && decimal && seperator && seperator_length)
+	{
+		wchar_t *dec = wcsstr(number, decimal);
+
+		size_t wall = (dec && dec != number) ? (dec - number) : wcslen(number);
+
+		while (seperator_length < wall)
+		{
+			wall -= seperator_length;
+
+			if (iswdigit(number[wall - 1]))
+				StringInsert(number, size, seperator, wall);
+		}
+	}
+
+	return number;
+}
+
+wchar_t *StringInsert(wchar_t *dst, size_t size, const wchar_t *src, size_t i)
+{
+	if (dst && src && *src)
+	{
+		const size_t dst_len = wcslen(dst);
+		const size_t src_len = wcslen(src);
+
+		if ((i <= dst_len) && ((dst_len + src_len) < size))
+		{
+			memmove(dst + i + src_len, dst + i, (dst_len - i + 1) * sizeof(wchar_t));
+			memcpy(dst + i, src, src_len * sizeof(wchar_t));
+		}
+	}
+
+	return dst;
+}
+
 wchar_t *StringDelete(wchar_t *s, size_t i)
 {
 	if (s)

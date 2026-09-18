@@ -23,7 +23,7 @@ const wchar_t *GetCompilerName()
 {
 	return (
 
-#if _MSC_VER >= 9999
+#if _MSC_VER >= 1950
 		L"Visual Studio 2026"
 
 #elif _MSC_VER >= 1930

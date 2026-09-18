@@ -179,6 +179,14 @@ bool Registry::GetString(const wchar_t *name, wchar_t *value, size_t size) const
 
 bool Registry::GetString(const wchar_t *name, String &value) const
 {
+	wchar_t w[256];
+
+	if (GetString(name, w, sizeof(w) / sizeof(w[0])))
+	{
+		value = w;
+		return true;
+	}
+
 	return false;
 }
 
@@ -245,7 +253,7 @@ bool Registry::SetString(const wchar_t *name, const wchar_t *value)
 
 bool Registry::SetString(const wchar_t *name, const String &value)
 {
-	return false;
+	return SetString(name, value.c_str());
 }
 
 bool Registry::SetBinary(const wchar_t *name, const void *value, size_t bytes)
