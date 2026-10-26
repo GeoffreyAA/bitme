@@ -47,8 +47,13 @@ bld/
 [Ll]og/
 [Ll]ogs/
 
+Include/
+
 Build/
 Build.c
+
+__Release__/
+*.zip
 
 # Build results on 'Bin' directories
 **/[Bb]in/*
@@ -429,3 +434,6 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+
+# Development certificate
+*.pfx

@@ -1,7 +1,7 @@
-Version 3.6.xxx (October 26, 2026)
+Version 3.6.223 (October 26, 2026)
 
 - Added opening of new instance
-- Re-added opening of Calculator
+- Restored opening of Calculator
 - Added decimals to hours and minutes
 - Select all text in most edit controls on Enter or focus
 - Restored classic red colour, lighter than present one
@@ -9,8 +9,10 @@ Version 3.6.xxx (October 26, 2026)
 - Save configuration when closing program with Esc
 - Removed Readme.txt from release; F1 now opens home page
 - Reorganised English.lng
-- Updated libraries
+- Updated library code
 - Compiled at C++20 level, and C++17 for XP build
+
+The biggest changes were "underneath the bonnet," particularly the shared library code from Weights & Measures.
 
 
 Version 3.5.183 (March 8, 2026)

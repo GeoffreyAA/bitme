@@ -16,8 +16,8 @@ copy	"Build\x64\Release\%bin_name%.exe" "%dst%"
 
 copy	"Licence.txt"     "%dst%"
 copy	"Log.txt"         "%dst%"
-copy	"Readme.md"       "%dst%"
-rename	"%dst%\Readme.md" "Readme.txt"
+::copy	"Readme.md"       "%dst%"
+::rename	"%dst%\Readme.md" "Readme.txt"
 
 copy	"Languages" "%dst%\Languages"
 
