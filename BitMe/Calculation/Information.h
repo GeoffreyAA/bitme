@@ -1,39 +1,41 @@
 #ifndef __INFORMATION_H__
 #define __INFORMATION_H__
 
+#include "..\Library\Decimal.h"
+
 class Information
 {
 public:
-	Information(double nBits = 0.0);
+	Information(Decimal nBits = DEC_LIT(0.0));
 
-	double getBits() const;
-	double getBytes() const;
-	double getKB() const;
-	double getMB() const;
-	double getGB() const;
-	double getTB() const;
-	double getPB() const;
-	double getEB() const;
-	double getZB() const;
-	double getYB() const;
-	double getRB() const;
-	double getQB() const;
+	Decimal getBits() const;
+	Decimal getBytes() const;
+	Decimal getKB() const;
+	Decimal getMB() const;
+	Decimal getGB() const;
+	Decimal getTB() const;
+	Decimal getPB() const;
+	Decimal getEB() const;
+	Decimal getZB() const;
+	Decimal getYB() const;
+	Decimal getRB() const;
+	Decimal getQB() const;
 
-	void setBits(double x);
-	void setBytes(double x);
-	void setKB(double x);
-	void setMB(double x);
-	void setGB(double x);
-	void setTB(double x);
-	void setPB(double x);
-	void setEB(double x);
-	void setZB(double x);
-	void setYB(double x);
-	void setRB(double x);
-	void setQB(double x);
+	void setBits(Decimal x);
+	void setBytes(Decimal x);
+	void setKB(Decimal x);
+	void setMB(Decimal x);
+	void setGB(Decimal x);
+	void setTB(Decimal x);
+	void setPB(Decimal x);
+	void setEB(Decimal x);
+	void setZB(Decimal x);
+	void setYB(Decimal x);
+	void setRB(Decimal x);
+	void setQB(Decimal x);
 
 private:
-	double bits;
+	Decimal bits;
 };
 
 #endif

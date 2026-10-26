@@ -193,21 +193,37 @@ void CResCalcDlg::OnReturnKey()
 		{
 			case IDC_EDIT1:
 				OnChangeWidth();
+				SelectEditText(Width.GetSafeHwnd());
 				break;
 
 			case IDC_EDIT2:
 				OnChangeHeight();
+				SelectEditText(Height.GetSafeHwnd());
 				break;
 
 			case IDC_EDIT3:
 				OnChangeAspectX();
+				SelectEditText(AspectX.GetSafeHwnd());
 				break;
 
 			case IDC_EDIT4:
 				OnChangeAspectY();
+				SelectEditText(AspectY.GetSafeHwnd());
 				break;
 		}
 	}
+}
+
+BOOL CResCalcDlg::OnCommand(WPARAM wParam, LPARAM lParam)
+{
+	switch (HIWORD(wParam))
+	{
+		case EN_SETFOCUS:
+			SelectEditText((HWND)lParam);
+			break;
+	}
+
+	return CDialog::OnCommand(wParam, lParam);
 }
 
 BOOL CResCalcDlg::OnHelpInfo(HELPINFO *pHelpInfo)

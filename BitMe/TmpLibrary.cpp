@@ -38,14 +38,14 @@ void SetWindowInt4(HWND hWnd, int x)
 	SetWindowTextW(hWnd, c);
 }
 
-void SetWindowFloat2(HWND hWnd, double x, const wchar_t *pszFormat)
+void SetWindowFloat2(HWND hWnd, double x, const wchar_t *pszFormat, bool bGroup)
 {
 	wchar_t c[256];
 	wchar_t Formatted[256];
 
 	swprintf(c, sizeof(c) / sizeof(c[0]), pszFormat, x);
 
-	if (GetNumberFormat(LOCALE_USER_DEFAULT, 0, c, NULL, Formatted, sizeof(Formatted) / sizeof(Formatted[0])))
+	if (bGroup && GetNumberFormat(LOCALE_USER_DEFAULT, 0, c, NULL, Formatted, sizeof(Formatted) / sizeof(Formatted[0])))
 	{
 		SetWindowTextW(hWnd, Formatted);
 	}

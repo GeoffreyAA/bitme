@@ -26,6 +26,7 @@ public:
 	virtual BOOL PreTranslateMessage(MSG *pMsg);
 	protected:
 	virtual void DoDataExchange(CDataExchange *pDX);
+	virtual BOOL OnCommand(WPARAM wParam, LPARAM lParam);
 	//}}AFX_VIRTUAL
 
 protected:

@@ -97,13 +97,17 @@
 #define ID_CALCULATION_CONTAINER13      32833
 #define ID_CALCULATION_CONTAINER14      32834
 #define ID_TOOLS_ABOUT                  32835
+#define ID_TOOLS_INSTANCE               32836
+#define ID_TOOLS_CALCULATOR32837        32837
+#define ID_TOOLS_COLOURS                32838
+#define ID_TOOLS_GROUPING               32839
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        135
-#define _APS_NEXT_COMMAND_VALUE         32836
+#define _APS_NEXT_COMMAND_VALUE         32840
 #define _APS_NEXT_CONTROL_VALUE         1057
 #define _APS_NEXT_SYMED_VALUE           106
 #endif

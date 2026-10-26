@@ -18,7 +18,7 @@ void SetWindowSize(HWND hWnd, int w, int h);
 void SetWindowWidth(HWND hWnd, int w);
 void SetWindowHeight(HWND hWnd, int h);
 void SetWindowPosition(HWND hWnd, int x, int y);
-void CenterWindow(HWND hWnd, HWND hRel = NULL);
+void CentreWindow(HWND hWnd, HWND hRel = NULL);
 double GetWindowFloat(HWND hWnd);
 void SetWindowFloat(HWND hWnd, double x, const wchar_t *pszFormat = L"%.16g");
 void SetWindowFloatDG(HWND hWnd, double x, bool bGroup);
@@ -27,6 +27,7 @@ void SetWindowInt(HWND hWnd, int x);
 bool GetDlgItemChecked(HWND hDlg, int nID);
 void SetDlgItemCheck(HWND hDlg, int nID, bool bCheck);
 void SetWindowFont(HWND hWnd, HFONT hFont);
+void SelectEditText(HWND hEdit);
 
 // Menu
 void SetMenuString(HMENU hMenu, UINT uID, const wchar_t *pszString);
@@ -50,7 +51,7 @@ int FontPointToLogicalSize(int PS);
 int FontLogicalToPointSize(int LU);
 
 // HTML Help
-//bool HtmlHelp(const wchar_t *pszFile, const wchar_t *pszPage = NULL, HWND hOwner = NULL);
+//bool HtmlHelp2(const wchar_t *pszFile, const wchar_t *pszPage = NULL, HWND hOwner = NULL);
 
 // Other
 bool GetDateTimeFormatted(wchar_t *pszBuffer, size_t cbSize, const SYSTEMTIME *st = NULL);
@@ -60,7 +61,9 @@ bool TimeToSystemTimeLocal(time_t t, SYSTEMTIME *st);
 bool ShellOpen(const wchar_t *pszFile, HWND hOwner);
 bool GetOpenFileNameDlg(wchar_t *pszBuffer, size_t cbSize, HWND hOwner = NULL, const wchar_t *pszTitle = NULL, const wchar_t *pszFilter = NULL);
 bool GetSaveFileNameDlg(wchar_t *pszBuffer, size_t cbSize, HWND hOwner = NULL, const wchar_t *pszTitle = NULL, const wchar_t *pszFilter = NULL, const wchar_t *pszDefExt = NULL);
+bool GetExecutablePath(wchar_t *pszBuffer, size_t cbSize);
 bool GetProgramPath(wchar_t *pszBuffer, size_t cbSize);
+bool FileExists(const wchar_t *pszFilePath);
 
 class ApplicationFile
 {

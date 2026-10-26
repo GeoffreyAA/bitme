@@ -6,7 +6,7 @@
 
 void SetWindowInt2(HWND hWnd, int x);
 void SetWindowInt4(HWND hWnd, int x);
-void SetWindowFloat2(HWND hWnd, double x, const wchar_t *pszFormat);
+void SetWindowFloat2(HWND hWnd, double x, const wchar_t *pszFormat, bool bGroup);
 void SetWindowTextRange(HWND hWnd, int x, const wchar_t *pszString);
 
 double BitsToKilobits(double x);

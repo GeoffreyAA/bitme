@@ -152,6 +152,7 @@
       <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <PreLinkEvent>
       <Command>"$(OutDir)Radiance.exe"
@@ -206,6 +207,7 @@ cl /nologo /c /Zl /Fo"$(OutDir)\" Build.c</Command>
       <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <PreLinkEvent>
       <Command>"$(OutDir)Radiance.exe"
@@ -258,6 +260,7 @@ cl /nologo /c /Zl /Fo"$(OutDir)\" Build.c</Command>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <WholeProgramOptimization>true</WholeProgramOptimization>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <PreLinkEvent>
       <Command>"$(OutDir)Radiance.exe"
@@ -313,6 +316,7 @@ cl /nologo /c /Zl /Fo"$(OutDir)\" Build.c</Command>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <EnableEnhancedInstructionSet>NoExtensions</EnableEnhancedInstructionSet>
       <WholeProgramOptimization>true</WholeProgramOptimization>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <PreLinkEvent>
       <Command>"$(OutDir)Radiance.exe"
@@ -367,6 +371,7 @@ cl /nologo /c /Zl /Fo"$(OutDir)\" Build.c</Command>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <WholeProgramOptimization>true</WholeProgramOptimization>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <PreLinkEvent>
       <Command>"$(OutDir)Radiance.exe"
@@ -420,6 +425,7 @@ cl /nologo /c /Zl /Fo"$(OutDir)\" Build.c</Command>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <WholeProgramOptimization>true</WholeProgramOptimization>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <PreLinkEvent>
       <Command>"$(OutDir)Radiance.exe"
@@ -479,7 +485,9 @@ cl /nologo /c /Zl /Fo"$(OutDir)\" Build.c</Command>
     <ClCompile Include="Calculation\VobInterface.cpp" />
     <ClCompile Include="Library\Alloc.cpp" />
     <ClCompile Include="Library\Base64.cpp" />
+    <ClCompile Include="Library\ConfigConcrete.cpp" />
     <ClCompile Include="Library\ConfigFile.cpp" />
+    <ClCompile Include="Library\Decimal.cpp" />
     <ClCompile Include="Library\File.cpp" />
     <ClCompile Include="Library\FilePointer.cpp" />
     <ClCompile Include="Library\Font.cpp" />
@@ -544,8 +552,10 @@ cl /nologo /c /Zl /Fo"$(OutDir)\" Build.c</Command>
     <ClInclude Include="Library\Alloc.h" />
     <ClInclude Include="Library\array.h" />
     <ClInclude Include="Library\Base64.h" />
+    <ClInclude Include="Library\ConfigConcrete.h" />
     <ClInclude Include="Library\ConfigFile.h" />
     <ClInclude Include="Library\Configuration.h" />
+    <ClInclude Include="Library\Decimal.h" />
     <ClInclude Include="Library\File.h" />
     <ClInclude Include="Library\FilePointer.h" />
     <ClInclude Include="Library\Font.h" />

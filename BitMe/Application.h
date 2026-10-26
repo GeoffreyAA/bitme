@@ -10,7 +10,8 @@ int GetBuildNumber();
 time_t GetBuildTime();
 const wchar_t *GetCopyright();
 const wchar_t *GetRegistryKey();
-const wchar_t *GetHelpFileName();
+const wchar_t *GetHelpFile();
 const wchar_t *GetURL();
+bool IsApplicationPortable();
 
 #endif

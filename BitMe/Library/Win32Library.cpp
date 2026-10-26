@@ -16,52 +16,52 @@ int GetWindowWidth(HWND hWnd)
 {
 	RECT r;
 
-	return (GetWindowRect(hWnd, &r) ? (r.right - r.left) : 0);
+	return GetWindowRect(hWnd, &r) ? (r.right - r.left) : 0;
 }
 
 int GetWindowHeight(HWND hWnd)
 {
 	RECT r;
 
-	return (GetWindowRect(hWnd, &r) ? (r.bottom - r.top) : 0);
+	return GetWindowRect(hWnd, &r) ? (r.bottom - r.top) : 0;
 }
 
 int GetWindowLeft(HWND hWnd)
 {
 	RECT r;
 
-	return (GetWindowRect(hWnd, &r) ? r.left : 0);
+	return GetWindowRect(hWnd, &r) ? r.left : 0;
 }
 
 int GetWindowRight(HWND hWnd)
 {
 	RECT r;
 
-	return (GetWindowRect(hWnd, &r) ? r.right : 0);
+	return GetWindowRect(hWnd, &r) ? r.right : 0;
 }
 
 int GetWindowTop(HWND hWnd)
 {
 	RECT r;
 
-	return (GetWindowRect(hWnd, &r) ? r.top : 0);
+	return GetWindowRect(hWnd, &r) ? r.top : 0;
 }
 
 int GetWindowBottom(HWND hWnd)
 {
 	RECT r;
 
-	return (GetWindowRect(hWnd, &r) ? r.bottom : 0);
+	return GetWindowRect(hWnd, &r) ? r.bottom : 0;
 }
 
 int GetDesktopWidth()
 {
-	return (GetWindowWidth(GetDesktopWindow()));
+	return GetWindowWidth(GetDesktopWindow());
 }
 
 int GetDesktopHeight()
 {
-	return (GetWindowHeight(GetDesktopWindow()));
+	return GetWindowHeight(GetDesktopWindow());
 }
 
 void SetWindowSize(HWND hWnd, int w, int h)
@@ -84,7 +84,7 @@ void SetWindowPosition(HWND hWnd, int x, int y)
 	SetWindowPos(hWnd, NULL, x, y, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
 }
 
-void CenterWindow(HWND hWnd, HWND hRel)
+void CentreWindow(HWND hWnd, HWND hRel)
 {
 	if (hWnd)
 	{
@@ -104,24 +104,24 @@ double GetWindowFloat(HWND hWnd)
 {
 	wchar_t c[512];
 
-	if (GetWindowTextW(hWnd, c, sizeof(c) / sizeof(c[0])))
+	if (GetWindowTextW(hWnd, c, _countof(c)))
 	{
 		if (!IsNumber(c))
 		{
 			RemoveNonNbrs(c);
 		}
 
-		return (wcstod(c, NULL));
+		return wcstod(c, NULL);
 	}
 
-	return (0.0);
+	return 0.0;
 }
 
 void SetWindowFloat(HWND hWnd, double x, const wchar_t *pszFormat)
 {
 	wchar_t c[256];
 
-	swprintf(c, sizeof(c) / sizeof(c[0]), pszFormat, x);
+	swprintf(c, _countof(c), pszFormat, x);
 
 	SetWindowTextW(hWnd, c);
 }
@@ -130,10 +130,10 @@ void SetWindowFloatDG(HWND hWnd, double x, bool bGroup)
 {
 	wchar_t c[256];
 
-	swprintf(c, sizeof(c) / sizeof(c[0]), L"%.16g", x);
+	swprintf(c, _countof(c), L"%.16g", x);
 
 	if (bGroup)
-		FormatNumber(c, sizeof(c) / sizeof(c[0]), L".", L",", 3);
+		FormatNumber(c, _countof(c), L".", L",", 3);
 
 	SetWindowTextW(hWnd, c);
 }
@@ -142,31 +142,31 @@ int GetWindowInt(HWND hWnd)
 {
 	wchar_t c[512];
 
-	if (GetWindowTextW(hWnd, c, sizeof(c) / sizeof(c[0])))
+	if (GetWindowTextW(hWnd, c, _countof(c)))
 	{
 		if (!IsNumber(c))
 		{
 			RemoveNonNbrs(c);
 		}
 
-		return (_wtoi(c));
+		return _wtoi(c);
 	}
 
-	return (0);
+	return 0;
 }
 
 void SetWindowInt(HWND hWnd, int x)
 {
 	wchar_t c[64];
 
-	IntToStr(x, c, sizeof(c) / sizeof(c[0]));
+	IntToStr(x, c, _countof(c));
 
 	SetWindowTextW(hWnd, c);
 }
 
 bool GetDlgItemChecked(HWND hDlg, int nID)
 {
-	return (SendDlgItemMessage(hDlg, nID, BM_GETCHECK, 0, 0) == BST_CHECKED);
+	return SendDlgItemMessage(hDlg, nID, BM_GETCHECK, 0, 0) == BST_CHECKED;
 }
 
 void SetDlgItemCheck(HWND hDlg, int nID, bool bCheck)
@@ -177,6 +177,11 @@ void SetDlgItemCheck(HWND hDlg, int nID, bool bCheck)
 void SetWindowFont(HWND hWnd, HFONT hFont)
 {
 	SendMessage(hWnd, WM_SETFONT, (WPARAM)hFont, MAKELPARAM(TRUE, 0));
+}
+
+void SelectEditText(HWND hEdit)
+{
+	SendMessage(hEdit, EM_SETSEL, (WPARAM)0, (LPARAM)-1);
 }
 
 
@@ -217,7 +222,7 @@ bool GetMenuItemChecked(HMENU hMenu, UINT uID)
 
 	if (uFlags != 0xFFFFFFFF)
 	{
-		return ((uFlags & MF_CHECKED) != 0);
+		return (uFlags & MF_CHECKED) != 0;
 	}
 
 	return false;
@@ -247,12 +252,12 @@ String GetMenuItemSelected(HMENU hMenu, const UINT IDs[], size_t n)
 			{
 				wchar_t w[32];
 
-				return (GetMenuStringW(hMenu, IDs[i], w, sizeof(w) / sizeof(w[0]), MF_BYCOMMAND) ? w : L"");
+				return GetMenuStringW(hMenu, IDs[i], w, _countof(w), MF_BYCOMMAND) ? w : L"";
 			}
 		}
 	}
 
-	return (L"");
+	return L"";
 }
 
 bool GetMenuItemSelected(HMENU hMenu, const UINT IDs[], size_t n, wchar_t *s, size_t cbSize)
@@ -265,7 +270,7 @@ bool GetMenuItemSelected(HMENU hMenu, const UINT IDs[], size_t n, wchar_t *s, si
 		{
 			if (GetMenuItemChecked(hMenu, IDs[i]))
 			{
-				return (GetMenuStringW(hMenu, IDs[i], s, size, MF_BYCOMMAND) != 0);
+				return GetMenuStringW(hMenu, IDs[i], s, size, MF_BYCOMMAND) != 0;
 			}
 		}
 	}
@@ -283,7 +288,7 @@ void SelectMenuItem(HMENU hMenu, const UINT IDs[], size_t n, const wchar_t *s)
 
 			for (size_t i = 0; i < n; i++)
 			{
-				if (GetMenuStringW(hMenu, IDs[i], w, sizeof(w) / sizeof(w[0]), MF_BYCOMMAND) && !wcscmp(s, w))
+				if (GetMenuStringW(hMenu, IDs[i], w, _countof(w), MF_BYCOMMAND) && !wcscmp(s, w))
 				{
 					CheckMenuRadioItem(hMenu, IDs[0], IDs[n - 1], IDs[i], MF_BYCOMMAND);
 
@@ -354,7 +359,7 @@ int MsgBox(const wchar_t *pszMessage, const wchar_t *pszTitle, HWND hOwner, MsgT
 			break;
 	}
 
-	return (MessageBoxW(hOwner, pszMessage, pszTitle, uType));
+	return MessageBoxW(hOwner, pszMessage, pszTitle, uType);
 }
 
 
@@ -373,13 +378,13 @@ HFONT CreatePointFont(const wchar_t *pszName, int nPointSize, int nWeight, bool 
 
 	HDC hDC = GetDC(NULL);
 
-	if (!hDC) return (NULL);
+	if (!hDC) return NULL;
 
 	HFONT h = CreateFontW(-MulDiv(nPointSize, GetDeviceCaps(hDC, LOGPIXELSY), 72),
 						  0,
 						  0,
 						  0,
-						  nWeight, /*bBold ? FW_BOLD : FW_NORMAL*/
+						  nWeight, /* bBold ? FW_BOLD : FW_NORMAL */
 						  bItalic,
 						  bUnderline,
 						  bStrikeOut,
@@ -392,14 +397,15 @@ HFONT CreatePointFont(const wchar_t *pszName, int nPointSize, int nWeight, bool 
 
 	ReleaseDC(NULL, hDC);
 
-	return (h);
+	return h;
 }
 
 int FontPointToLogicalSize(int PS)
 {
 	HDC hDC = GetDC(NULL);
 
-	if (!hDC) return 0;
+	if (!hDC)
+		return 0;
 
 	int LU = -MulDiv(PS, GetDeviceCaps(hDC, LOGPIXELSY), 72);
 
@@ -412,7 +418,8 @@ int FontLogicalToPointSize(int LU)
 {
 	HDC hDC = GetDC(NULL);
 
-	if (!hDC) return 0;
+	if (!hDC)
+		return 0;
 
 	int PS = -MulDiv(LU, 72, GetDeviceCaps(hDC, LOGPIXELSY));
 
@@ -428,60 +435,27 @@ int FontLogicalToPointSize(int LU)
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/*
-bool HtmlHelp(const wchar_t *pszFile, const wchar_t *pszPage, HWND hOwner)
+#if 0
+
+#include <htmlhelp.h>
+#pragma comment(lib, "htmlhelp")
+
+bool HtmlHelp2(const wchar_t *pszFile, const wchar_t *pszPage, HWND hOwner)
 {
 	if (pszFile)
 	{
+		wchar_t w[MAX_PATH];
+
 		if (pszPage)
-		{
-			wchar_t w[MAX_PATH];
+			swprintf(w, _countof(w), L"%ls::/%ls", pszFile, pszPage);
 
-			swprintfs(w, sizeof(w) / sizeof(w[0]), L"%s::/%s", pszFile, pszPage);
-
-			return (pHtmlHelp(hOwner, w, HH_DISPLAY_TOPIC, NULL) != NULL);
-		}
-
-		return (pHtmlHelp(hOwner, pszFile, HH_DISPLAY_TOPIC, NULL) != NULL);
-	}
-
-	return false;
-}
-
-#ifndef _AFXDLL
-
-bool HtmlHelp(const wchar_t *pszFile, const wchar_t *pszPage, HWND hOwner)
-{
-	HINSTANCE h = LoadLibrary(L"hhctrl.ocx");
-
-	if (h)
-	{
-		typedef HWND (WINAPI* fnHtmlHelp)(HWND, LPCWSTR, UINT, DWORD *);
-
-		//fnHtmlHelp pHtmlHelp = (fnHtmlHelp)GetProcAddress(h, (LPCSTR)((DWORD)((WORD)(15))));
-
-		fnHtmlHelp pHtmlHelp = (fnHtmlHelp)GetProcAddress(h, "HtmlHelpW");
-
-		if (pHtmlHelp)
-		{
-			if (pszFile && pszPage)
-			{
-				wchar_t w[MAX_PATH];
-
-				swprintfs(w, sizeof(w) / sizeof(w[0]), L"%s::/%s", pszFile, pszPage);
-
-				return (pHtmlHelp(hOwner, w, 0, NULL) != NULL);
-			}
-
-			return (pHtmlHelp(hOwner, pszFile, 0, NULL) != NULL);
-		}
+		return HtmlHelpW(hOwner, pszPage ? w : pszFile, HH_DISPLAY_TOPIC, NULL) != NULL;
 	}
 
 	return false;
 }
 
 #endif
-*/
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -495,8 +469,8 @@ bool GetDateTimeFormatted(wchar_t *pszBuffer, size_t cbSize, const SYSTEMTIME *s
 	wchar_t d[256];
 	wchar_t t[256];
 
-	if (GetDateFormatW(LOCALE_USER_DEFAULT, DATE_LONGDATE, st, NULL, d, sizeof(d) / sizeof(d[0])) &&
-		GetTimeFormatW(LOCALE_USER_DEFAULT, 0, st, NULL, t, sizeof(t) / sizeof(t[0])))
+	if (GetDateFormatW(LOCALE_USER_DEFAULT, DATE_LONGDATE, st, NULL, d, _countof(d)) &&
+		GetTimeFormatW(LOCALE_USER_DEFAULT, 0, st, NULL, t, _countof(t)))
 	{
 		swprintf(pszBuffer, cbSize, L"%ls, %ls", d, t);
 
@@ -530,7 +504,7 @@ bool TimeToSystemTime(time_t t, SYSTEMTIME *st)
 	{
 		FILETIME ft;
 
-		return (TimeToFileTime(t, &ft) && FileTimeToSystemTime(&ft, st));
+		return TimeToFileTime(t, &ft) && FileTimeToSystemTime(&ft, st);
 	}
 
 	return false;
@@ -543,7 +517,7 @@ bool TimeToSystemTimeLocal(time_t t, SYSTEMTIME *st)
 		FILETIME ft;
 		FILETIME ftLocal;
 
-		return (TimeToFileTime(t, &ft) && FileTimeToLocalFileTime(&ft, &ftLocal) && FileTimeToSystemTime(&ftLocal, st));
+		return TimeToFileTime(t, &ft) && FileTimeToLocalFileTime(&ft, &ftLocal) && FileTimeToSystemTime(&ftLocal, st);
 	}
 
 	return false;
@@ -551,7 +525,7 @@ bool TimeToSystemTimeLocal(time_t t, SYSTEMTIME *st)
 
 bool ShellOpen(const wchar_t *pszFile, HWND hOwner)
 {
-	return (ShellExecuteW(hOwner, NULL, pszFile, NULL, NULL, SW_SHOWNORMAL) > (HINSTANCE)32);
+	return ShellExecuteW(hOwner, NULL, pszFile, NULL, NULL, SW_SHOWNORMAL) > (HINSTANCE)32;
 }
 
 bool GetOpenFileNameDlg(wchar_t *pszBuffer, size_t cbSize, HWND hOwner, const wchar_t *pszTitle, const wchar_t *pszFilter)
@@ -573,7 +547,7 @@ bool GetOpenFileNameDlg(wchar_t *pszBuffer, size_t cbSize, HWND hOwner, const wc
 		ofn.lpstrTitle = pszTitle;
 		ofn.Flags = OFN_FILEMUSTEXIST | OFN_HIDEREADONLY | OFN_PATHMUSTEXIST;
 
-		return (GetOpenFileNameW(&ofn) != 0);
+		return GetOpenFileNameW(&ofn) != 0;
 	}
 
 	return false;
@@ -599,13 +573,13 @@ bool GetSaveFileNameDlg(wchar_t *pszBuffer, size_t cbSize, HWND hOwner, const wc
 		ofn.Flags = OFN_HIDEREADONLY | OFN_NOREADONLYRETURN | OFN_OVERWRITEPROMPT | OFN_PATHMUSTEXIST;
 		ofn.lpstrDefExt = pszDefExt;
 
-		return (GetSaveFileNameW(&ofn) != 0);
+		return GetSaveFileNameW(&ofn) != 0;
 	}
 
 	return false;
 }
 
-bool GetProgramPath(wchar_t *pszBuffer, size_t cbSize)
+bool GetExecutablePath(wchar_t *pszBuffer, size_t cbSize)
 {
 	DWORD dwSize;
 
@@ -613,9 +587,36 @@ bool GetProgramPath(wchar_t *pszBuffer, size_t cbSize)
 	{
 		pszBuffer[dwSize - 1] = L'\0';
 
+		return true;
+	}
+
+	return false;
+}
+
+bool GetProgramPath(wchar_t *pszBuffer, size_t cbSize)
+{
+	if (GetExecutablePath(pszBuffer, cbSize))
+	{
 		RemoveFileName(pszBuffer);
 
 		return true;
+	}
+
+	return false;
+}
+
+bool FileExists(const wchar_t *pszFilePath)
+{
+	if (pszFilePath)
+	{
+		HANDLE h = CreateFile(pszFilePath, 0, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+
+		if (h != INVALID_HANDLE_VALUE)
+		{
+			CloseHandle(h);
+
+			return true;
+		}
 	}
 
 	return false;
@@ -630,17 +631,16 @@ bool GetProgramPath(wchar_t *pszBuffer, size_t cbSize)
 
 ApplicationFile::ApplicationFile(const wchar_t *pszFile)
 {
-	const size_t s = sizeof(Path) / sizeof(Path[0]);
-
-	Ready = GetProgramPath(Path, s) && AddFileName(Path, GetFileName(pszFile), s);
+	Ready = GetProgramPath(Path, _countof(Path)) &&
+			AddFileName(Path, GetFileName(pszFile), _countof(Path));
 }
 
 const wchar_t *ApplicationFile::c_str() const
 {
-	return (Ready ? Path : NULL);
+	return Ready ? Path : NULL;
 }
 
 ApplicationFile::operator const wchar_t *() const
 {
-	return (c_str());
+	return c_str();
 }

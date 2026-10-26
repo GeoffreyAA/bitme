@@ -50,9 +50,9 @@ BEGIN
     RTEXT           "0",IDC_LABEL2,140,20,45,12
     RTEXT           "0",IDC_LABEL3,234,20,27,12
     RTEXT           "0",IDC_LABEL4,294,20,30,12
-    RTEXT           "0",IDC_LABEL5,14,98,8,12
-    RTEXT           "0",IDC_LABEL6,62,98,29,12
-    RTEXT           "0",IDC_LABEL7,130,98,41,12
+    RTEXT           "0",IDC_LABEL5,15,98,20,12
+    RTEXT           "0",IDC_LABEL6,73,98,29,12
+    RTEXT           "0",IDC_LABEL7,137,98,34,12
     LTEXT           "0",IDC_LABEL8,235,98,85,15
     LTEXT           "0",IDC_LABEL9,235,118,85,15
     LTEXT           "0",IDC_LABEL10,235,138,85,15
@@ -69,8 +69,8 @@ BEGIN
     LTEXT           "Text",IDC_LABEL17,327,20,22,12
     LTEXT           "Text",IDC_LABEL18,234,64,50,12
     RTEXT           "Text",IDC_LABEL19,297,64,50,12
-    LTEXT           "Text",IDC_LABEL20,25,98,23,12
-    LTEXT           "Text",IDC_LABEL21,94,98,32,12
+    LTEXT           "Text",IDC_LABEL20,38,98,23,12
+    LTEXT           "Text",IDC_LABEL21,105,98,32,12
     LTEXT           "Text",IDC_LABEL22,174,98,35,12
     LTEXT           "Text",IDC_LABEL23,15,143,50,12
     RTEXT           "Text",IDC_LABEL24,158,143,50,12
@@ -262,7 +262,13 @@ IDR_BITME_MENU MENU
 BEGIN
     POPUP "&Tools"
     BEGIN
+        MENUITEM "New instance",                ID_TOOLS_INSTANCE
+        MENUITEM SEPARATOR
         MENUITEM "Resolution Calculator...",    ID_TOOLS_RESCALC
+        MENUITEM "Windows Calculator",          ID_TOOLS_CALCULATOR
+        MENUITEM SEPARATOR
+        MENUITEM "Grouping",                    ID_TOOLS_GROUPING
+        MENUITEM "Colours",                     ID_TOOLS_COLOURS
         MENUITEM "Settings...",                 ID_TOOLS_SETTINGS
         MENUITEM SEPARATOR
         MENUITEM "About...",                    ID_TOOLS_ABOUT

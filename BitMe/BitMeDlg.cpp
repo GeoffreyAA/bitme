@@ -9,7 +9,7 @@
 
 #include "Application.h"
 #include "Name.h"
-#include "Library\ConfigFile.h"
+#include "Library\ConfigConcrete.h"
 #include "Library\File.h"
 #include "Library\Library.h"
 #include "Library\ResourceString.h"
@@ -19,11 +19,16 @@
 #include "Calculation\Information.h"
 #include "TmpLibrary.h"
 
-const int VIDEO_MAX = 900000;	// 900,000 = 900 Mbps
-const int AUDIO_MAX = 90000;	// 90,000 = 90 Mbps
-const int TIME_MAX  = 32400;	// 32,400 = 9 hours
+const int VIDEO_MAX = 900000;				// 900,000 = 900 Mbps
+const int AUDIO_MAX = 90000;				// 90,000 = 90 Mbps
+const int TIME_MAX  = 32400;				// 32,400 = 9 hours
 
-const wchar_t szFormat[] = L"%.2f";	// 0.00
+const wchar_t szFormat[] = L"%.2f";			// 0.00
+
+const COLORREF Colour0 = 0;					// Black
+const COLORREF Colour1 = 0x00c00000;		// Bluish
+const COLORREF Colour2 = 0x00008000;		// Greenish
+const COLORREF Colour3 = RGB(192, 0, 0);	// Reddish
 
 const UINT Containers[] = {ID_CALCULATION_CONTAINER0,
 						   ID_CALCULATION_CONTAINER1,
@@ -118,10 +123,13 @@ BEGIN_MESSAGE_MAP(CBitMeDlg, CDialog)
 	ON_EN_KILLFOCUS(IDC_EDIT2, OnChangeClock)
 	ON_EN_KILLFOCUS(IDC_EDIT3, OnChangeClock)
 	ON_WM_CTLCOLOR()
+	ON_COMMAND(ID_TOOLS_INSTANCE, OnToolsInstance)
 	ON_COMMAND(ID_TOOLS_RESCALC, OnToolsResCalc)
+	ON_COMMAND(ID_TOOLS_CALCULATOR, OnToolsCalculator)
+	ON_COMMAND(ID_TOOLS_GROUPING, OnToolsGrouping)
+	ON_COMMAND(ID_TOOLS_COLOURS, OnToolsColours)
 	ON_COMMAND(ID_TOOLS_SETTINGS, OnToolsSettings)
 	ON_COMMAND(ID_TOOLS_ABOUT, OnToolsAbout)
-	//ON_COMMAND(ID_TOOLS_CALCULATOR, OnToolsCalculator)
 	ON_COMMAND(ID_TOOLS_QUIT, OnToolsQuit)
 	ON_COMMAND(ID_CALCULATION_OVERHEAD, OnCalculationOverhead)
 	ON_COMMAND(ID_CALCULATION_INFORMATION, OnCalculationInformation)
@@ -173,10 +181,15 @@ void CBitMeDlg::OnOK()
 {
 }
 
+void CBitMeDlg::OnCancel()
+{
+	OnBeforeClose();
+	EndDialog(IDOK);
+}
+
 void CBitMeDlg::OnClose()
 {
 	OnBeforeClose();
-
 	CDialog::OnClose();
 }
 
@@ -224,7 +237,7 @@ void CBitMeDlg::RetrieveConfiguration()
 {
 	CBitMeDlgCfg Cfg;
 
-	if (!CBitMeDlgCfgSerialiser().Retrieve(Cfg, ConfigFile()))
+	if (!Cfg.Retrieve(ConfigConcrete().Get()))
 		Cfg = CBitMeDlgCfg();
 
 	CheckVideo.SetCheck(Cfg.bVideo);
@@ -238,7 +251,10 @@ void CBitMeDlg::RetrieveConfiguration()
 	Model.enableOverhead(Cfg.bOverhead);
 	Model.setContainer(ContainerManager::CreateContainer(Cfg.sContainer.c_str()));
 
-	::SetWindowPos(GetSafeHwnd(), NULL, Cfg.x, Cfg.y, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
+	SetMenuItemCheck(::GetMenu(GetSafeHwnd()), ID_TOOLS_GROUPING, Cfg.bGrouping);
+	SetMenuItemCheck(::GetMenu(GetSafeHwnd()), ID_TOOLS_COLOURS, Cfg.bColours);
+
+	SetWindowPosition(GetSafeHwnd(), Cfg.x, Cfg.y);
 }
 
 void CBitMeDlg::SaveConfiguration()
@@ -255,10 +271,12 @@ void CBitMeDlg::SaveConfiguration()
 	Cfg.nVideo = Video.GetPos();
 	Cfg.nAudio = Audio.GetPos();
 	Cfg.nTime = Time.GetPos();
+	Cfg.bGrouping = h ? GetMenuItemChecked(h, ID_TOOLS_GROUPING) : false;
+	Cfg.bColours = h ? GetMenuItemChecked(h, ID_TOOLS_COLOURS) : false;
 	Cfg.x = GetWindowLeft(GetSafeHwnd());
 	Cfg.y = GetWindowTop(GetSafeHwnd());
 
-	CBitMeDlgCfgSerialiser().Save(Cfg, ConfigFile());
+	Cfg.Save(ConfigConcrete().Get());
 }
 
 void CBitMeDlg::OnBeforeClose()
@@ -281,7 +299,7 @@ void CBitMeDlg::SetupControls()
 
 	if (h)
 	{
-		SetMenuStrings(h, Containers, sizeof(Containers) / sizeof(Containers[0]), ContainerManager::GetAvailableContainers());
+		SetMenuStrings(h, Containers, _countof(Containers), ContainerManager::GetAvailableContainers());
 	}
 
 #if 1
@@ -350,14 +368,16 @@ void CBitMeDlg::UpdateMenu()
 	if (h)
 	{
 		ModifyMenu(h, 0, MF_BYPOSITION | MF_STRING, 0, ResourceString(L"IDS_MENU_TOOLS"));
-		ModifyMenu(h, 1, MF_BYPOSITION | MF_STRING, 0, ResourceString(L"IDS_MENU_CALCULATION"));
-
+		SetMenuString(h, ID_TOOLS_INSTANCE, ResourceString(L"IDS_TOOLS_INSTANCE"));
 		SetMenuString(h, ID_TOOLS_RESCALC, ResourceString(L"IDS_TOOLS_RESCALC"));
+		SetMenuString(h, ID_TOOLS_CALCULATOR, ResourceString(L"IDS_TOOLS_CALCULATOR"));
+		SetMenuString(h, ID_TOOLS_GROUPING, ResourceString(L"IDS_TOOLS_GROUPING"));
+		SetMenuString(h, ID_TOOLS_COLOURS, ResourceString(L"IDS_TOOLS_COLOURS"));
 		SetMenuString(h, ID_TOOLS_SETTINGS, ResourceString(L"IDS_TOOLS_SETTINGS"));
 		SetMenuString(h, ID_TOOLS_ABOUT, ResourceString(L"IDS_TOOLS_ABOUT"));
-		//SetMenuString(h, ID_TOOLS_CALCULATOR, ResourceString(L"IDS_TOOLS_CALCULATOR"));
 		SetMenuString(h, ID_TOOLS_QUIT, ResourceString(L"IDS_TOOLS_QUIT"));
 
+		ModifyMenu(h, 1, MF_BYPOSITION | MF_STRING, 0, ResourceString(L"IDS_MENU_CALCULATION"));
 		SetMenuString(h, ID_CALCULATION_OVERHEAD, ResourceString(L"IDS_CALCULATION_OVERHEAD"));
 		SetMenuString(h, ID_CALCULATION_INFORMATION, ResourceString(L"IDS_CALCULATION_INFORMATION"));
 
@@ -394,8 +414,12 @@ void CBitMeDlg::UpdateControls()
 	// Time
 	int s = Model.getDuration();
 
-	SetWindowInt(LabelHours.GetSafeHwnd(), s / 60 / 60);
-	SetWindowInt(LabelMinutes.GetSafeHwnd(), s / 60);
+	//SetWindowInt(LabelHours.GetSafeHwnd(), s / 60 / 60);
+	//SetWindowInt(LabelMinutes.GetSafeHwnd(), s / 60);
+	//SetWindowInt(LabelSeconds.GetSafeHwnd(), s);
+
+	SetWindowFloat(LabelHours.GetSafeHwnd(), s / 60.0 / 60.0, szFormat);
+	SetWindowFloat(LabelMinutes.GetSafeHwnd(), s / 60.0, szFormat);
 	SetWindowInt(LabelSeconds.GetSafeHwnd(), s);
 
 	SetWindowInt(THrs.GetSafeHwnd(), s / 60 / 60);
@@ -403,21 +427,23 @@ void CBitMeDlg::UpdateControls()
 	SetWindowInt2(TSec.GetSafeHwnd(), s % 60);
 
 	// File Size; Data Rate
+	bool bGroup = GetMenuItemChecked(::GetMenu(GetSafeHwnd()), ID_TOOLS_GROUPING);
+
 	if (CheckDataRate.GetCheck())
 	{
 		double bps = Model.getDataRate();
 
-		SetWindowFloat2(LabelFS1.GetSafeHwnd(), Information(bps).getKB(), szFormat);
-		SetWindowFloat2(LabelFS2.GetSafeHwnd(), BitsToKilobits(bps), szFormat);
-		SetWindowFloat2(LabelFS3.GetSafeHwnd(), BitsToMegabits(bps), szFormat);
+		SetWindowFloat2(LabelFS1.GetSafeHwnd(), Information(bps).getKB(), szFormat, bGroup);
+		SetWindowFloat2(LabelFS2.GetSafeHwnd(), BitsToKilobits(bps), szFormat, bGroup);
+		SetWindowFloat2(LabelFS3.GetSafeHwnd(), BitsToMegabits(bps), szFormat, bGroup);
 	}
 	else
 	{
 		Information i(Model.getFileSize());
 
-		SetWindowFloat2(LabelFS1.GetSafeHwnd(), i.getKB(), szFormat);
-		SetWindowFloat2(LabelFS2.GetSafeHwnd(), i.getMB(), szFormat);
-		SetWindowFloat2(LabelFS3.GetSafeHwnd(), i.getGB(), szFormat);
+		SetWindowFloat2(LabelFS1.GetSafeHwnd(), i.getKB(), szFormat, bGroup);
+		SetWindowFloat2(LabelFS2.GetSafeHwnd(), i.getMB(), szFormat, bGroup);
+		SetWindowFloat2(LabelFS3.GetSafeHwnd(), i.getGB(), szFormat, bGroup);
 	}
 
 	// Custom Size
@@ -463,8 +489,8 @@ void CBitMeDlg::UpdateStrings()
 	LabelT1Title.SetWindowText(ResourceString(L"IDS_HOURS"));
 	LabelT2Title.SetWindowText(ResourceString(L"IDS_MINUTES"));
 	LabelT3Title.SetWindowText(ResourceString(L"IDS_SECONDS"));
-	SetWindowTextRange(LabelTMin.GetSafeHwnd(), Time.GetRangeMin(), ResourceString(L"IDS_SECONDS"));
-	SetWindowTextRange(LabelTMax.GetSafeHwnd(), Time.GetRangeMax() / 60 / 60, ResourceString(L"IDS_HOURS"));
+	SetWindowTextRange(LabelTMin.GetSafeHwnd(), Time.GetRangeMin(), ResourceString(L"IDS_SECONDS_ABBRV"));
+	SetWindowTextRange(LabelTMax.GetSafeHwnd(), Time.GetRangeMax() / 60 / 60, ResourceString(L"IDS_HOURS_ABBRV"));
 
 	if (CheckDataRate.GetCheck())
 	{
@@ -645,9 +671,33 @@ void CBitMeDlg::OnReturnKey()
 
 			case IDC_EDIT4:
 				OnChangeCustomSize();
+				CustomSize.SetSel(0, -1);
 				break;
 		}
 	}
+}
+
+BOOL CBitMeDlg::OnCommand(WPARAM wParam, LPARAM lParam)
+{
+	HMENU h = ::GetMenu(GetSafeHwnd());
+
+	if (h)
+	{
+		if (SelectMenuItemID(h, Containers, _countof(Containers), LOWORD(wParam)))
+		{
+			Model.setContainer(ContainerManager::CreateContainer(GetSelectedContainer().c_str()));
+			UpdateControls();
+		}
+	}
+
+	switch (HIWORD(wParam))
+	{
+		case EN_SETFOCUS:
+			SelectEditText((HWND)lParam);
+			break;
+	}
+
+	return CDialog::OnCommand(wParam, lParam);
 }
 
 HBRUSH CBitMeDlg::OnCtlColor(CDC *pDC, CWnd *pWnd, UINT nCtlColor)
@@ -656,25 +706,28 @@ HBRUSH CBitMeDlg::OnCtlColor(CDC *pDC, CWnd *pWnd, UINT nCtlColor)
 
 	if (pWnd && pDC)
 	{
+		const bool c = GetMenuItemChecked(::GetMenu(GetSafeHwnd()), ID_TOOLS_COLOURS);
+
 		switch (pWnd->GetDlgCtrlID())
 		{
 			case IDC_LABEL1:
 			case IDC_LABEL2:
 			case IDC_LABEL3:
 			case IDC_LABEL4:
-				pDC->SetTextColor(0x00c00000);
+				pDC->SetTextColor(c ? Colour1 : Colour0);
 				break;
 
 			case IDC_LABEL5:
 			case IDC_LABEL6:
 			case IDC_LABEL7:
-				pDC->SetTextColor(0x00008000);
+				pDC->SetTextColor(c ? Colour2 : Colour0);
 				break;
 
 			case IDC_LABEL8:
 			case IDC_LABEL9:
 			case IDC_LABEL10:
-				pDC->SetTextColor(0x00000080);
+				//pDC->SetTextColor(0x00000080);
+				pDC->SetTextColor(c ? Colour3 : Colour0);
 				break;
 		}
 	}
@@ -684,12 +737,12 @@ HBRUSH CBitMeDlg::OnCtlColor(CDC *pDC, CWnd *pWnd, UINT nCtlColor)
 
 String CBitMeDlg::GetSelectedContainer() const
 {
-	return (GetMenuItemSelected(::GetMenu(GetSafeHwnd()), Containers, sizeof(Containers) / sizeof(Containers[0])));
+	return GetMenuItemSelected(::GetMenu(GetSafeHwnd()), Containers, _countof(Containers));
 }
 
 void CBitMeDlg::SelectContainer(const wchar_t *s)
 {
-	SelectMenuItem(::GetMenu(GetSafeHwnd()), Containers, sizeof(Containers) / sizeof(Containers[0]), s);
+	SelectMenuItem(::GetMenu(GetSafeHwnd()), Containers, _countof(Containers), s);
 }
 
 void CBitMeDlg::EnableContainersAndFormats(bool b)
@@ -698,16 +751,42 @@ void CBitMeDlg::EnableContainersAndFormats(bool b)
 
 	if (h)
 	{
-		EnableMenuItems(h, Containers, sizeof(Containers) / sizeof(Containers[0]), b);
+		EnableMenuItems(h, Containers, _countof(Containers), b);
 	}
 }
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+void CBitMeDlg::OnToolsInstance()
+{
+	wchar_t s[MAX_PATH];
+
+	if (!GetExecutablePath(s, _countof(s)) || !ShellOpen(s, GetSafeHwnd()))
+		MsgBox(ResourceString(L"IDS_ERROR_INSTANCE"), ResourceString(L"IDS_ERROR"), GetSafeHwnd(), MSG_ERROR);
+}
+
 void CBitMeDlg::OnToolsResCalc()
 {
 	CResCalcDlg().DoModal();
+}
+
+void CBitMeDlg::OnToolsCalculator()
+{
+	if (!ShellOpen(L"calc", GetSafeHwnd()))
+		MsgBox(ResourceString(L"IDS_ERROR_CALCULATOR"), ResourceString(L"IDS_ERROR"), GetSafeHwnd(), MSG_ERROR);
+}
+
+void CBitMeDlg::OnToolsGrouping()
+{
+	ToggleMenuItemCheck(::GetMenu(GetSafeHwnd()), ID_TOOLS_GROUPING);
+	UpdateControls();
+}
+
+void CBitMeDlg::OnToolsColours()
+{
+	ToggleMenuItemCheck(::GetMenu(GetSafeHwnd()), ID_TOOLS_COLOURS);
+	RedrawWindow();
 }
 
 void CBitMeDlg::OnToolsSettings()
@@ -725,29 +804,9 @@ void CBitMeDlg::OnToolsAbout()
 	CAboutDlg().DoModal();
 }
 
-/*
-void CBitMeDlg::OnToolsCalculator()
-{
-	wchar_t c[MAX_PATH];
-
-	const UINT cbSize = sizeof(c) / sizeof(c[0]);
-
-	UINT n = GetSystemDirectory(c, cbSize);
-
-	if ((0 < n) && (n < cbSize) && AddFileName(c, L"calc.exe", cbSize))
-	{
-		if (!ShellOpen(c, GetSafeHwnd()))
-		{
-			MsgBox(ResourceString(L"IDS_CALCULATOR_ERROR"), ResourceString(L"IDS_CALCULATOR_ERROR_TITLE"), GetSafeHwnd(), MSG_ERROR);
-		}
-	}
-}
-*/
-
 void CBitMeDlg::OnToolsQuit()
 {
 	OnBeforeClose();
-
 	EndDialog(IDOK);
 }
 
@@ -767,22 +826,6 @@ void CBitMeDlg::OnCalculationOverhead()
 	}
 }
 
-BOOL CBitMeDlg::OnCommand(WPARAM wParam, LPARAM lParam)
-{
-	HMENU h = ::GetMenu(GetSafeHwnd());
-
-	if (h)
-	{
-		if (SelectMenuItemID(h, Containers, sizeof(Containers) / sizeof(Containers[0]), LOWORD(wParam)))
-		{
-			Model.setContainer(ContainerManager::CreateContainer(GetSelectedContainer().c_str()));
-			UpdateControls();
-		}
-	}
-
-	return CDialog::OnCommand(wParam, lParam);
-}
-
 void CBitMeDlg::OnCalculationInformation()
 {
 	MsgBox(Model.getInformation().c_str(), ResourceString(L"IDS_INFORMATION"), GetSafeHwnd());
@@ -790,7 +833,7 @@ void CBitMeDlg::OnCalculationInformation()
 
 BOOL CBitMeDlg::OnHelpInfo(HELPINFO *pHelpInfo)
 {
-	ShellOpen(ApplicationFile(GetHelpFileName()), GetSafeHwnd());
+	ShellOpen(GetURL(), nullptr);
 
 	return TRUE;
 }
@@ -805,42 +848,47 @@ CBitMeDlgCfg::CBitMeDlgCfg() : bVideo(true),
 							   bOverhead(true),
 							   sContainer(L"MP4/MOV/3GP"),
 							   nVideo(2000), nAudio(192), nTime(7200),
+							   bGrouping(true), bColours(true),
 							   x(32), y(32)
 {
 }
 
-bool CBitMeDlgCfgSerialiser::Save(const CBitMeDlgCfg &Cfg, Configuration &c) const
+bool CBitMeDlgCfg::Save(Configuration &to) const
 {
-	c.SetBool(L"bVideo", Cfg.bVideo);
-	c.SetBool(L"bAudio", Cfg.bAudio);
-	c.SetBool(L"bDataRate", Cfg.bDataRate);
-	c.SetBool(L"bCustomSize", Cfg.bCustomSize);
-	c.SetBool(L"bOverhead", Cfg.bOverhead);
-	c.SetString(L"sContainer", Cfg.sContainer.c_str());
-	c.SetInt(L"nVideo", Cfg.nVideo);
-	c.SetInt(L"nAudio", Cfg.nAudio);
-	c.SetInt(L"nTime", Cfg.nTime);
-	c.SetInt(L"x", Cfg.x);
-	c.SetInt(L"y", Cfg.y);
+	to.SetBool(L"bVideo", bVideo);
+	to.SetBool(L"bAudio", bAudio);
+	to.SetBool(L"bDataRate", bDataRate);
+	to.SetBool(L"bCustomSize", bCustomSize);
+	to.SetBool(L"bOverhead", bOverhead);
+	to.SetString(L"sContainer", sContainer.c_str());
+	to.SetInt(L"nVideo", nVideo);
+	to.SetInt(L"nAudio", nAudio);
+	to.SetInt(L"nTime", nTime);
+	to.SetBool(L"bGrouping", bGrouping);
+	to.SetBool(L"bColours", bColours);
+	to.SetInt(L"x", x);
+	to.SetInt(L"y", y);
 
 	return true;
 }
 
-bool CBitMeDlgCfgSerialiser::Retrieve(CBitMeDlgCfg &Cfg, const Configuration &c) const
+bool CBitMeDlgCfg::Retrieve(const Configuration &from)
 {
 	const CBitMeDlgCfg def;
 
-	if (!c.GetBool(L"bVideo", Cfg.bVideo))				Cfg.bVideo = def.bVideo;
-	if (!c.GetBool(L"bAudio", Cfg.bAudio))				Cfg.bAudio = def.bAudio;
-	if (!c.GetBool(L"bDataRate", Cfg.bDataRate))		Cfg.bDataRate = def.bDataRate;
-	if (!c.GetBool(L"bCustomSize", Cfg.bCustomSize))	Cfg.bCustomSize = def.bCustomSize;
-	if (!c.GetBool(L"bOverhead", Cfg.bOverhead))		Cfg.bOverhead = def.bOverhead;
-	if (!c.GetString(L"sContainer", Cfg.sContainer))	Cfg.sContainer = def.sContainer;
-	if (!c.GetInt(L"nVideo", Cfg.nVideo))				Cfg.nVideo = def.nVideo;
-	if (!c.GetInt(L"nAudio", Cfg.nAudio))				Cfg.nAudio = def.nAudio;
-	if (!c.GetInt(L"nTime", Cfg.nTime))					Cfg.nTime = def.nTime;
-	if (!c.GetInt(L"x", Cfg.x))							Cfg.x = def.x;
-	if (!c.GetInt(L"y", Cfg.y))							Cfg.y = def.y;
+	if (!from.GetBool(L"bVideo", bVideo))			bVideo = def.bVideo;
+	if (!from.GetBool(L"bAudio", bAudio))			bAudio = def.bAudio;
+	if (!from.GetBool(L"bDataRate", bDataRate))		bDataRate = def.bDataRate;
+	if (!from.GetBool(L"bCustomSize", bCustomSize))	bCustomSize = def.bCustomSize;
+	if (!from.GetBool(L"bOverhead", bOverhead))		bOverhead = def.bOverhead;
+	if (!from.GetString(L"sContainer", sContainer))	sContainer = def.sContainer;
+	if (!from.GetInt(L"nVideo", nVideo))			nVideo = def.nVideo;
+	if (!from.GetInt(L"nAudio", nAudio))			nAudio = def.nAudio;
+	if (!from.GetInt(L"nTime", nTime))				nTime = def.nTime;
+	if (!from.GetBool(L"bGrouping", bGrouping))		bGrouping = def.bGrouping;
+	if (!from.GetBool(L"bColours", bColours))		bColours = def.bColours;
+	if (!from.GetInt(L"x", x))						x = def.x;
+	if (!from.GetInt(L"y", y))						y = def.y;
 
 	return true;
 }

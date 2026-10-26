@@ -5,6 +5,7 @@
 #pragma once
 #endif
 
+#define NOMINMAX			// Prevent clashes with std::min/max()
 #define VC_EXTRALEAN		// Exclude rarely-used things from Windows headers
 
 #if _MSC_VER > 1200

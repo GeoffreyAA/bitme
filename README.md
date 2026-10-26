@@ -3,9 +3,11 @@ BitMe
 
 A bitrate calculator with a different, whimsical appearance.
 
+<p align=center>
 <img src="BM.png" alt="A screenshot of BitMe." />
+</p>
 
-The program [goes back a long time](https://github.com/GeoffreyAA/bitme-vb). The first version, *The Bitrate Calculator,* later BitMe, was written in secondary school (2003 or 2004). It was put together in Visual Basic and looked pretty, but I wanted something better. Later, learning C++, I rewrote it, helped by MFC, releasing version 2.1.1 on SourceForge in November 2007. In 2013, I wrote BitMe from scratch again; this had a sounder architecture but kept the old appearance. In 2016, I tackled the challenge of adding support for any container or codec. Unfortunately, this work was left incomplete, and I did not touch it until 2021, when, cutting out codecs and using an approximate method, I simplified the system, keeping the concept of containers. It is working but will benefit from more tuning.
+The program [goes back](https://github.com/GeoffreyAA/bitme-vb) a long time. The first version, *The Bitrate Calculator,* later BitMe, was written in secondary school (2003 or 2004). It was put together in Visual Basic and looked pretty, but I wanted something better. Later, learning C++, I rewrote it, helped by MFC, releasing version 2.1.1 on SourceForge in November 2007. In 2013, I wrote BitMe from scratch again; this had a better architecture but kept the old appearance. In 2016, I tackled the challenge of adding support for any container or codec. Unfortunately, this work was left incomplete, and I did not touch it until 2021, when, cutting out codecs and using an approximate method, I simplified the system, keeping the concept of containers; it will benefit from tuning.
 
 
 Notes
@@ -15,7 +17,7 @@ The program comes with a default language of English and can be translated into 
 
 Download BitMe only from its [official page](https://github.com/GeoffreyAA/bitme). It is free; do not pay for it anywhere.
 
-No AI was used developing this program.
+No AI was used to develop this program.
 
 
 Building

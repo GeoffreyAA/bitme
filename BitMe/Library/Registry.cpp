@@ -3,6 +3,7 @@
 #include "StrW.h"
 #include "Unicode.h"
 #include <intsafe.h>
+#include <stdlib.h>
 
 Registry::Registry() : h(NULL)
 {
@@ -151,7 +152,7 @@ bool Registry::GetString(const wchar_t *name, char *value, size_t size) const
 {
 	wchar_t w[256];
 
-	if (GetString(name, w, sizeof(w) / sizeof(w[0])))
+	if (GetString(name, w, _countof(w)))
 		return ConvertUTF16To8(value, size, w);
 
 	return false;
@@ -181,7 +182,7 @@ bool Registry::GetString(const wchar_t *name, String &value) const
 {
 	wchar_t w[256];
 
-	if (GetString(name, w, sizeof(w) / sizeof(w[0])))
+	if (GetString(name, w, _countof(w)))
 	{
 		value = w;
 		return true;

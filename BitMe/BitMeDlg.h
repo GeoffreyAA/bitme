@@ -98,6 +98,7 @@ protected:
 	afx_msg void OnPaint();
 	afx_msg HCURSOR OnQueryDragIcon();
 	virtual void OnOK();
+	virtual void OnCancel();
 	afx_msg void OnClose();
 	afx_msg void OnCheckVideo();
 	afx_msg void OnCheckAudio();
@@ -106,10 +107,13 @@ protected:
 	afx_msg void OnHScroll(UINT nSBCode, UINT nPos, CScrollBar *pScrollBar);
 	afx_msg void OnChangeClock();
 	afx_msg HBRUSH OnCtlColor(CDC *pDC, CWnd *pWnd, UINT nCtlColor);
+	afx_msg void OnToolsInstance();
 	afx_msg void OnToolsResCalc();
+	afx_msg void OnToolsCalculator();
+	afx_msg void OnToolsGrouping();
+	afx_msg void OnToolsColours();
 	afx_msg void OnToolsSettings();
 	afx_msg void OnToolsAbout();
-	//afx_msg void OnToolsCalculator();
 	afx_msg void OnToolsQuit();
 	afx_msg void OnCalculationOverhead();
 	afx_msg void OnCalculationInformation();
@@ -128,6 +132,8 @@ private:
 struct CBitMeDlgCfg
 {
 	CBitMeDlgCfg();
+	bool Save(Configuration &to) const;
+	bool Retrieve(const Configuration &from);
 
 	bool bVideo;
 	bool bAudio;
@@ -141,15 +147,10 @@ struct CBitMeDlgCfg
 	int nAudio;
 	int nTime;
 
+	bool bGrouping;
+	bool bColours;
 	int x;
 	int y;
-};
-
-class CBitMeDlgCfgSerialiser
-{
-public:
-	bool Save(const CBitMeDlgCfg &Cfg, Configuration &c) const;
-	bool Retrieve(CBitMeDlgCfg &Cfg, const Configuration &c) const;
 };
 
 //{{AFX_INSERT_LOCATION}}

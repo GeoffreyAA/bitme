@@ -34,7 +34,7 @@ const wchar_t *GetRegistryKey()
 	return (L"Software\\BitMe");
 }
 
-const wchar_t *GetHelpFileName()
+const wchar_t *GetHelpFile()
 {
 	return (L"Readme.txt");
 }
@@ -42,4 +42,9 @@ const wchar_t *GetHelpFileName()
 const wchar_t *GetURL()
 {
 	return (L"https://github.com/GeoffreyAA/bitme");
+}
+
+bool IsApplicationPortable()
+{
+	return true;
 }

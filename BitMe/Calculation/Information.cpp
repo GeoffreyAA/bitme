@@ -1,146 +1,146 @@
 #include "stdafx.h"
 #include "Information.h"
 
-const double __2_pow_10  = 1024.0;
-const double __2_pow_20  = 1048576.0;
-const double __2_pow_30  = 1073741824.0;
-const double __2_pow_40  = 1099511627776.0;
-const double __2_pow_50  = 1125899906842624.0;
-const double __2_pow_60  = 1152921504606846976.0;
-const double __2_pow_70  = 1180591620717411303424.0;
-const double __2_pow_80  = 1208925819614629174706176.0;
-const double __2_pow_90  = 1237940039285380274899124224.0;
-const double __2_pow_100 = 1267650600228229401496703205376.0;
+DEC_CONST Decimal __2_pow_10  = DEC_LIT(1024.0);
+DEC_CONST Decimal __2_pow_20  = DEC_LIT(1048576.0);
+DEC_CONST Decimal __2_pow_30  = DEC_LIT(1073741824.0);
+DEC_CONST Decimal __2_pow_40  = DEC_LIT(1099511627776.0);
+DEC_CONST Decimal __2_pow_50  = DEC_LIT(1125899906842624.0);
+DEC_CONST Decimal __2_pow_60  = DEC_LIT(1152921504606846976.0);
+DEC_CONST Decimal __2_pow_70  = DEC_LIT(1180591620717411303424.0);
+DEC_CONST Decimal __2_pow_80  = DEC_LIT(1208925819614629174706176.0);
+DEC_CONST Decimal __2_pow_90  = DEC_LIT(1237940039285380274899124224.0);
+DEC_CONST Decimal __2_pow_100 = DEC_LIT(1267650600228229401496703205376.0);
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Information::Information(double nBits) : bits(nBits)
+Information::Information(Decimal nBits) : bits(nBits)
 {
-}
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-double Information::getBits() const
-{
-	return (bits);
-}
-
-double Information::getBytes() const
-{
-	return (getBits() / 8.0);
-}
-
-double Information::getKB() const
-{
-	return (getBytes() / __2_pow_10);
-}
-
-double Information::getMB() const
-{
-	return (getBytes() / __2_pow_20);
-}
-
-double Information::getGB() const
-{
-	return (getBytes() / __2_pow_30);
-}
-
-double Information::getTB() const
-{
-	return (getBytes() / __2_pow_40);
-}
-
-double Information::getPB() const
-{
-	return (getBytes() / __2_pow_50);
-}
-
-double Information::getEB() const
-{
-	return (getBytes() / __2_pow_60);
-}
-
-double Information::getZB() const
-{
-	return (getBytes() / __2_pow_70);
-}
-
-double Information::getYB() const
-{
-	return (getBytes() / __2_pow_80);
-}
-
-double Information::getRB() const
-{
-	return (getBytes() / __2_pow_90);
-}
-
-double Information::getQB() const
-{
-	return (getBytes() / __2_pow_100);
 }
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void Information::setBits(double x)
+Decimal Information::getBits() const
+{
+	return bits;
+}
+
+Decimal Information::getBytes() const
+{
+	return getBits() / DEC_LIT(8.0);
+}
+
+Decimal Information::getKB() const
+{
+	return getBytes() / __2_pow_10;
+}
+
+Decimal Information::getMB() const
+{
+	return getBytes() / __2_pow_20;
+}
+
+Decimal Information::getGB() const
+{
+	return getBytes() / __2_pow_30;
+}
+
+Decimal Information::getTB() const
+{
+	return getBytes() / __2_pow_40;
+}
+
+Decimal Information::getPB() const
+{
+	return getBytes() / __2_pow_50;
+}
+
+Decimal Information::getEB() const
+{
+	return getBytes() / __2_pow_60;
+}
+
+Decimal Information::getZB() const
+{
+	return getBytes() / __2_pow_70;
+}
+
+Decimal Information::getYB() const
+{
+	return getBytes() / __2_pow_80;
+}
+
+Decimal Information::getRB() const
+{
+	return getBytes() / __2_pow_90;
+}
+
+Decimal Information::getQB() const
+{
+	return getBytes() / __2_pow_100;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void Information::setBits(Decimal x)
 {
 	bits = x;
 }
 
-void Information::setBytes(double x)
+void Information::setBytes(Decimal x)
 {
-	setBits(x * 8.0);
+	setBits(x * DEC_LIT(8.0));
 }
 
-void Information::setKB(double x)
+void Information::setKB(Decimal x)
 {
 	setBytes(x * __2_pow_10);
 }
 
-void Information::setMB(double x)
+void Information::setMB(Decimal x)
 {
 	setBytes(x * __2_pow_20);
 }
 
-void Information::setGB(double x)
+void Information::setGB(Decimal x)
 {
 	setBytes(x * __2_pow_30);
 }
 
-void Information::setTB(double x)
+void Information::setTB(Decimal x)
 {
 	setBytes(x * __2_pow_40);
 }
 
-void Information::setPB(double x)
+void Information::setPB(Decimal x)
 {
 	setBytes(x * __2_pow_50);
 }
 
-void Information::setEB(double x)
+void Information::setEB(Decimal x)
 {
 	setBytes(x * __2_pow_60);
 }
 
-void Information::setZB(double x)
+void Information::setZB(Decimal x)
 {
 	setBytes(x * __2_pow_70);
 }
 
-void Information::setYB(double x)
+void Information::setYB(Decimal x)
 {
 	setBytes(x * __2_pow_80);
 }
 
-void Information::setRB(double x)
+void Information::setRB(Decimal x)
 {
 	setBytes(x * __2_pow_90);
 }
 
-void Information::setQB(double x)
+void Information::setQB(Decimal x)
 {
 	setBytes(x * __2_pow_100);
 }
